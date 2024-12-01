@@ -5,7 +5,7 @@ import { Input } from "../../../components/ui/input";
 import { Label } from "@/components/ui/label";
 import Heading from "@/components/ui/heading";
 import { Textarea } from "@/components/ui/textarea";
-import FancyMultiSelect from "../CreateQuestionComponents/CreateQuestion";
+import FancyMultiSelect from "../Components/CreateQuestion";
 const CreateQuestion: React.FC = () => {
   return (
     <Container>
