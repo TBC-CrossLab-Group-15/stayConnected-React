@@ -40,7 +40,6 @@ const Profile: React.FC = () => {
 
       {/* Avatar and User Info */}
       <div className="flex  flex-col  md:flex-row items-center md:items-start bg-gray-100 dark:bg-gray-800 p-8 rounded-xl shadow-lg gap-6 hover:shadow-2xl transition-shadow duration-300">
-        
         <div className="flex items-center w-[30%]  justify-center  md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-blue-500 hover:scale-105 transform transition-all duration-300">
           <Avatar className="rounded-full w-full h-full">
             <AvatarImage
@@ -53,7 +52,6 @@ const Profile: React.FC = () => {
         </div>
 
         <div className="flex flex-col w-[60%]   items-center md:items-start text-center md:text-left space-y-2">
-          
           <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
             Giorgi
           </p>
@@ -66,7 +64,6 @@ const Profile: React.FC = () => {
             className="flex  flex-col pt-10 md:flex-row lg:flex-row items-center  gap-2 w-full "
           >
             <Controller
-            
               name="avatarIcon"
               control={control}
               render={({ field }) => (
@@ -98,7 +95,13 @@ const Profile: React.FC = () => {
                 />
               )}
             />
-            <Button variant={"outline"} className="w-3/4 sm:w-1/3 md:w-20 lg:w-20 "  type="submit">Change</Button>
+            <Button
+              variant={"outline"}
+              className="w-3/4 sm:w-1/3 md:w-20 lg:w-20 "
+              type="submit"
+            >
+              Change
+            </Button>
           </form>
         </div>
       </div>
