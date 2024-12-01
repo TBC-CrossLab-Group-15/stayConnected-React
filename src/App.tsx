@@ -24,7 +24,7 @@ function App() {
             <Route path="login" element={<Login />} /> {/* Route for login */}
             <Route path="profile" element={<Profile />} />
             <Route path="questionPage" element={<QuestionPage />} />
-            <Route path="CreateQuestion" element={<CreateQuestion />} />
+            <Route path="createQuestion" element={<CreateQuestion />} />
             {/* Route for profile */}
           </Route>
           <Route path="*" element={<NotFoundPage />} />
