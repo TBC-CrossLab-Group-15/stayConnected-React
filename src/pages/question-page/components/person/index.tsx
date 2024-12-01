@@ -27,22 +27,19 @@ const Person: React.FC<{
           Date Time
         </Button>
 
-      {
-        questionAuthorIsSignedIn && (
+        {questionAuthorIsSignedIn && (
           <Button
-          onClick={() => onApprove(id)}
-          variant="outline"
-          className={`w-full ${
-            isApproved
-              ? "bg-green-500 text-white hover:bg-green-600 border-green-500"
-              : "bg-blue-500 text-white hover:bg-blue-600 border-blue-500"
-          }`}
-        >
-          {isApproved ? "Unapprove" : "Approve"}
-        </Button>
-        )
-      }
-
+            onClick={() => onApprove(id)}
+            variant="outline"
+            className={`w-full ${
+              isApproved
+                ? "bg-green-500 text-white hover:bg-green-600 border-green-500"
+                : "bg-blue-500 text-white hover:bg-blue-600 border-blue-500"
+            }`}
+          >
+            {isApproved ? "Unapprove" : "Approve"}
+          </Button>
+        )}
       </div>
     </div>
   );
