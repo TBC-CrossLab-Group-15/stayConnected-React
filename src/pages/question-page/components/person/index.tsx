@@ -1,8 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import React, { PropsWithChildren } from "react";
+import React from "react";
 
-const Person: React.FC<PropsWithChildren> = () => {
+const Person: React.FC<{
+  questionAuthorIsSignedIn: boolean;
+  onApprove: (id: number) => void;
+  id: number;
+  isApproved: boolean;
+}> = ({ questionAuthorIsSignedIn, onApprove, id, isApproved }) => {
   return (
     <div className="dark:bg-gray-800 persons flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between  shadow-inner bg-gray-200 border rounded-lg p-5 ">
       {/* Left Section */}
@@ -21,9 +26,23 @@ const Person: React.FC<PropsWithChildren> = () => {
         <Button className="p-0" variant="link">
           Date Time
         </Button>
-        <Button variant="outline" className=" w-full">
-          Approve
+
+      {
+        questionAuthorIsSignedIn && (
+          <Button
+          onClick={() => onApprove(id)}
+          variant="outline"
+          className={`w-full ${
+            isApproved
+              ? "bg-green-500 text-white hover:bg-green-600 border-green-500"
+              : "bg-blue-500 text-white hover:bg-blue-600 border-blue-500"
+          }`}
+        >
+          {isApproved ? "Unapprove" : "Approve"}
         </Button>
+        )
+      }
+
       </div>
     </div>
   );

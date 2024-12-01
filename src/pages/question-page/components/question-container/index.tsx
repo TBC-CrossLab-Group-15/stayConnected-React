@@ -1,9 +1,36 @@
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import Person from "../person";
+import { useState } from "react";
 
-const QuestionContainer = () => {
-  const persons = ["giorgi", "gvanca", "elene", "teona", "rati"]; // Placeholder for persons who answered
+const QuestionContainer: React.FC = () => {
+  const [approvedPerson, setApprovedPerson] = useState<number | null>(null); // Store only one approved person
+
+  const [persons, setPersons] = useState([
+    { id: 1, name: "giorgi" },
+    { id: 2, name: "nika" },
+    { id: 3, name: "teona" },
+    { id: 4, name: "tatia" },
+  ]);
+
+  const questionAuthorIsSignedIn = true; // როცა ავტორიზირებულია კითხვის ავტორი
+  const userIsSignedIn = true; // როცა ავტორიზირებულია მომხმარებელი შეუძლია პასუხის გაცემა
+
+  const onApprove = (id: number) => {
+    if (approvedPerson === id) {
+      setApprovedPerson(null);
+      return;
+    }
+
+    setApprovedPerson(id);
+
+    // Move the approved person to the top of the list
+    setPersons((prevPersons) => {
+      const approved = prevPersons.find((person) => person.id === id);
+      const others = prevPersons.filter((person) => person.id !== id);
+      return approved ? [approved, ...others] : prevPersons;
+    });
+  };
 
   return (
     <div className="bg-gray-50  overflow-hidden dark:bg-black p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-14">
@@ -35,22 +62,30 @@ const QuestionContainer = () => {
           Answers
         </h3>
         <div className="max-h-[300px]  overflow-y-auto flex flex-col gap-4 pr-10 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent dark:scrollbar-thumb-blue-700 dark:scrollbar-track-transparent">
-          {persons.map((index) => (
-            <Person key={index} />
+          {persons.map((person) => (
+            <Person
+              key={person.id}
+              id={person.id}
+              onApprove={onApprove}
+              questionAuthorIsSignedIn={questionAuthorIsSignedIn}
+              isApproved={approvedPerson === person.id}
+            />
           ))}
         </div>
       </div>
 
       {/* Question Footer */}
-      <div className="flex items-center gap-4 ">
-        <Textarea className="flex-1" placeholder="Type your message here." />
-        <Button
-          className="h-full bg-blue-700 text-white dark:bg-black dark:text-white"
-          variant="outline"
-        >
-          Send
-        </Button>
-      </div>
+      {userIsSignedIn && (
+        <div className="flex items-center gap-4 ">
+          <Textarea className="flex-1" placeholder="Type your message here." />
+          <Button
+            className="h-full bg-blue-700 text-white dark:bg-black dark:text-white"
+            variant="outline"
+          >
+            Send
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

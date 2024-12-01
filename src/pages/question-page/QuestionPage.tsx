@@ -1,6 +1,6 @@
 import QuestionContainer from "./components/question-container";
 
-const QuestionPage = () => {
+const QuestionPage: React.FC = () => {
   return <QuestionContainer />;
 };
 
