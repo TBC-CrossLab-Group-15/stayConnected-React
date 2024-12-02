@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 
 const QuestionContainer: React.FC = () => {
   const [approvedPerson, setApprovedPerson] = useState<number | null>(null); // Store only one approved person
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   // const { data } = useQuery({
   //   queryKey: ["question"],

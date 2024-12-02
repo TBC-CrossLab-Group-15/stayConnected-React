@@ -9,8 +9,7 @@ const Person: React.FC<{
   id: number;
   isApproved: boolean;
 }> = ({ questionAuthorIsSignedIn, onApprove, id, isApproved }) => {
-
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <div className="dark:bg-gray-800 persons flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between  shadow-inner bg-gray-200 border rounded-lg p-5 ">

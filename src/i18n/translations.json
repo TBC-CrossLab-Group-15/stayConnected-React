@@ -40,13 +40,20 @@
       "full-name-ka": "Full Name (ქართულად)",
       "full-name-en": "Full Name (English)",
       "edit-profile-info": "Edit Profile Info",
-      
-      "send":"Send",
-      "cancel":"Cancel",
+
+      "send": "Send",
+      "cancel": "Cancel",
       "approve": "Approve",
       "answers": "Answers",
       "date": "Date",
-      "time": "Time"
+      "time": "Time",
+
+      "profile":"Profile",
+      "information":"Information",
+      "score": "Score",
+      "answeredQuestions": "Answered Questions",
+      "logout": "Logout",
+      "change": "Change"
     }
   },
   "ka": {
@@ -93,12 +100,19 @@
       "full-name-en": "სრული სახელი (ინგლისურად)",
       "edit-profile-info": "პროფილის ინფორმაციის რედაქტირება",
 
-      "send":"გაგზავნა",
-      "cancel":"გაუქმება",
+      "send": "გაგზავნა",
+      "cancel": "გაუქმება",
       "approve": "დადასტურება",
       "answers": "პასუხები",
       "date": "თარიღი",
-      "time": "დრო"
+      "time": "დრო",
+
+      "profile":"პროფილი",
+      "information":"ინფორმაცია",
+      "score": "ქულა",
+      "answeredQuestions":"გაცემული პასუხები",
+      "logout": "გასვლა",
+      "change": "შეცვლა"
     }
   }
 }
