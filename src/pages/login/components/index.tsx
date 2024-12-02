@@ -7,6 +7,8 @@ import { FormValues } from "../types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormSchema } from "./schema";
 import { Label } from "@radix-ui/react-label";
+
+import { useTranslation } from "react-i18next";
 // import { useMutation } from "@tanstack/react-query";
 
 const LoginForm: React.FC = () => {
@@ -18,7 +20,7 @@ const LoginForm: React.FC = () => {
     resolver: zodResolver(LoginFormSchema),
     defaultValues: LoginDefaultValues,
   });
-
+  const { t } = useTranslation();
   // const { mutate: handleLogin } = useMutation({
   //   mutationKey: ["login"],
   //   mutationFn: login,
@@ -43,13 +45,18 @@ const LoginForm: React.FC = () => {
           className="
         text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          Email
+          {t("email")}
         </Label>
         <Controller
           name="email"
           control={control}
           render={({ field }) => (
-            <Input id="email" type="email" placeholder="Email" {...field} />
+            <Input
+              id="email"
+              type="email"
+              placeholder={t("email-placeholder")}
+              {...field}
+            />
           )}
         />
         {errors.email && (
@@ -62,7 +69,7 @@ const LoginForm: React.FC = () => {
           htmlFor="password"
           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          Password
+          {t("password")}
         </Label>
         <Controller
           name="password"
@@ -71,7 +78,7 @@ const LoginForm: React.FC = () => {
             <Input
               id="password"
               type="password"
-              placeholder="Password"
+              placeholder={t("password-placeholder")}
               {...field}
             />
           )}
@@ -83,14 +90,14 @@ const LoginForm: React.FC = () => {
       {/*დალოგინება/რეგისტრაციაზე გადასვლა */}
       <div className="flex justify-between">
         <Button className="w-full" variant="outline" type="submit">
-          Log in
+          {t("sign-in")}
         </Button>
       </div>
       <div className="flex justify-center items-center">
-        <p className="text-muted-foreground">Already have an account?</p>
+        <p className="text-muted-foreground text-xs">{t("no-account")} </p>
         <Button variant="link">
           <Link className="text-bold " to="/signup">
-            Sign up
+            {t("sign-up")}
           </Link>
         </Button>
       </div>

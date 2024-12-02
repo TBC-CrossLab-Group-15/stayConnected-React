@@ -7,6 +7,7 @@ import { RegisterDataType } from "../../types";
 import { registerFormSchema } from "./shema.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const RegistrationForm: React.FC = () => {
   const {
@@ -23,7 +24,7 @@ const RegistrationForm: React.FC = () => {
       confirmPassword: "",
     },
   });
-
+  const { t } = useTranslation();
   const onSubmit = (values: RegisterDataType) => {
     if (values.password !== values.confirmPassword) {
       alert("Passwords do not match");
@@ -36,19 +37,19 @@ const RegistrationForm: React.FC = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="grid w-full items-center gap-4">
         <div className="flex flex-col space-y-1.5">
-          <Label htmlFor="name">Name</Label>
+          <Label htmlFor="name">{t("name")}</Label>
           <Controller
             name="name"
             control={control}
             render={({ field }) => (
-              <Input id="name" type="text" placeholder="Name" {...field} />
+              <Input id="name" type="text" placeholder={t("name")} {...field} />
             )}
           />
           {errors.name && <p className="text-red-500">{errors.name.message}</p>}
         </div>
 
         <div className="flex flex-col space-y-1.5">
-          <Label htmlFor="lastName">Last Name</Label>
+          <Label htmlFor="lastName">{t("last-name")}</Label>
           <Controller
             name="lastName"
             control={control}
@@ -56,7 +57,7 @@ const RegistrationForm: React.FC = () => {
               <Input
                 id="lastName"
                 type="text"
-                placeholder="Last Name"
+                placeholder={t("last-name")}
                 {...field}
               />
             )}
@@ -67,12 +68,17 @@ const RegistrationForm: React.FC = () => {
         </div>
 
         <div className="flex flex-col space-y-1.5">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">{t("email")}</Label>
           <Controller
             name="email"
             control={control}
             render={({ field }) => (
-              <Input id="email" type="email" placeholder="Email" {...field} />
+              <Input
+                id="email"
+                type="email"
+                placeholder={t("email-placeholder")}
+                {...field}
+              />
             )}
           />
           {errors.email && (
@@ -80,7 +86,7 @@ const RegistrationForm: React.FC = () => {
           )}
         </div>
         <div className="flex flex-col space-y-1.5">
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor={t("password")}>Password</Label>
           <Controller
             name="password"
             control={control}
@@ -88,7 +94,7 @@ const RegistrationForm: React.FC = () => {
               <Input
                 id="password"
                 type="password"
-                placeholder="Password"
+                placeholder={t("password-placeholder")}
                 {...field}
               />
             )}
@@ -98,7 +104,7 @@ const RegistrationForm: React.FC = () => {
           )}
         </div>
         <div className="flex flex-col space-y-1.5">
-          <Label htmlFor="confirmPassword">Confirm Password</Label>
+          <Label htmlFor="confirmPassword">{t("confirm-password")}</Label>
           <Controller
             name="confirmPassword"
             control={control}
@@ -106,7 +112,7 @@ const RegistrationForm: React.FC = () => {
               <Input
                 id="confirmPassword"
                 type="password"
-                placeholder="Confirm Password"
+                placeholder={t("confirm-password-placeholder")}
                 {...field}
               />
             )}
@@ -117,14 +123,16 @@ const RegistrationForm: React.FC = () => {
         </div>
         <div className="flex justify-between">
           <Button className="w-full" variant="outline" type="submit">
-            Register
+            {t("sign-up")}
           </Button>
         </div>
         <div className="flex justify-center items-center">
-          <p className="text-muted-foreground">Don't have an account?</p>
+          <p className="text-muted-foreground text-xs">
+            {t("already-have-account")}{" "}
+          </p>
           <Button variant="link">
-            <Link className="text-bold " to="/login">
-              Sign In
+            <Link className="text-bold  " to="/login">
+              {t("sign-in")}
             </Link>
           </Button>
         </div>
