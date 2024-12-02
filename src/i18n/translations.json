@@ -48,8 +48,8 @@
       "date": "Date",
       "time": "Time",
 
-      "profile":"Profile",
-      "information":"Information",
+      "profile": "Profile",
+      "information": "Information",
       "score": "Score",
       "answeredQuestions": "Answered Questions",
       "logout": "Logout",
@@ -107,10 +107,10 @@
       "date": "თარიღი",
       "time": "დრო",
 
-      "profile":"პროფილი",
-      "information":"ინფორმაცია",
+      "profile": "პროფილი",
+      "information": "ინფორმაცია",
       "score": "ქულა",
-      "answeredQuestions":"გაცემული პასუხები",
+      "answeredQuestions": "გაცემული პასუხები",
       "logout": "გასვლა",
       "change": "შეცვლა"
     }

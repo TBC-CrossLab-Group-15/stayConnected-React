@@ -18,7 +18,7 @@ const Profile: React.FC = () => {
     },
   });
 
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const avatar = createAvatar(avataaars, {
     seed: userAvatar, // in here i whant to put avatarIcon : {value}
@@ -26,8 +26,6 @@ const Profile: React.FC = () => {
   const svg = avatar.toString();
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
   const dataUrl = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
-
-
 
   const onSubmit = (data: { avatarIcon: { value: string; label: string } }) => {
     if (data.avatarIcon.value) {
