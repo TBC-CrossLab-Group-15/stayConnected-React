@@ -9,7 +9,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 const Leaderboard = () => {
   return (
-    <>
+    
       <Card className="mt-8 font-sans p-3 flex flex-col items-center dark:border-solid dark:border-neutral-800">
         <CardHeader className="flex items-center font-sans">
           <CardTitle className="text-xl">LeaderBoard</CardTitle>
@@ -62,7 +62,7 @@ const Leaderboard = () => {
           <p>Answer questions to become one of them!</p>
         </CardFooter>
       </Card>
-    </>
+    
   );
 };
 
