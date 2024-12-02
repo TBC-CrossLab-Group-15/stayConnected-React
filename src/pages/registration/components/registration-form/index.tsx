@@ -45,7 +45,11 @@ const RegistrationForm: React.FC = () => {
               <Input id="name" type="text" placeholder={t("name")} {...field} />
             )}
           />
-          {errors.name && <p className="text-red-500 text-sm">{t(`${errors.name.message}`)}</p>}
+          {errors.name && (
+            <p className="text-red-500 text-sm">
+              {t(`${errors.name.message}`)}
+            </p>
+          )}
         </div>
 
         <div className="flex flex-col space-y-1.5">
@@ -63,7 +67,9 @@ const RegistrationForm: React.FC = () => {
             )}
           />
           {errors.lastName && (
-            <p className="text-red-500 text-sm">{t(`${errors.lastName.message}`)}</p>
+            <p className="text-red-500 text-sm">
+              {t(`${errors.lastName.message}`)}
+            </p>
           )}
         </div>
 
@@ -82,7 +88,9 @@ const RegistrationForm: React.FC = () => {
             )}
           />
           {errors.email && (
-            <p className="text-red-500 text-sm">{t(`${errors.email.message}`)}</p>
+            <p className="text-red-500 text-sm">
+              {t(`${errors.email.message}`)}
+            </p>
           )}
         </div>
         <div className="flex flex-col space-y-1.5">
@@ -100,7 +108,9 @@ const RegistrationForm: React.FC = () => {
             )}
           />
           {errors.password && (
-            <p className="text-red-500 text-sm">{t(`${errors.password.message}`)}</p>
+            <p className="text-red-500 text-sm">
+              {t(`${errors.password.message}`)}
+            </p>
           )}
         </div>
         <div className="flex flex-col space-y-1.5">
@@ -118,7 +128,9 @@ const RegistrationForm: React.FC = () => {
             )}
           />
           {errors.password && (
-            <p className="text-red-500 text-sm">{t(`${errors.password.message}`)}</p>
+            <p className="text-red-500 text-sm">
+              {t(`${errors.password.message}`)}
+            </p>
           )}
         </div>
         <div className="flex justify-between">
