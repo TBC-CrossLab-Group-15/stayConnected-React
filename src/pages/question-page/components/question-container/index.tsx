@@ -8,11 +8,12 @@ import { getQuestion } from "@/api/question";
 const QuestionContainer: React.FC = () => {
   const [approvedPerson, setApprovedPerson] = useState<number | null>(null); // Store only one approved person
 
-const {data} = useQuery({
-  queryKey:["question"],
-  queryFn:()=>getQuestion(1)
-})
-console.log(data)
+  const { data } = useQuery({
+    queryKey: ["question"],
+    queryFn: () => getQuestion(1),
+    
+  });
+  console.log(data);
 
   const [persons, setPersons] = useState([
     { id: 1, name: "giorgi" },
