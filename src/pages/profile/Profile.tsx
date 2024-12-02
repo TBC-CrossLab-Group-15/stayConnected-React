@@ -127,7 +127,7 @@ const Profile: React.FC = () => {
 
       {/* Logout Button */}
       <div className="flex justify-center">
-        <Button  className="bg-sky-500 w-full md:w-auto text-white hover:bg-sky-600 rounded-md px-6 py-3 text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+        <Button className="bg-sky-500 w-full md:w-auto text-white hover:bg-sky-600 rounded-md px-6 py-3 text-lg font-semibold transition-all duration-300 transform hover:scale-105">
           Logout
         </Button>
       </div>

@@ -2,9 +2,17 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import Person from "../person";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getQuestion } from "@/api/question";
 
 const QuestionContainer: React.FC = () => {
   const [approvedPerson, setApprovedPerson] = useState<number | null>(null); // Store only one approved person
+
+const {data} = useQuery({
+  queryKey:["question"],
+  queryFn:()=>getQuestion(1)
+})
+console.log(data)
 
   const [persons, setPersons] = useState([
     { id: 1, name: "giorgi" },
