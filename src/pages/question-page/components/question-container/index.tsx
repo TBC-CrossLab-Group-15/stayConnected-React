@@ -2,18 +2,19 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import Person from "../person";
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getQuestion } from "@/api/question";
+// import { useQuery } from "@tanstack/react-query";
+// import { getQuestion } from "@/api/question";
+import { useTranslation } from "react-i18next";
 
 const QuestionContainer: React.FC = () => {
   const [approvedPerson, setApprovedPerson] = useState<number | null>(null); // Store only one approved person
+  const {t} = useTranslation();
 
-  const { data } = useQuery({
-    queryKey: ["question"],
-    queryFn: () => getQuestion(1),
-    
-  });
-  console.log(data);
+  // const { data } = useQuery({
+  //   queryKey: ["question"],
+  //   queryFn: () => getQuestion(1),
+  // });
+  // console.log(data);
 
   const [persons, setPersons] = useState([
     { id: 1, name: "giorgi" },
@@ -42,7 +43,7 @@ const QuestionContainer: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-50  overflow-hidden dark:bg-black p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-14">
+    <div className="bg-gray-50 max-w-[1400px]  mx-auto overflow-hidden dark:bg-black p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-14">
       {/* Question Header */}
       <div className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
@@ -54,7 +55,7 @@ const QuestionContainer: React.FC = () => {
               Author
             </Button>
             <Button className="text-gray-600 dark:text-gray-300" variant="link">
-              Date Time
+              {t("date")} {t("time")}
             </Button>
           </div>
         </div>
@@ -68,7 +69,7 @@ const QuestionContainer: React.FC = () => {
       {/* Question Body */}
       <div className="flex flex-col gap-6 ">
         <h3 className="text-base font-medium text-gray-800 dark:text-gray-200">
-          Answers
+          {t("answers")}
         </h3>
         <div className="max-h-[300px]  overflow-y-auto flex flex-col gap-4 pr-10 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent dark:scrollbar-thumb-blue-700 dark:scrollbar-track-transparent">
           {persons.map((person) => (
@@ -91,7 +92,7 @@ const QuestionContainer: React.FC = () => {
             className="h-full bg-blue-700 text-white dark:bg-black dark:text-white"
             variant="outline"
           >
-            Send
+            {t("send")}
           </Button>
         </div>
       )}
