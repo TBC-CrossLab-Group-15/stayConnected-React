@@ -8,6 +8,8 @@ import { registerFormSchema } from "./shema.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useMutation } from "@tanstack/react-query";
+import { Register } from "@/api/auth/index.ts";
 
 const RegistrationForm: React.FC = () => {
   const {
@@ -25,11 +27,21 @@ const RegistrationForm: React.FC = () => {
     },
   });
   const { t } = useTranslation();
+
+  const { mutate: handleRegister } = useMutation({
+    mutationKey: ["register"],
+    mutationFn: Register,
+    onSuccess: (data) => {
+      console.log("User signed in:", data);
+    },
+  });
   const onSubmit = (values: RegisterDataType) => {
     if (values.password !== values.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
+    console.log("values:", values);
+    handleRegister(values);
     alert("register successfully");
   };
 
