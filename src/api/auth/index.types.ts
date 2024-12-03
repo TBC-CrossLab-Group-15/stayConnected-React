@@ -8,3 +8,7 @@ export type LoginResponseType = {
   access: string;
   refresh: string;
 };
+
+export type RefreshResponseType = {
+  refresh: string;
+};
