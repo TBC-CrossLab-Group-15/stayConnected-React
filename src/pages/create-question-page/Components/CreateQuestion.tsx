@@ -22,7 +22,7 @@ const FRAMEWORKS = [
   { value: "nest.js", label: "Nest.js" },
 ] satisfies Framework[];
 
-const FancyMultiSelect: React.FC = () => {
+const CreateQuestion: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<Framework[]>([]);
@@ -119,4 +119,4 @@ const FancyMultiSelect: React.FC = () => {
     </Command>
   );
 };
-export default FancyMultiSelect;
+export default CreateQuestion;
