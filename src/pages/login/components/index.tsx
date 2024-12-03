@@ -2,38 +2,40 @@ import { Controller, useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { LoginDefaultValues } from "../login-default-values";
-import { FormValues } from "../types/types";
+import { LoginDefaultValues } from "./login-default-values";
+import { LoginFormValues } from "./types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormSchema } from "./schema";
 import { Label } from "@radix-ui/react-label";
 
 import { useTranslation } from "react-i18next";
-// import { useMutation } from "@tanstack/react-query";
+
+import { Login } from "@/api/auth";
+import { useMutation } from "@tanstack/react-query";
 
 const LoginForm: React.FC = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({
+  } = useForm<LoginFormValues>({
     resolver: zodResolver(LoginFormSchema),
     defaultValues: LoginDefaultValues,
   });
   const { t } = useTranslation();
-  // const { mutate: handleLogin } = useMutation({
-  //   mutationKey: ["login"],
-  //   mutationFn: login,
-  //   onSuccess: (data) => {
-  //     console.log("User signed in:", data);
-  //   },
-  // });
+  const { mutate: handleLogin } = useMutation({
+    mutationKey: ["login"],
+    mutationFn: Login,
+    onSuccess: (data) => {
+      console.log("User signed in:", data);
+    },
+  });
 
-  const onSubmit = (values: FormValues) => {
+  const onSubmit = (values: LoginFormValues) => {
     const { email, password } = values;
     alert("login successfully");
     console.log(email, password);
-    // handleLogin({email, password})
+    handleLogin(values);
   };
 
   return (
