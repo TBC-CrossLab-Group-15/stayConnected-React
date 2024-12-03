@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import Person from "../person";
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import {  useQuery } from "@tanstack/react-query";
 import { getQuestion } from "@/api/question";
 import { useTranslation } from "react-i18next";
 
@@ -10,11 +10,12 @@ const QuestionContainer: React.FC = () => {
   const [approvedPerson, setApprovedPerson] = useState<number | null>(null); // Store only one approved person
   const { t } = useTranslation();
 
-  const { data } = useQuery({
-    queryKey: ["question"],
+
+  const {data} = useQuery({
+    queryKey: ['question', 1],
     queryFn: () => getQuestion(1),
-  });
-  console.log(data);
+  })
+
 
   const [persons, setPersons] = useState([
     { id: 1, name: "giorgi" },
@@ -27,6 +28,8 @@ const QuestionContainer: React.FC = () => {
   const userIsSignedIn = true; // როცა ავტორიზირებულია მომხმარებელი შეუძლია პასუხის გაცემა
 
   const onApprove = (id: number) => {
+
+
     if (approvedPerson === id) {
       setApprovedPerson(null);
       return;
