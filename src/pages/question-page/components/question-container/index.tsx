@@ -50,21 +50,19 @@ const QuestionContainer: React.FC = () => {
       <div className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
-            {data?.title||"DataTitle"}
+            {data?.title || "DataTitle"}
           </h2>
           <div className="flex gap-4">
             <Button className="text-gray-600 dark:text-gray-300" variant="link">
-              {data?.user.first_name||"Author"}
+              {data?.user.first_name || "Author"}
             </Button>
             <Button className="text-gray-600 dark:text-gray-300" variant="link">
-              {data?.user.create_date||"date / time"}
+              {data?.user.create_date || "date / time"}
             </Button>
           </div>
         </div>
         <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
-            {
-              data?.text||"კითხვის აღწერა"
-            }
+          {data?.text || "კითხვის აღწერა"}
         </p>
       </div>
 
