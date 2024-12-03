@@ -13,7 +13,7 @@ export const registerFormSchema = z.object({
     .string()
     .min(10, { message: "validation.email-min" })
     .max(50, { message: "validation.email-max" })
-    .email({message: "validation.email-invalid"}),
+    .email({ message: "validation.email-invalid" }),
   password: z
     .string()
     .min(8, { message: "validation.password-min" })
