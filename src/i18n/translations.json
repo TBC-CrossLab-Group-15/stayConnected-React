@@ -53,7 +53,14 @@
       "score": "Score",
       "answeredQuestions": "Answered Questions",
       "logout": "Logout",
-      "change": "Change"
+      "change": "Change",
+
+
+      "askQuestion": "Ask Your Question!",
+      "questionTitle": "Question Title",
+      "questionDescription": "Question Description",
+      "addTag": "Add Tag"
+
     }
   },
   "ka": {
@@ -112,7 +119,13 @@
       "score": "ქულა",
       "answeredQuestions": "გაცემული პასუხები",
       "logout": "გასვლა",
-      "change": "შეცვლა"
+      "change": "შეცვლა",
+
+
+      "askQuestion": "დასვი შენი კითხვა!",
+      "questionTitle": "კითხვის სათაური",
+      "questionDescription": "კითხვის დახასიათბა",
+      "addTag": "დაამატე თაგი"
     }
   }
 }
