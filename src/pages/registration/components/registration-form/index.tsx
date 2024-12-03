@@ -52,8 +52,10 @@ const RegistrationForm: React.FC = () => {
               <Input id="name" type="text" placeholder={t("name")} {...field} />
             )}
           />
+
           {errors.first_name && (
             <p className="text-red-500">{errors.first_name.message}</p>
+
           )}
         </div>
 
@@ -71,8 +73,10 @@ const RegistrationForm: React.FC = () => {
               />
             )}
           />
+
           {errors.last_name && (
             <p className="text-red-500">{errors.last_name.message}</p>
+
           )}
         </div>
 
@@ -91,11 +95,13 @@ const RegistrationForm: React.FC = () => {
             )}
           />
           {errors.email && (
-            <p className="text-red-500">{errors.email.message}</p>
+            <p className="text-red-500 text-sm">
+              {t(`${errors.email.message}`)}
+            </p>
           )}
         </div>
         <div className="flex flex-col space-y-1.5">
-          <Label htmlFor={t("password")}>Password</Label>
+          <Label htmlFor={t("password")}>{t("password")}</Label>
           <Controller
             name="password"
             control={control}
@@ -109,7 +115,9 @@ const RegistrationForm: React.FC = () => {
             )}
           />
           {errors.password && (
-            <p className="text-red-500">{errors.password.message}</p>
+            <p className="text-red-500 text-sm">
+              {t(`${errors.password.message}`)}
+            </p>
           )}
         </div>
         <div className="flex flex-col space-y-1.5">
@@ -126,8 +134,10 @@ const RegistrationForm: React.FC = () => {
               />
             )}
           />
+
           {errors.confirm_password && (
             <p className="text-red-500">{errors.confirm_password.message}</p>
+
           )}
         </div>
         <div className="flex justify-between">

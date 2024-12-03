@@ -62,7 +62,7 @@ const LoginForm: React.FC = () => {
           )}
         />
         {errors.email && (
-          <p className="text-sm text-red-500">{errors.email.message}</p>
+          <p className="text-sm text-red-500">{t(`${errors.email.message}`)}</p>
         )}
       </div>
       {/* პაროლი */}
@@ -86,7 +86,9 @@ const LoginForm: React.FC = () => {
           )}
         />
         {errors.password && (
-          <p className="text-sm text-red-500">{errors.password.message}</p>
+          <p className="text-sm text-red-500">
+            {t(`${errors.password.message}`)}
+          </p>
         )}
       </div>
       {/*დალოგინება/რეგისტრაციაზე გადასვლა */}

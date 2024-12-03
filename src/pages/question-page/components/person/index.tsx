@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const Person: React.FC<{
   questionAuthorIsSignedIn: boolean;
@@ -8,6 +9,8 @@ const Person: React.FC<{
   id: number;
   isApproved: boolean;
 }> = ({ questionAuthorIsSignedIn, onApprove, id, isApproved }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="dark:bg-gray-800 persons flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between  shadow-inner bg-gray-200 border rounded-lg p-5 ">
       {/* Left Section */}
@@ -24,7 +27,7 @@ const Person: React.FC<{
       {/* Right Section */}
       <div className="flex  items-start gap-2 sm:flex-row sm:items-center sm:gap-5 ">
         <Button className="p-0" variant="link">
-          Date Time
+          {t("date")} {t("time")}
         </Button>
 
         {questionAuthorIsSignedIn && (
@@ -37,7 +40,7 @@ const Person: React.FC<{
                 : "bg-blue-500 text-white hover:bg-blue-600 border-blue-500"
             }`}
           >
-            {isApproved ? "Unapprove" : "Approve"}
+            {isApproved ? t("cancel") : t("approve")}
           </Button>
         )}
       </div>
