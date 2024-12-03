@@ -1,5 +1,4 @@
 import { PropsWithChildren } from "react";
-import { Link } from "react-router-dom";
 
 
 const MainSection: React.FC<PropsWithChildren> = ({ children }) => {
@@ -10,7 +9,6 @@ const MainSection: React.FC<PropsWithChildren> = ({ children }) => {
         flex items-center justify-center"
     >
       {children}
-      <Link to="./questionPage">questionPage</Link>
     </div>
   );
 };
