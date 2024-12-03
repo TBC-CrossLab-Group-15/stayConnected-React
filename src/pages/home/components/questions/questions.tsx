@@ -36,8 +36,8 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
               <path
                 d="M7.66663 12.6289L10.4289 15.3912C10.8733 15.8356 11.0956 16.0578 11.3717 16.0578C11.6478 16.0578 11.8701 15.8356 12.3145 15.3912L18.334 9.3717"
                 stroke="#059669"
-                stroke-width="1.6"
-                stroke-linecap="round"
+                strokeWidth="1.6"
+                strokeLinecap="round"
               ></path>
             </svg>
           </div>

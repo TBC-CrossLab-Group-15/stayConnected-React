@@ -41,10 +41,16 @@ const QuestionContainer: React.FC = () => {
             {data?.title || "DataTitle"}
           </h2>
           <div className="flex gap-4">
-            <Button className="text-gray-600 dark:text-gray-300  p-0 sm:p-4" variant="link">
+            <Button
+              className="text-gray-600 dark:text-gray-300  p-0 sm:p-4"
+              variant="link"
+            >
               {data?.user.first_name + " " + data?.user.last_name || "Author"}
             </Button>
-            <Button className="text-gray-600 dark:text-gray-300 p-0 sm:p-4" variant="link">
+            <Button
+              className="text-gray-600 dark:text-gray-300 p-0 sm:p-4"
+              variant="link"
+            >
               {data?.create_date.slice(0, 10) || "date / time"}
             </Button>
           </div>

@@ -12,8 +12,16 @@ const Person: React.FC<{
   isApproved: boolean;
   userAvatar: string;
   userName: string;
-  text:string
-}> = ({ questionAuthorIsSignedIn, onApprove, id, isApproved, userAvatar ,userName ,text}) => {
+  text: string;
+}> = ({
+  questionAuthorIsSignedIn,
+  onApprove,
+  id,
+  isApproved,
+  userAvatar,
+  userName,
+  text,
+}) => {
   const { t } = useTranslation();
 
   const avatar = createAvatar(avataaars, {
@@ -23,8 +31,6 @@ const Person: React.FC<{
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
   const dataUrl = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
 
-
-
   return (
     <div className="dark:bg-gray-800 h-full  persons flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between  shadow-inner bg-gray-200 border rounded-lg p-5 ">
       {/* Left Section */}
@@ -32,9 +38,7 @@ const Person: React.FC<{
       <div className="flex w-full h-full  sm:h-64  flex-col sm:flex-row gap-5 bg-white  overflow-hidden p-4">
         {/* Icon Box */}
         <div className="flex flex-col justify-center  items-center w-full sm:w-1/4 p-4 bg-gray-100 rounded-lg">
-
           <Avatar className="w-16 h-16 sm:h-28 sm:w-28">
-
             <AvatarImage
               src={dataUrl}
               className="w-full h-full "
@@ -74,9 +78,14 @@ const Person: React.FC<{
             {isApproved ? t("reject") : t("approve")}
           </Button>
         )}
-        {
-          isApproved&&<Button className="h-full flex justify-center items-end text-green-500" variant="link">Accepted</Button>
-        }
+        {isApproved && (
+          <Button
+            className="h-full flex justify-center items-end text-green-500"
+            variant="link"
+          >
+            Accepted
+          </Button>
+        )}
       </div>
     </div>
   );
