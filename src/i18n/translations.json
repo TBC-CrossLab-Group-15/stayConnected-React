@@ -1,0 +1,128 @@
+{
+  "en": {
+    "translation": {
+      "language": {
+        "english": "ENG",
+        "georgian": "GEO"
+      },
+      "name": "Name",
+      "last-name": "Last Name",
+      "enter-details": "Enter your details",
+      "email": "Email",
+      "email-placeholder": "Enter your email",
+      "password": "Password",
+      "password-placeholder": "Enter your password",
+      "sign-in": "Sign In",
+      "no-account": "Don't have an account?",
+      "sign-up": "Sign Up",
+      "confirm-password": "Confirm Password",
+      "confirm-password-placeholder": "Confirm your password",
+      "already-have-account": "Already have an account?",
+      "validation": {
+        "name-min": "Name must be at least 2 characters.",
+        "name-max": "Name cannot exceed 50 characters.",
+        "lastName-min": "Last name must be at least 2 characters.",
+        "lastName-max": "Last name cannot exceed 50 characters.",
+        "email-min": "Email must be at least 10 characters.",
+        "email-max": "Email cannot exceed 50 characters.",
+        "email-invalid": "Please enter a valid email address.",
+        "password-min": "Password must be at least 8 characters.",
+        "password-max": "Password cannot exceed 50 characters.",
+        "passwords-mismatch": "Passwords do not match."
+      },
+      "profile-info-title": "Your Profile Info",
+      "username": "Username",
+      "avatar": "Avatar",
+      "avatar-option-blue": "Blue",
+      "avatar-option-yellow": "Yellow",
+      "avatar-option-pink": "Pink",
+      "avatar-option-gray": "Gray",
+      "full-name-ka": "Full Name (ქართულად)",
+      "full-name-en": "Full Name (English)",
+      "edit-profile-info": "Edit Profile Info",
+
+      "send": "Send",
+      "cancel": "Cancel",
+      "approve": "Approve",
+      "answers": "Answers",
+      "date": "Date",
+      "time": "Time",
+
+      "profile": "Profile",
+      "information": "Information",
+      "score": "Score",
+      "answeredQuestions": "Answered Questions",
+      "logout": "Logout",
+      "change": "Change",
+
+      "askQuestion": "Ask Your Question!",
+      "questionTitle": "Question Title",
+      "questionDescription": "Question Description",
+      "addTag": "Add Tag"
+    }
+  },
+  "ka": {
+    "translation": {
+      "language": {
+        "english": "ინგლისური",
+        "georgian": "ქართული"
+      },
+      "name": "სახელი",
+      "last-name": "გვარი",
+      "enter-details": "შეიყვანეთ მონაცემები",
+      "email": "ელ.ფოსტა",
+      "email-placeholder": "შეიყვანეთ თქვენი ელ.ფოსტა",
+      "password": "პაროლი",
+      "password-placeholder": "შეიყვანეთ თქვენი პაროლი",
+      "sign-in": "შესვლა",
+      "no-account": "ანგარიში არ გაქვთ?",
+      "sign-up": "რეგისტრაცია",
+      "sign-up-title": "რეგისტრაცია BitBlogs-ზე",
+      "sign-up-subtitle": "შეიყვანეთ თქვენი მონაცემები ანგარიშის შესაქმნელად",
+      "confirm-password": "დაადასტურეთ პაროლი",
+      "confirm-password-placeholder": "დაადასტურეთ თქვენი პაროლი",
+      "already-have-account": "უკვე გაქვთ ანგარიში?",
+      "validation": {
+        "name-min": "სახელი უნდა იყოს მინიმუმ 2 სიმბოლო.",
+        "name-max": "სახელი არ უნდა აღემატებოდეს 50 სიმბოლოს.",
+        "lastName-min": "გვარი უნდა იყოს მინიმუმ 2 სიმბოლო.",
+        "lastName-max": "გვარი არ უნდა აღემატებოდეს 50 სიმბოლოს.",
+        "email-min": "ელფოსტა უნდა იყოს მინიმუმ 10 სიმბოლო.",
+        "email-max": "ელფოსტა არ უნდა აღემატებოდეს 50 სიმბოლოს.",
+        "email-invalid": "გთხოვთ შეიყვანოთ სწორი ელფოსტა.",
+        "password-min": "პაროლი უნდა იყოს მინიმუმ 8 სიმბოლო.",
+        "password-max": "პაროლი არ უნდა აღემატებოდეს 50 სიმბოლოს.",
+        "passwords-mismatch": "პაროლები არ ემთხვევა."
+      },
+      "profile-info-title": "თქვენი პროფილის ინფორმაცია",
+      "username": "მომხმარებლის სახელი",
+      "avatar": "ავატარი",
+      "avatar-option-blue": "ლურჯი",
+      "avatar-option-yellow": "ყვითელი",
+      "avatar-option-pink": "ვარდისფერი",
+      "avatar-option-gray": "ნაცრისფერი",
+      "full-name-ka": "სრული სახელი (ქართულად)",
+      "full-name-en": "სრული სახელი (ინგლისურად)",
+      "edit-profile-info": "პროფილის ინფორმაციის რედაქტირება",
+
+      "send": "გაგზავნა",
+      "cancel": "გაუქმება",
+      "approve": "დადასტურება",
+      "answers": "პასუხები",
+      "date": "თარიღი",
+      "time": "დრო",
+
+      "profile": "პროფილი",
+      "information": "ინფორმაცია",
+      "score": "ქულა",
+      "answeredQuestions": "გაცემული პასუხები",
+      "logout": "გასვლა",
+      "change": "შეცვლა",
+
+      "askQuestion": "დასვი შენი კითხვა!",
+      "questionTitle": "კითხვის სათაური",
+      "questionDescription": "კითხვის დახასიათბა",
+      "addTag": "დაამატე თაგი"
+    }
+  }
+}

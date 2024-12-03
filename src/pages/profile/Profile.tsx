@@ -5,10 +5,10 @@ import { Controller, useForm } from "react-hook-form";
 import Select from "react-select";
 import { createAvatar } from "@dicebear/core";
 import { avataaars } from "@dicebear/collection";
+import { useTranslation } from "react-i18next";
 
 const Profile: React.FC = () => {
   const [userAvatar, setUserAvatar] = React.useState<string>("Oliver");
-
   const { control, handleSubmit } = useForm({
     defaultValues: {
       avatarIcon: {
@@ -17,6 +17,8 @@ const Profile: React.FC = () => {
       },
     },
   });
+
+  const { t } = useTranslation();
 
   const avatar = createAvatar(avataaars, {
     seed: userAvatar, // in here i whant to put avatarIcon : {value}
@@ -35,7 +37,7 @@ const Profile: React.FC = () => {
     <div className="w-full border m-auto max-w-3xl bg-white dark:bg-gray-900 rounded-xl shadow-2xl p-10 space-y-8">
       {/* Profile Header */}
       <h2 className="text-4xl font-extrabold text-center text-gray-800 dark:text-gray-200 tracking-tight">
-        Profile
+        {t("profile")}
       </h2>
 
       {/* Avatar and User Info */}
@@ -100,7 +102,7 @@ const Profile: React.FC = () => {
               className="w-3/4 sm:w-1/3 md:w-20 lg:w-20 "
               type="submit"
             >
-              Change
+              {t("change")}
             </Button>
           </form>
         </div>
@@ -109,16 +111,16 @@ const Profile: React.FC = () => {
       {/* Information Section */}
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 space-y-6 hover:shadow-xl transition-shadow duration-300">
         <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-          Information
+          {t("information")}
         </p>
         <div className="flex justify-between text-gray-600 dark:text-gray-400">
-          <p className="text-lg">Score</p>
+          <p className="text-lg">{t("score")}</p>
           <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
             25
           </p>
         </div>
         <div className="flex justify-between text-gray-600 dark:text-gray-400">
-          <p className="text-lg">Answered Questions</p>
+          <p className="text-lg">{t("answeredQuestions")}</p>
           <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
             10
           </p>
@@ -128,7 +130,7 @@ const Profile: React.FC = () => {
       {/* Logout Button */}
       <div className="flex justify-center">
         <Button className="bg-sky-500 w-full md:w-auto text-white hover:bg-sky-600 rounded-md px-6 py-3 text-lg font-semibold transition-all duration-300 transform hover:scale-105">
-          Logout
+          {t("logout")}
         </Button>
       </div>
     </div>
