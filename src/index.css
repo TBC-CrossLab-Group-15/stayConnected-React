@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 html,
 body,
 div,
@@ -198,3 +199,6 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
+
+
