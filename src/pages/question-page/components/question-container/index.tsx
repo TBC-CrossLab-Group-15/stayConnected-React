@@ -2,19 +2,19 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import Person from "../person";
 import { useState } from "react";
-// import { useQuery } from "@tanstack/react-query";
-// import { getQuestion } from "@/api/question";
+import { useQuery } from "@tanstack/react-query";
+import { getQuestion } from "@/api/question";
 import { useTranslation } from "react-i18next";
 
 const QuestionContainer: React.FC = () => {
   const [approvedPerson, setApprovedPerson] = useState<number | null>(null); // Store only one approved person
   const { t } = useTranslation();
 
-  // const { data } = useQuery({
-  //   queryKey: ["question"],
-  //   queryFn: () => getQuestion(1),
-  // });
-  // console.log(data);
+  const { data } = useQuery({
+    queryKey: ["question"],
+    queryFn: () => getQuestion(1),
+  });
+  console.log(data);
 
   const [persons, setPersons] = useState([
     { id: 1, name: "giorgi" },
@@ -42,27 +42,29 @@ const QuestionContainer: React.FC = () => {
     });
   };
 
+  // if(!data) return <p>Loading...</p>
+
   return (
     <div className="bg-gray-50 max-w-[1400px]  mx-auto overflow-hidden dark:bg-black p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-14">
       {/* Question Header */}
       <div className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
-            Question Title
+            {data?.title||"DataTitle"}
           </h2>
           <div className="flex gap-4">
             <Button className="text-gray-600 dark:text-gray-300" variant="link">
-              Author
+              {data?.user.first_name||"Author"}
             </Button>
             <Button className="text-gray-600 dark:text-gray-300" variant="link">
-              {t("date")} {t("time")}
+              {data?.user.create_date||"date / time"}
             </Button>
           </div>
         </div>
         <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
-          კითხვის აღწერილობა კითხვის აღწერილობა კითხვის აღწერილობა კითხვის
-          აღწერილობა კითხვის აღწერილობა კითხვის აღწერილობა კითხვის აღწერილობა
-          კითხვის აღწერილობა კითხვის აღწერილობა კითხვის აღწერილობა...
+            {
+              data?.text||"კითხვის აღწერა"
+            }
         </p>
       </div>
 
