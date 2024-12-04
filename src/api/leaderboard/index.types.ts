@@ -3,4 +3,4 @@ export type LeaderBoardResponseType = {
   first_name: string;
   last_name: string;
   rating: number;
-};
+}[];
