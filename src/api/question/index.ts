@@ -23,7 +23,7 @@ export type QuestionsListResponseType = {
   results: QuestionType[];
 };
 export const getQuestions = async (
-  params: QuestionsListDataType
+  params: QuestionsListDataType,
 ): Promise<QuestionsListResponseType> => {
   try {
     const result = await httpClient.get("posts/questions/", {
@@ -36,7 +36,6 @@ export const getQuestions = async (
   }
 };
 
-
 export const sendAnswer = async ({
   questionId,
   answerText,
@@ -48,7 +47,6 @@ export const sendAnswer = async ({
     const result = await httpClient.post(`posts/answers/`, {
       text: answerText,
       question: questionId,
-
     });
     return result.data;
   } catch (error) {
@@ -56,7 +54,6 @@ export const sendAnswer = async ({
     throw new Error("Failed");
   }
 };
-
 
 export const getCorrectAnswer = async ({
   id,

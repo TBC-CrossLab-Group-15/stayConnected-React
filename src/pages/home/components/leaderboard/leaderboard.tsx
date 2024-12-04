@@ -28,7 +28,11 @@ const Leaderboard: React.FC = () => {
   const others = leaderBoardData.slice(3, 10);
 
   return (
-    <div className="w-full p-5 flex-col  bg-gray-100 rounded-lg border shadow-lg dark:bg-black dark:border-solid dark:border-neutral-800">
+
+  
+    <div className="w-full p-5 flex-col sticky top-32 bg-gray-100 rounded-lg border shadow-lg dark:bg-black dark:border-solid dark:border-neutral-800">
+      {/* Top 3 Users */}
+
       <h1 className="mb-3 text-xl font-sans font-bold text-center">
         Leaderboard
       </h1>
