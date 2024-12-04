@@ -9,8 +9,6 @@ export const getQuestion = async (id: number) => {
     throw new Error("Failed");
   }
 };
-<<<<<<< HEAD
-=======
 
 export const getCorrectAnswer = async ({
   id,
@@ -27,4 +25,3 @@ export const getCorrectAnswer = async ({
     throw new Error("Failed");
   }
 };
->>>>>>> ff45b7a98e7bb13d2f76160177e96f216022a6c0
