@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 // import { Command, CommandInput } from "@/components/ui/command";
@@ -14,7 +14,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  // DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -24,10 +23,17 @@ import { useAuthContext } from "@/context/auth/hooks";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 
 const Header = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const user = useAuthContext();
   console.log(user);
+  // იუზერის დალოგაუთება
   const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("userId");
+    navigate("/login");
+    window.location.reload();
     console.log("logOut");
   };
   return (
