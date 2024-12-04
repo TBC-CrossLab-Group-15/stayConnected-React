@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 // import { Command, CommandInput } from "@/components/ui/command";
@@ -13,15 +13,29 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  // DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import LanguageSwitcher from "./components/language";
 import { useTranslation } from "react-i18next";
+import { useAuthContext } from "@/context/auth/hooks";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 
 const Header = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
+  const user = useAuthContext();
+  const userId = localStorage.getItem("userId");
+
+  // იუზერის დალოგაუთება
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("userId");
+    navigate("/login");
+    window.location.reload();
+    console.log("logOut");
+  };
   return (
     <div className=" shadow-[0px_-2px_4px_rgba(0,0,0,0.1)] border-solid border-b border-b-gray-300 dark:border-b-solid dark:border-b-neutral-800">
       <div className="max-w-[1400px]  mx-auto  px-5 h-20 flex items-center justify-between gap-4">
@@ -60,32 +74,44 @@ const Header = () => {
           </Select> */}
         </div>
         <div className="flex justify-between gap-3">
-          {/* {user ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger>
-                <Avatar>
-                  <AvatarImage src={profileData?.avatar_url ?? undefined} />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="font-sans">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <NavLink to="/profile">
-                  <DropdownMenuItem>Profile</DropdownMenuItem>
-                </NavLink>
-                <DropdownMenuItem onClick={() => handleLogout()}>
-                  Sign Out
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ) : ( */}
-          <NavLink to="login" className="hidden md:block">
-            <Button className="bg-blue-500 hover:bg-blue-400 text-base font-sans">
-              {t("sign-in")}
-            </Button>
-          </NavLink>
+          {userId ? (
+            <>
+              <NavLink to="createQuestion">
+                <Button className="rounded-full text-base font-sans h-9 w-9 bg-slate-50 text-black hover:bg-slate-100 dark:bg-black dark:text-white border dark:hover:bg-zinc-900">
+                  +
+                </Button>
+              </NavLink>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Avatar>
+                    <AvatarImage src={user?.user?.avatar ?? undefined} />
+                    <AvatarFallback>{user?.user?.first_name}</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="shadow-md rounded-md p-2 flex justify-center items-center flex-col">
+                  <NavLink to="/profile">
+                    <DropdownMenuItem>
+                      <Button variant={"outline"}>Profile</Button>
+                    </DropdownMenuItem>
+                  </NavLink>
+                  <DropdownMenuItem onClick={() => handleLogout()}>
+                    <Button variant={"outline"}>Sign Out</Button>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
+          ) : (
+            <div className="bg-black">
+              <NavLink to="login" className="hidden md:block">
+                <Button className="bg-blue-500 hover:bg-blue-400 text-base font-sans">
+                  {t("sign-in")}
+                </Button>
+              </NavLink>
+            </div>
+          )}
           <LanguageSwitcher />
+
           {/* <NavLink to="addcomment">
             <Button className="rounded-full text-base font-sans h-9 w-9 bg-slate-50 text-black hover:bg-slate-100 dark:bg-black dark:text-white border dark:hover:bg-zinc-900">
               +
@@ -94,33 +120,37 @@ const Header = () => {
           {/* )} */}
 
           <ModeToggle />
-          <DropdownMenu>
-            <DropdownMenuTrigger className="block md:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-align-justify"
-              >
-                <path d="M3 12h18" />
-                <path d="M3 18h18" />
-                <path d="M3 6h18" />
-              </svg>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuSeparator />
-              <NavLink to="login">
-                <DropdownMenuItem>{t("sign-in")}</DropdownMenuItem>
-              </NavLink>
-              {/* <DropdownMenuItem>Add Question</DropdownMenuItem> only appears if user is logged in */}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {!userId ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger className="block md:hidden">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-align-justify"
+                >
+                  <path d="M3 12h18" />
+                  <path d="M3 18h18" />
+                  <path d="M3 6h18" />
+                </svg>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuSeparator />
+                <NavLink to="login">
+                  <DropdownMenuItem>{t("sign-in")}</DropdownMenuItem>
+                </NavLink>
+                {/* <DropdownMenuItem>Add Question</DropdownMenuItem> only appears if user is logged in */}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <div></div>
+          )}
         </div>
       </div>
     </div>

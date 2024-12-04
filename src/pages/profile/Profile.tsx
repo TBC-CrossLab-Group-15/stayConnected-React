@@ -6,9 +6,11 @@ import Select from "react-select";
 import { createAvatar } from "@dicebear/core";
 import { avataaars } from "@dicebear/collection";
 import { useTranslation } from "react-i18next";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { changeAvagar, getUser } from "@/api/profile";
 
 const Profile: React.FC = () => {
-  const [userAvatar, setUserAvatar] = React.useState<string>("Oliver");
+  const userId = Number(localStorage.getItem("userId")); //იუზერის აიდი
   const { control, handleSubmit } = useForm({
     defaultValues: {
       avatarIcon: {
@@ -19,19 +21,30 @@ const Profile: React.FC = () => {
   });
 
   const { t } = useTranslation();
+  const { data, refetch } = useQuery({
+    queryKey: ["userInfo"],
+    queryFn: getUser,
+  });
+
+  const { mutate: setAvatar } = useMutation({
+    mutationKey: ["avatar"],
+    mutationFn: changeAvagar,
+    onSuccess: () => refetch(),
+  });
 
   const avatar = createAvatar(avataaars, {
-    seed: userAvatar, // in here i whant to put avatarIcon : {value}
+    seed: data?.avatar ?? "", // in here i whant to put avatarIcon : {value}
   });
   const svg = avatar.toString();
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
   const dataUrl = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
 
   const onSubmit = (data: { avatarIcon: { value: string; label: string } }) => {
-    if (data.avatarIcon.value) {
-      setUserAvatar(data.avatarIcon.value); // Update seed dynamically
-    }
+    const avatarValue = data.avatarIcon.value;
+    setAvatar({ id: userId, avatar: avatarValue });
   };
+
+  if (!data) return <div>Loading...</div>;
 
   return (
     <div className="w-full border m-auto max-w-3xl bg-white dark:bg-gray-900 rounded-xl shadow-2xl p-10 space-y-8">
@@ -49,16 +62,16 @@ const Profile: React.FC = () => {
               src={dataUrl}
               alt="Avatar"
             />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback>{data?.first_name}</AvatarFallback>
           </Avatar>
         </div>
 
         <div className="flex flex-col w-[60%]   items-center md:items-start text-center md:text-left space-y-2">
           <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-            Giorgi
+            {data ? data?.first_name + " " + data?.last_name : "User Name"}
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            example@gmail.com
+            {data?.email ?? "example@gmail.com"}
           </p>
 
           <form
@@ -116,13 +129,13 @@ const Profile: React.FC = () => {
         <div className="flex justify-between text-gray-600 dark:text-gray-400">
           <p className="text-lg">{t("score")}</p>
           <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-            25
+            {data?.rating ?? "0"}
           </p>
         </div>
         <div className="flex justify-between text-gray-600 dark:text-gray-400">
           <p className="text-lg">{t("answeredQuestions")}</p>
           <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-            10
+            {data?.my_answers ?? "0"}
           </p>
         </div>
       </div>

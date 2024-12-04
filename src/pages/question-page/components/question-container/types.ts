@@ -1,17 +1,16 @@
 export type Answer = {
+  id: number;
+  text: string;
+  isCorrect: boolean;
+  user: {
     id: number;
-    text: string;
-    isCorrect: boolean;
-    user: {
+    avatar: {
       id: number;
-      avatar: {
-        id: number;
-        name: string;
-      };
-      first_name: string;
-      last_name: string;
+      name: string;
     };
-    question: number;
-    create_date: string;
+    first_name: string;
+    last_name: string;
   };
-  
+  question: number;
+  create_date: string;
+};
