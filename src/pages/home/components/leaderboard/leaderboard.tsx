@@ -1,65 +1,34 @@
 import { getLeaderBoard } from "@/api/leaderboard";
-import { LeaderBoardResponseType } from "@/api/leaderboard/index.types";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { avataaars } from "@dicebear/collection";
 import { createAvatar } from "@dicebear/core";
-import React, { useEffect, useState } from "react";
-
-interface User {
-  avatar: string | null;
-  first_name: string;
-  last_name: string;
-  rating: number;
-}
+import { useQuery } from "@tanstack/react-query";
 
 const Leaderboard: React.FC = () => {
-  const [leaderBoardData, setLeaderBoardData] = useState<User[]>([]);
+  const {
+    data: leaderBoardData = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["leaderboard"],
+    queryFn: () => getLeaderBoard({ order: "desc" }),
+  });
 
-  useEffect(() => {
-    const fetchLeaderBoard = async () => {
-      try {
-        const data: LeaderBoardResponseType[] = await getLeaderBoard({
-          order: "desc",
-        });
-        console.log("Fetched leaderboard data:", data);
-
-        if (data) {
-          const transformedData: User[] = data
-            .map((user) => {
-              if (user.avatar) {
-                return {
-                  avatar: user.avatar,
-                  first_name: user.first_name,
-                  last_name: user.last_name,
-                  rating: user.rating,
-                };
-              } else {
-                return {
-                  avatar: null,
-                  first_name: user.first_name,
-                  last_name: user.last_name,
-                  rating: user.rating,
-                };
-              }
-            })
-            .filter((user) => user !== null);
-
-          setLeaderBoardData(transformedData);
-        }
-      } catch (error) {
-        console.error("Error fetching leaderboard:", error);
-      }
-    };
-
-    fetchLeaderBoard();
-  }, []);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (isError) {
+    return (
+      <div>Error loading leaderboard: {error?.message || "Unknown error"}</div>
+    );
+  }
 
   const topThree = leaderBoardData.slice(0, 3);
   const others = leaderBoardData.slice(3, 10);
 
   return (
     <div className="w-full p-5 flex-col  bg-gray-100 rounded-lg border shadow-lg dark:bg-black dark:border-solid dark:border-neutral-800">
-      {/* Top 3 Users */}
       <h1 className="mb-3 text-xl font-sans font-bold text-center">
         Leaderboard
       </h1>

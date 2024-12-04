@@ -1,5 +1,4 @@
 import { getQuestions } from "@/api/question";
-
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -9,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Pagination,
   PaginationContent,
@@ -19,6 +18,8 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { format } from "date-fns";
+import { useQuery } from "@tanstack/react-query";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface myCardProps {
   width: string;
@@ -38,78 +39,43 @@ interface Questions {
 }
 
 const Questions: React.FC<myCardProps> = ({ width }) => {
-  const [questionsData, setQuestionsData] = useState<Questions[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
   const pageSize = 10;
-  // useEffect(() => {
-  //   const fetchQuestions = async () => {
-  //     try {
-  //       const data: QuestionType[] = await getQuestions({
-  //         page: currentPage,
-  //         page_size: pageSize,
-  //       });
-  //       console.log(data);
-  //       if (data) {
-  //         const transformedData: Questions[] = data.map((questions) => {
-  //           return {
-  //             id: questions.id,
-  //             title: questions.title,
-  //             description: questions.text,
-  //             is_answered: questions.answers[0]?.isCorrect ?? false, // Safe access
-  //             date: questions.create_date,
-  //             user: {
-  //               user_name: questions.user.first_name,
-  //               user_surname: questions.user.last_name,
-  //             },
-  //             tags:
-  //               questions.tags?.map((tag) => ({
-  //                 id: tag.id,
-  //                 name: tag.name,
-  //               })) || [], // Ensure tags are an array
-  //           };
-  //         });
-  //         setQuestionsData(transformedData);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching questions:", error);
-  //     }
-  //   };
 
-  //   fetchQuestions();
-  // }, []);
-  useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        const data = await getQuestions({
-          page: currentPage,
-          page_size: pageSize,
-        });
+  const {
+    data: questionsData = { count: 0, next: null, previous: null, results: [] },
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["questionslist", currentPage],
+    queryFn: () =>
+      getQuestions({
+        page: currentPage,
+        page_size: pageSize,
+      }),
+  });
 
-        setQuestionsData(
-          data.results.map((question) => ({
-            id: question.id,
-            title: question.title,
-            description: question.text,
-            is_answered: question.answers.some((a) => a.isCorrect), // Check if any answer is correct
-            date: question.create_date,
-            user: {
-              user_name: question.user.first_name,
-              user_surname: question.user.last_name,
-            },
-            tags: question.tags || [],
-          }))
-        );
+  const totalPages = Math.ceil(questionsData.count / pageSize);
 
-        // Calculate total pages
-        setTotalPages(Math.ceil(data.count / pageSize));
-      } catch (error) {
-        console.error("Error fetching questions:", error);
-      }
-    };
+  console.log("questions:", questionsData);
 
-    fetchQuestions();
-  }, [currentPage]);
+  if (isLoading) {
+    return (
+      <div className="flex flex-col space-y-3">
+        <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-[250px]" />
+          <Skeleton className="h-4 w-[200px]" />
+        </div>
+      </div>
+    );
+  }
+  if (isError) {
+    return (
+      <div>Error loading Questions: {error?.message || "Unknown error"}</div>
+    );
+  }
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -120,7 +86,7 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
   };
   return (
     <div className="max-w-[1400px] w-full mx-auto px-5 h-full mt-8 mb-8 font-sans">
-      {questionsData.map((question) => (
+      {questionsData.results.map((question) => (
         <Card
           key={question.id}
           className={`rounded-xl flex flex-col justify-center p-0 border-solid border-b border-zinc-200 bg-card text-card-foreground shadow sm:min-h-[200px] md:min-h-[200px] lg:min-h-[200px] xl:min-h-[150px] 2xl:min-h-[150px] ${width} mb-5`}
@@ -131,13 +97,13 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
             </div>
             <CardDescription className="flex justify-between">
               <p>
-                {question.user.user_name} {question.user.user_surname}
+                {question.user.first_name} {question.user.first_name}
               </p>
-              <p>Date Posted: {formatDate(question.date)}</p>
+              <p>Date Posted: {formatDate(question.create_date)}</p>
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-lg"> {question.description}</p>
+            <p className="text-lg"> {question.text}</p>
           </CardContent>
           <CardFooter className="flex flex-wrap gap-3">
             {question.tags.length > 0 ? (

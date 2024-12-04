@@ -1,5 +1,4 @@
 import { getTags } from "@/api/tags";
-import { TagsResponseType } from "@/api/tags/index.types";
 import { Command, CommandInput } from "@/components/ui/command";
 import {
   Select,
@@ -8,35 +7,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useEffect, useState } from "react";
-
-interface Tags {
-  id: number;
-  name: string;
-}
+import { useQuery } from "@tanstack/react-query";
 
 const Search = () => {
-  const [tagsData, setTagsData] = useState<Tags[]>([]);
-  useEffect(() => {
-    const fetchTags = async () => {
-      try {
-        const data: TagsResponseType[] = await getTags();
-        console.log(data);
-        if (data) {
-          const transformedData: Tags[] = data.map((tags) => {
-            return {
-              id: tags.id,
-              name: tags.name,
-            };
-          });
-          setTagsData(transformedData);
-        }
-      } catch (error) {
-        console.error("Error fetching leaderboard:", error);
-      }
-    };
-    fetchTags();
-  }, []);
+  const {
+    data: tagsData = [],
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["tags"],
+    queryFn: getTags,
+  });
+  console.log("tags:", tagsData);
+  if (isError) {
+    return <div>Error loading tags: {error?.message || "Unknown error"}</div>;
+  }
 
   return (
     <>
