@@ -20,7 +20,7 @@ const Profile: React.FC = () => {
       },
     },
   });
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
@@ -153,7 +153,10 @@ const navigate = useNavigate();
 
       {/* Logout Button */}
       <div className="flex justify-center">
-        <Button onClick={handleLogout} className="bg-sky-500 w-full md:w-auto text-white hover:bg-sky-600 rounded-md px-6 py-3 text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+        <Button
+          onClick={handleLogout}
+          className="bg-sky-500 w-full md:w-auto text-white hover:bg-sky-600 rounded-md px-6 py-3 text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+        >
           {t("logout")}
         </Button>
       </div>
