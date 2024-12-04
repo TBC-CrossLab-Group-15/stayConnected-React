@@ -35,7 +35,7 @@ const LoginForm: React.FC = () => {
       AfterLoginSuccessn({
         accessToken: res?.access,
         refreshToken: res?.refresh,
-        userId: res?.user_id,
+        // userId: res?.user_id,
       });
 
       queryClient.invalidateQueries({ queryKey: ["user"] });

@@ -7,6 +7,7 @@ export type RegisterResponseType = {
 export type LoginResponseType = {
   access: string | undefined;
   refresh: string | undefined;
+  // user_id: number | null | undefined;
 };
 
 export type RefreshPayload = {
