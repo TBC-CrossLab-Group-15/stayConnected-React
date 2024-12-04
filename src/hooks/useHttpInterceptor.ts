@@ -18,6 +18,7 @@ export const useHttpInterceptor = () => {
       },
       (resErr) => {
         const refreshToken = localStorage.getItem("refreshToken");
+        const userId = localStorage.getItem("userId");
 
         if (resErr.status === 401 && refreshToken) {
           setIsRefreshLoading(true);
@@ -27,6 +28,7 @@ export const useHttpInterceptor = () => {
               AfterLoginSuccessn({
                 accessToken: res?.access,
                 refreshToken: refreshToken,
+                userId: Number(userId),
               });
               queryClient.invalidateQueries({ queryKey: ["user"] });
               navigate("/");
