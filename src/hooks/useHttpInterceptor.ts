@@ -31,7 +31,6 @@ export const useHttpInterceptor = () => {
                 userId: Number(userId),
               });
               queryClient.invalidateQueries({ queryKey: ["user"] });
-              navigate("/");
             })
             .catch(() => {
               localStorage.removeItem("accessToken");
