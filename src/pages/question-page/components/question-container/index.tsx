@@ -11,7 +11,7 @@ const QuestionContainer: React.FC = () => {
   //
   const { control, handleSubmit } = useForm({ defaultValues: { answer: "" } });
   //
-  const userId =localStorage.getItem("userId"); // მომავალში ლოკალსთორეჯიდან წამოვიღებ
+  const userId = localStorage.getItem("userId"); // მომავალში ლოკალსთორეჯიდან წამოვიღებ
   const questionId = 1; // როცა რომელიმე კითხვაზე დაკლიკებით გადმოვა კონკრეტულ შეკითხვაზე
   //
   const { data, refetch } = useQuery({

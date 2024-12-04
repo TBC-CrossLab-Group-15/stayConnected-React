@@ -10,7 +10,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { changeAvagar, getUser } from "@/api/profile";
 
 const Profile: React.FC = () => {
-  const userId = Number(localStorage.getItem("userId"));//იუზერის აიდი 
+  const userId = Number(localStorage.getItem("userId")); //იუზერის აიდი
   const { control, handleSubmit } = useForm({
     defaultValues: {
       avatarIcon: {
@@ -20,23 +20,20 @@ const Profile: React.FC = () => {
     },
   });
 
-const { t } = useTranslation();
-const {data,refetch} = useQuery({
-  queryKey:["userInfo"],
-  queryFn:getUser
-})
+  const { t } = useTranslation();
+  const { data, refetch } = useQuery({
+    queryKey: ["userInfo"],
+    queryFn: getUser,
+  });
 
-
-
-const {mutate:setAvatar} = useMutation({
-    mutationKey:["avatar"],
-    mutationFn:changeAvagar,
-    onSuccess:()=>refetch()
-})
-
+  const { mutate: setAvatar } = useMutation({
+    mutationKey: ["avatar"],
+    mutationFn: changeAvagar,
+    onSuccess: () => refetch(),
+  });
 
   const avatar = createAvatar(avataaars, {
-    seed:data?.avatar?? "" // in here i whant to put avatarIcon : {value}
+    seed: data?.avatar ?? "", // in here i whant to put avatarIcon : {value}
   });
   const svg = avatar.toString();
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
@@ -44,7 +41,7 @@ const {mutate:setAvatar} = useMutation({
 
   const onSubmit = (data: { avatarIcon: { value: string; label: string } }) => {
     const avatarValue = data.avatarIcon.value;
-    setAvatar({id:userId,avatar:avatarValue})
+    setAvatar({ id: userId, avatar: avatarValue });
   };
 
   if (!data) return <div>Loading...</div>;
