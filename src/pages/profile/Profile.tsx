@@ -36,15 +36,14 @@ const Profile: React.FC = () => {
   //   mutationFn:changeAvagar
   // })
 
-const data= {
-  avatar: null,
-  first_name: "giorgi",
-  last_name: "zautashvili",
-  email: "gio@gmail.com",
-  rating: 2,
-  my_answers: 1
-}
-
+  const data = {
+    avatar: null,
+    first_name: "giorgi",
+    last_name: "zautashvili",
+    email: "gio@gmail.com",
+    rating: 2,
+    my_answers: 1,
+  };
 
   const avatar = createAvatar(avataaars, {
     seed: userAvatar, // in here i whant to put avatarIcon : {value}
@@ -83,7 +82,7 @@ const data= {
 
         <div className="flex flex-col w-[60%]   items-center md:items-start text-center md:text-left space-y-2">
           <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-            {data?data?.first_name + " "+ data?.last_name:"User Name"}
+            {data ? data?.first_name + " " + data?.last_name : "User Name"}
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             {data?.email ?? "example@gmail.com"}
@@ -144,13 +143,13 @@ const data= {
         <div className="flex justify-between text-gray-600 dark:text-gray-400">
           <p className="text-lg">{t("score")}</p>
           <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-            {data?.rating??"0"}
+            {data?.rating ?? "0"}
           </p>
         </div>
         <div className="flex justify-between text-gray-600 dark:text-gray-400">
           <p className="text-lg">{t("answeredQuestions")}</p>
           <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-            {data?.my_answers??"0"}
+            {data?.my_answers ?? "0"}
           </p>
         </div>
       </div>

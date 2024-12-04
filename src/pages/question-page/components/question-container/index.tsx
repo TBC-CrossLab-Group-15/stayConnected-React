@@ -2,20 +2,31 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import Person from "../person";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getCorrectAnswer, getQuestion } from "@/api/question";
+import { getCorrectAnswer, getQuestion, sendAnswer } from "@/api/question";
 import { useTranslation } from "react-i18next";
 import { Answer } from "./types";
+import { Controller, useForm } from "react-hook-form";
 
 const QuestionContainer: React.FC = () => {
   const { t } = useTranslation();
-  //როცა გადავალთ კონკრეტულ კითხვაზე აიდი იქნება დასაჭერი რომ კითხვის რექუესთს გადავცეთ
-
-  const { data } = useQuery({
-    queryKey: ["question", 8],
-    queryFn: () => getQuestion(8),
+//
+const { control, handleSubmit } = useForm({defaultValues:{answer: "",}});
+//
+  const userId = 1 // მომავალში ლოკალსთორეჯიდან წამოვიღებ
+  const questionId = 1 ; // როცა რომელიმე კითხვაზე დაკლიკებით გადმოვა კონკრეტულ შეკითხვაზე 
+//
+  const { data ,refetch} = useQuery({
+    queryKey: ["question", questionId],
+    queryFn: () => getQuestion(questionId),
   });
 
-  console.log(data)
+  const { mutate:Answer} = useMutation({
+    mutationKey: ["answers", questionId],
+    mutationFn:sendAnswer,
+    onSuccess: () => {
+      refetch();
+    }
+  })
 
   const { mutate: approve } = useMutation({
     mutationKey: ["answer"],
@@ -24,16 +35,23 @@ const QuestionContainer: React.FC = () => {
       console.error("Failed to approve the answer:", error);
     },
   });
-
-  const questionAuthorIsSignedIn = true; // როცა ავტორიზირებულია კითხვის ავტორი
-  const userIsSignedIn = true; // როცა ავტორიზირებულია მომხმარებელი შეუძლია პასუხის გაცემა
-
+//
+  const ifUserIsAuth = () => {
+    return userId === data?.user.id || false;
+  }; 
+  const questionAuthorIsSignedIn = ifUserIsAuth();// როცა ავტორიზირებულია კითხვის ავტორი / ამით გამოჩნდება aprove ღილაკი 
+  const userIsSignedIn = localStorage.getItem("accessToken"); // როცა ავტორიზირებულია მომხმარებელი შეუძლია პასუხის გაცემა და ამით გამოჩნდება სენდის ღილაკი 
+//
   const onApprove = (id: number, isCorrect: boolean) => {
     approve({ id, payload: isCorrect });
   };
 
+  const onSendAnswer = ({answer}: {answer: string}) => {
+    Answer({ questionId: questionId, answerText: answer })
+  }
+//
   if (!data) return <p>Loading...</p>;
-
+//
   return (
     <div className="bg-gray-50 w-[1400px] h-[750px] sm:h-auto   mx-auto overflow-hidden dark:bg-black p-3 sm:p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-3 sm:gap-14">
       {/* Question Header */}
@@ -71,7 +89,9 @@ const QuestionContainer: React.FC = () => {
           {data.answers.map((person: Answer) => (
             <Person
               text={person?.text}
-              userName={person?.user?.first_name + " " + person?.user?.last_name}
+              userName={
+                person?.user?.first_name + " " + person?.user?.last_name
+              }
               userAvatar={person.user.avatar?.name}
               key={person?.id}
               id={person?.id}
@@ -85,15 +105,27 @@ const QuestionContainer: React.FC = () => {
 
       {/* Question Footer */}
       {userIsSignedIn && (
-        <div className="flex items-center gap-4  flex-col sm:flex-row">
-          <Textarea className="flex-1" placeholder="Type your message here." />
+        <form onSubmit={handleSubmit(onSendAnswer)} className="flex items-center gap-4  flex-col sm:flex-row">
+          <Controller
+          name="answer" // The name of the field in the form data
+          control={control} // Pass in the control object from useForm
+          defaultValue="" // Default value for the textarea
+          render={({ field }) => (
+            <Textarea 
+              {...field} // Spread the field props (onChange, value, etc.)
+              className="flex-1"
+              placeholder="Type your answer here."
+            />
+          )}
+        />
           <Button
+            type="submit"
             className="w-full sm:w-20 p-0 sm:p-7 bg-blue-700 text-white dark:bg-black dark:text-white"
             variant="outline"
           >
             {t("send")}
           </Button>
-        </div>
+        </form>
       )}
     </div>
   );
