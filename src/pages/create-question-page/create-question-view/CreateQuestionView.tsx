@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 const CreateQuestion: React.FC = () => {
   const { t } = useTranslation();
 
+   
   return (
     <Container>
       <div className="py-40 flex justify-center ">

@@ -1,5 +1,5 @@
 import { getQuestions } from "@/api/question";
-import { questionResponseType } from "@/api/question/index.types";
+
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -10,7 +10,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+import { format } from "date-fns";
 
 interface myCardProps {
   width: string;
@@ -31,81 +39,107 @@ interface Questions {
 
 const Questions: React.FC<myCardProps> = ({ width }) => {
   const [questionsData, setQuestionsData] = useState<Questions[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const pageSize = 10;
+  // useEffect(() => {
+  //   const fetchQuestions = async () => {
+  //     try {
+  //       const data: QuestionType[] = await getQuestions({
+  //         page: currentPage,
+  //         page_size: pageSize,
+  //       });
+  //       console.log(data);
+  //       if (data) {
+  //         const transformedData: Questions[] = data.map((questions) => {
+  //           return {
+  //             id: questions.id,
+  //             title: questions.title,
+  //             description: questions.text,
+  //             is_answered: questions.answers[0]?.isCorrect ?? false, // Safe access
+  //             date: questions.create_date,
+  //             user: {
+  //               user_name: questions.user.first_name,
+  //               user_surname: questions.user.last_name,
+  //             },
+  //             tags:
+  //               questions.tags?.map((tag) => ({
+  //                 id: tag.id,
+  //                 name: tag.name,
+  //               })) || [], // Ensure tags are an array
+  //           };
+  //         });
+  //         setQuestionsData(transformedData);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching questions:", error);
+  //     }
+  //   };
 
+  //   fetchQuestions();
+  // }, []);
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const data: questionResponseType[] = await getQuestions();
-        console.log(data);
-        if (data) {
-          const transformedData: Questions[] = data.map((questions) => {
-            return {
-              id: questions.id,
-              title: questions.title,
-              description: questions.text,
-              is_answered: questions.answers[0]?.isCorrect ?? false, // Safe access
-              date: questions.create_date,
-              user: {
-                user_name: questions.user.first_name,
-                user_surname: questions.user.last_name,
-              },
-              tags:
-                questions.tags?.map((tag) => ({
-                  id: tag.id,
-                  name: tag.name,
-                })) || [], // Ensure tags are an array
-            };
-          });
-          setQuestionsData(transformedData);
-        }
+        const data = await getQuestions({
+          page: currentPage,
+          page_size: pageSize,
+        });
+
+        setQuestionsData(
+          data.results.map((question) => ({
+            id: question.id,
+            title: question.title,
+            description: question.text,
+            is_answered: question.answers.some((a) => a.isCorrect), // Check if any answer is correct
+            date: question.create_date,
+            user: {
+              user_name: question.user.first_name,
+              user_surname: question.user.last_name,
+            },
+            tags: question.tags || [],
+          }))
+        );
+
+        // Calculate total pages
+        setTotalPages(Math.ceil(data.count / pageSize));
       } catch (error) {
         console.error("Error fetching questions:", error);
       }
     };
 
     fetchQuestions();
-  }, []);
+  }, [currentPage]);
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const formatDate = (isoDate: string) => {
+    return format(new Date(isoDate), "dd/MM/yyyy");
+  };
   return (
     <div className="max-w-[1400px] w-full mx-auto px-5 h-full mt-8 mb-8 font-sans">
       {questionsData.map((question) => (
         <Card
           key={question.id}
-          className={`rounded-xl flex flex-col justify-center p-0 border-solid border-b border-zinc-200 bg-card text-card-foreground shadow sm:h-[320px] md:h-[300px] lg:h-[300px] xl:h-[280px] 2xl:h-[250px] ${width} mb-5`}
+          className={`rounded-xl flex flex-col justify-center p-0 border-solid border-b border-zinc-200 bg-card text-card-foreground shadow sm:min-h-[200px] md:min-h-[200px] lg:min-h-[200px] xl:min-h-[150px] 2xl:min-h-[150px] ${width} mb-5`}
         >
           <CardHeader>
             <div className="flex justify-between">
               <CardTitle>{question.title}</CardTitle>
-              <svg
-                width="26"
-                height="26"
-                viewBox="0 0 26 26"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M0 13C0 5.8203 5.8203 0 13 0C20.1797 0 26 5.8203 26 13C26 20.1797 20.1797 26 13 26C5.8203 26 0 20.1797 0 13Z"
-                  fill="#ECFDF5"
-                ></path>
-                <path
-                  d="M7.66663 12.6289L10.4289 15.3912C10.8733 15.8356 11.0956 16.0578 11.3717 16.0578C11.6478 16.0578 11.8701 15.8356 12.3145 15.3912L18.334 9.3717"
-                  stroke="#059669"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                ></path>
-              </svg>
             </div>
-            <CardDescription>
-              <NavLink to="/author" className="hover:underline">
-                {question.user.user_name} {question.user.user_surname},
-              </NavLink>{" "}
-              {question.date}
+            <CardDescription className="flex justify-between">
+              <p>
+                {question.user.user_name} {question.user.user_surname}
+              </p>
+              <p>Date Posted: {formatDate(question.date)}</p>
             </CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-lg"> {question.description}</p>
           </CardContent>
-          <CardFooter className="flex gap-3">
+          <CardFooter className="flex flex-wrap gap-3">
             {question.tags.length > 0 ? (
               question.tags.map((tag) => (
                 <Badge
@@ -122,6 +156,59 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
           </CardFooter>
         </Card>
       ))}
+
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                if (currentPage > 1) handlePageChange(currentPage - 1);
+              }}
+              className={`${
+                currentPage === 1 ? "cursor-not-allowed opacity-50" : ""
+              }`}
+              aria-disabled={currentPage === 1}
+            >
+              Previous
+            </PaginationPrevious>
+          </PaginationItem>
+          {[...Array(totalPages).keys()].map((page) => (
+            <PaginationItem key={page}>
+              <PaginationLink
+                href="#"
+                className={currentPage === page + 1 ? "font-bold" : ""}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlePageChange(page + 1);
+                }}
+              >
+                {page + 1}
+              </PaginationLink>
+            </PaginationItem>
+          ))}
+          <PaginationItem>
+            <PaginationNext
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                if (currentPage < totalPages) {
+                  handlePageChange(currentPage + 1);
+                }
+              }}
+              className={`${
+                currentPage === totalPages
+                  ? "cursor-not-allowed opacity-50"
+                  : ""
+              }`}
+              aria-disabled={currentPage === totalPages}
+            >
+              Next
+            </PaginationNext>
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </div>
   );
 };

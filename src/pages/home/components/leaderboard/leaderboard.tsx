@@ -6,11 +6,7 @@ import { createAvatar } from "@dicebear/core";
 import React, { useEffect, useState } from "react";
 
 interface User {
-  id: number;
-  avatar: {
-    id: number;
-    name: string;
-  } | null;
+  avatar: string | null;
   first_name: string;
   last_name: string;
   rating: number;
@@ -30,9 +26,8 @@ const Leaderboard: React.FC = () => {
         if (data) {
           const transformedData: User[] = data
             .map((user) => {
-              if (user.avatar && user.avatar.id) {
+              if (user.avatar) {
                 return {
-                  id: user.avatar.id,
                   avatar: user.avatar,
                   first_name: user.first_name,
                   last_name: user.last_name,
@@ -40,7 +35,6 @@ const Leaderboard: React.FC = () => {
                 };
               } else {
                 return {
-                  id: Math.random(),
                   avatar: null,
                   first_name: user.first_name,
                   last_name: user.last_name,
@@ -64,7 +58,7 @@ const Leaderboard: React.FC = () => {
   const others = leaderBoardData.slice(3, 10);
 
   return (
-    <div className="max-w-md mx-auto p-5 flex-col  bg-gray-100 rounded-lg border shadow-lg dark:bg-black dark:border-solid dark:border-neutral-800">
+    <div className="w-full p-5 flex-col  bg-gray-100 rounded-lg border shadow-lg dark:bg-black dark:border-solid dark:border-neutral-800">
       {/* Top 3 Users */}
       <h1 className="mb-3 text-xl font-sans font-bold text-center">
         Leaderboard
@@ -75,7 +69,7 @@ const Leaderboard: React.FC = () => {
           const colors = ["bg-yellow-300", "bg-gray-300", "bg-orange-400"];
 
           const avatar = createAvatar(avataaars, {
-            seed: `${user?.avatar?.name || user.first_name}`,
+            seed: `${user?.avatar || user.first_name}`,
           });
           const svg = avatar.toString();
           const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
@@ -83,7 +77,7 @@ const Leaderboard: React.FC = () => {
 
           return (
             <div
-              key={user.id}
+              key={index}
               className={`flex flex-col items-center p-4 rounded-lg shadow ${colors[index]} w-1/3`}
             >
               <Avatar className="mb-3">
@@ -108,7 +102,7 @@ const Leaderboard: React.FC = () => {
       <div className="bg-white rounded-lg border shadow p-4 dark:bg-neutral-950 dark:border-solid dark:border-neutral-800">
         {others.map((user, index) => {
           const avatar = createAvatar(avataaars, {
-            seed: `${user?.avatar?.name || user.first_name}`,
+            seed: `${user?.avatar || user.first_name}`,
           });
           const svg = avatar.toString();
           const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
@@ -116,7 +110,7 @@ const Leaderboard: React.FC = () => {
 
           return (
             <div
-              key={user.id}
+              key={index}
               className="flex items-center p-2 border-b last:border-none hover:bg-gray-50"
             >
               <span className="w-6 font-bold text-gray-600 mr-3">

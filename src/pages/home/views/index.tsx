@@ -8,15 +8,13 @@ import Questions from "../components/questions/questions";
 
 const HomeView = () => {
   return (
-    <div className="max-w-[1400px]  mx-auto">
-      <div className="flex flex-col-reverse lg:flex-row">
-        <div className="xl:w-3/5 sm:w-full">
-          <Search />
-          <Questions width={"w-full"} />
-        </div>
-        <div className="xl:w-2/5 sm:w-full">
-          <Leaderboard />
-        </div>
+    <div className="xl:w-[1400px] flex flex-col-reverse lg:flex-row gap-10">
+      <div className="xl:w-3/5 sm:w-full">
+        <Search />
+        <Questions width={"w-full"} />
+      </div>
+      <div className="  sm:w-full xl:w-2/5">
+        <Leaderboard />
       </div>
     </div>
   );
