@@ -1,11 +1,19 @@
 import { httpClient } from "..";
-import { TagsResponseType } from "./index.types";
-import { TAGS_ENDPOINTS } from "./index.enum";
+import { LeaderBoardResponseType } from "./index.types";
+import { LEADERBOARD_ENDPOINTS } from "./index.enum";
 import axios from "axios";
 
-export const getTags = async (): Promise<TagsResponseType | undefined> => {
+type LeaderBoardDataType = {
+  order: "asc" | "desc";
+};
+
+export const getLeaderBoard = async (
+  params: LeaderBoardDataType
+): Promise<LeaderBoardResponseType | undefined> => {
   try {
-    const result = await httpClient.get(TAGS_ENDPOINTS.TAGS, {});
+    const result = await httpClient.get(LEADERBOARD_ENDPOINTS.LEADERBOARD, {
+      params,
+    });
     console.log("Response Data:", result.data);
     return result.data;
   } catch (error: unknown) {

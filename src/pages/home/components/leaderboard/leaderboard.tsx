@@ -1,64 +1,138 @@
-import React from "react";
+import { getLeaderBoard } from "@/api/leaderboard";
+import { LeaderBoardResponseType } from "@/api/leaderboard/index.types";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { avataaars } from "@dicebear/collection";
+import { createAvatar } from "@dicebear/core";
+import React, { useEffect, useState } from "react";
 
 interface User {
-  id: string;
-  name: string;
-  avatar: string;
-  score: number;
+  avatar: string | null;
+  first_name: string;
+  last_name: string;
+  rating: number;
 }
 
-interface LeaderboardProps {
-  users: User[];
-}
+const Leaderboard: React.FC = () => {
+  const [leaderBoardData, setLeaderBoardData] = useState<User[]>([]);
 
-const Leaderboard: React.FC<LeaderboardProps> = ({ users }) => {
-  const sortedUsers = [...users].sort((a, b) => b.score - a.score);
+  useEffect(() => {
+    const fetchLeaderBoard = async () => {
+      try {
+        const data: LeaderBoardResponseType[] = await getLeaderBoard({
+          order: "desc",
+        });
+        console.log("Fetched leaderboard data:", data);
 
-  const topThree = sortedUsers.slice(0, 3);
-  const others = sortedUsers.slice(3, 10);
+        if (data) {
+          const transformedData: User[] = data
+            .map((user) => {
+              if (user.avatar) {
+                return {
+                  avatar: user.avatar,
+                  first_name: user.first_name,
+                  last_name: user.last_name,
+                  rating: user.rating,
+                };
+              } else {
+                return {
+                  avatar: null,
+                  first_name: user.first_name,
+                  last_name: user.last_name,
+                  rating: user.rating,
+                };
+              }
+            })
+            .filter((user) => user !== null);
+
+          setLeaderBoardData(transformedData);
+        }
+      } catch (error) {
+        console.error("Error fetching leaderboard:", error);
+      }
+    };
+
+    fetchLeaderBoard();
+  }, []);
+
+  const topThree = leaderBoardData.slice(0, 3);
+  const others = leaderBoardData.slice(3, 10);
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
+    <div className="w-full p-5 flex-col  bg-gray-100 rounded-lg border shadow-lg dark:bg-black dark:border-solid dark:border-neutral-800">
       {/* Top 3 Users */}
+      <h1 className="mb-3 text-xl font-sans font-bold text-center">
+        Leaderboard
+      </h1>
+
       <div className="flex justify-between mb-6 gap-4">
         {topThree.map((user, index) => {
           const colors = ["bg-yellow-300", "bg-gray-300", "bg-orange-400"];
+
+          const avatar = createAvatar(avataaars, {
+            seed: `${user?.avatar || user.first_name}`,
+          });
+          const svg = avatar.toString();
+          const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
+          const dataUrl = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
+
           return (
             <div
-              key={user.id}
+              key={index}
               className={`flex flex-col items-center p-4 rounded-lg shadow ${colors[index]} w-1/3`}
             >
-              <img
-                src={user.avatar}
-                alt={user.name}
-                className="w-16 h-16 rounded-full mb-2"
-              />
-              <h2 className="text-lg font-semibold">{user.name}</h2>
-              <p className="text-sm">Score: {user.score}</p>
+              <Avatar className="mb-3">
+                <AvatarImage
+                  src={dataUrl}
+                  className="w-full h-full"
+                  alt="@shadcn"
+                />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <div className="text-center flex flex-col justify-between  h-14">
+                <h2 className="text-md font-semibold dark:text-black">
+                  {user.first_name} {user.last_name}
+                </h2>
+                <p className="text-sm dark:text-black">Score: {user.rating}</p>
+              </div>
             </div>
           );
         })}
       </div>
-
       {/* Remaining Users */}
-      <div className="bg-white rounded-lg shadow p-4">
-        {others.map((user, index) => (
-          <div
-            key={user.id}
-            className="flex items-center p-2 border-b last:border-none hover:bg-gray-50"
-          >
-            <span className="w-6 font-bold text-gray-600">{index + 4}.</span>
-            <img
-              src={user.avatar}
-              alt={user.name}
-              className="w-10 h-10 rounded-full mx-4"
-            />
-            <div className="flex-grow">
-              <h3 className="text-sm font-medium">{user.name}</h3>
-              <p className="text-xs text-gray-500">Score: {user.score}</p>
+      <div className="bg-white rounded-lg border shadow p-4 dark:bg-neutral-950 dark:border-solid dark:border-neutral-800">
+        {others.map((user, index) => {
+          const avatar = createAvatar(avataaars, {
+            seed: `${user?.avatar || user.first_name}`,
+          });
+          const svg = avatar.toString();
+          const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
+          const dataUrl = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
+
+          return (
+            <div
+              key={index}
+              className="flex items-center p-2 border-b last:border-none hover:bg-gray-50"
+            >
+              <span className="w-6 font-bold text-gray-600 mr-3">
+                {index + 4}.
+              </span>
+              <Avatar className="mr-3">
+                <AvatarImage
+                  src={dataUrl}
+                  className="w-full h-full"
+                  alt="@shadcn"
+                />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <div className="w-full flex justify-between">
+                <h3 className="text-sm font-medium">
+                  {user.first_name} {user.last_name}
+                </h3>
+                <p className="text-xs text-gray-500">Score: {user.rating}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

@@ -18,6 +18,15 @@ export const changeAvagar = async ({
   }
 };
 
+
+// };
+
+export enum AUTH_ENDPOINTS {
+    SIGN_IN = "user/login/",
+    SIGN_UP = "user/register/",
+  }
+  
+
 export const getUser = async () => {
   try {
     const result = await httpClient.get("/user/currentuser");
@@ -28,3 +37,4 @@ export const getUser = async () => {
     throw new Error("Failed");
   }
 };
+
