@@ -7,14 +7,14 @@ const Loader = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress((prev) => (prev >= 100 ? 100 : prev + 5));
-    }, 500);
+    }, 5);
 
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="w-full max-w-md">
-      <h2 className="text-xl font-bold mb-4">Loading...</h2>
+    <div className="w-full max-w-md flex flex-col justify-center items-center h-screen">
+      <h2 className="text-xl font-bold mb-4 text-center">Loading...</h2>
       <Progress value={progress} className="mb-4" />
       {progress === 100 && <p className="text-green-500">Complete!</p>}
     </div>

@@ -29,7 +29,7 @@ const RegistrationForm: React.FC = () => {
     mutationFn: Register,
     onSuccess: (data) => {
       console.log("User signed in:", data);
-      navigate("login");
+      navigate("/login");
     },
   });
   const onSubmit = (values: RegisterDataType) => {
