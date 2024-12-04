@@ -9,24 +9,24 @@ import { Controller, useForm } from "react-hook-form";
 
 const QuestionContainer: React.FC = () => {
   const { t } = useTranslation();
-//
-const { control, handleSubmit } = useForm({defaultValues:{answer: "",}});
-//
-  const userId = 1 // მომავალში ლოკალსთორეჯიდან წამოვიღებ
-  const questionId = 1 ; // როცა რომელიმე კითხვაზე დაკლიკებით გადმოვა კონკრეტულ შეკითხვაზე 
-//
-  const { data ,refetch} = useQuery({
+  //
+  const { control, handleSubmit } = useForm({ defaultValues: { answer: "" } });
+  //
+  const userId = 1; // მომავალში ლოკალსთორეჯიდან წამოვიღებ
+  const questionId = 1; // როცა რომელიმე კითხვაზე დაკლიკებით გადმოვა კონკრეტულ შეკითხვაზე
+  //
+  const { data, refetch } = useQuery({
     queryKey: ["question", questionId],
     queryFn: () => getQuestion(questionId),
   });
 
-  const { mutate:Answer} = useMutation({
+  const { mutate: Answer } = useMutation({
     mutationKey: ["answers", questionId],
-    mutationFn:sendAnswer,
+    mutationFn: sendAnswer,
     onSuccess: () => {
       refetch();
-    }
-  })
+    },
+  });
 
   const { mutate: approve } = useMutation({
     mutationKey: ["answer"],
@@ -35,23 +35,23 @@ const { control, handleSubmit } = useForm({defaultValues:{answer: "",}});
       console.error("Failed to approve the answer:", error);
     },
   });
-//
+  //
   const ifUserIsAuth = () => {
     return userId === data?.user.id || false;
-  }; 
-  const questionAuthorIsSignedIn = ifUserIsAuth();// როცა ავტორიზირებულია კითხვის ავტორი / ამით გამოჩნდება aprove ღილაკი 
-  const userIsSignedIn = localStorage.getItem("accessToken"); // როცა ავტორიზირებულია მომხმარებელი შეუძლია პასუხის გაცემა და ამით გამოჩნდება სენდის ღილაკი 
-//
+  };
+  const questionAuthorIsSignedIn = ifUserIsAuth(); // როცა ავტორიზირებულია კითხვის ავტორი / ამით გამოჩნდება aprove ღილაკი
+  const userIsSignedIn = localStorage.getItem("accessToken"); // როცა ავტორიზირებულია მომხმარებელი შეუძლია პასუხის გაცემა და ამით გამოჩნდება სენდის ღილაკი
+  //
   const onApprove = (id: number, isCorrect: boolean) => {
     approve({ id, payload: isCorrect });
   };
 
-  const onSendAnswer = ({answer}: {answer: string}) => {
-    Answer({ questionId: questionId, answerText: answer })
-  }
-//
+  const onSendAnswer = ({ answer }: { answer: string }) => {
+    Answer({ questionId: questionId, answerText: answer });
+  };
+  //
   if (!data) return <p>Loading...</p>;
-//
+  //
   return (
     <div className="bg-gray-50 w-[1400px] h-[750px] sm:h-auto   mx-auto overflow-hidden dark:bg-black p-3 sm:p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-3 sm:gap-14">
       {/* Question Header */}
@@ -105,19 +105,22 @@ const { control, handleSubmit } = useForm({defaultValues:{answer: "",}});
 
       {/* Question Footer */}
       {userIsSignedIn && (
-        <form onSubmit={handleSubmit(onSendAnswer)} className="flex items-center gap-4  flex-col sm:flex-row">
+        <form
+          onSubmit={handleSubmit(onSendAnswer)}
+          className="flex items-center gap-4  flex-col sm:flex-row"
+        >
           <Controller
-          name="answer" // The name of the field in the form data
-          control={control} // Pass in the control object from useForm
-          defaultValue="" // Default value for the textarea
-          render={({ field }) => (
-            <Textarea 
-              {...field} // Spread the field props (onChange, value, etc.)
-              className="flex-1"
-              placeholder="Type your answer here."
-            />
-          )}
-        />
+            name="answer" // The name of the field in the form data
+            control={control} // Pass in the control object from useForm
+            defaultValue="" // Default value for the textarea
+            render={({ field }) => (
+              <Textarea
+                {...field} // Spread the field props (onChange, value, etc.)
+                className="flex-1"
+                placeholder="Type your answer here."
+              />
+            )}
+          />
           <Button
             type="submit"
             className="w-full sm:w-20 p-0 sm:p-7 bg-blue-700 text-white dark:bg-black dark:text-white"
