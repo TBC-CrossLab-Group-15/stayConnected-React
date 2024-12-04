@@ -1,7 +1,7 @@
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LoginDefaultValues } from "./login-default-values";
 import { LoginFormValues } from "./types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,6 +12,8 @@ import { useTranslation } from "react-i18next";
 
 import { Login } from "@/api/auth";
 import { useMutation } from "@tanstack/react-query";
+import { AfterLoginSuccessn } from "./utils";
+import { queryClient } from "@/main";
 
 const LoginForm: React.FC = () => {
   const {
@@ -22,15 +24,28 @@ const LoginForm: React.FC = () => {
     resolver: zodResolver(LoginFormSchema),
     defaultValues: LoginDefaultValues,
   });
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const { mutate: handleLogin } = useMutation({
     mutationKey: ["login"],
     mutationFn: Login,
-    onSuccess: (data) => {
-      console.log("User signed in:", data);
+    onSuccess: (res) => {
+      console.log("User signed in:", res);
+      // if (res?.access && res?.refresh) {
+      AfterLoginSuccessn({
+        accessToken: res?.access,
+        refreshToken: res?.refresh,
+        // userId: res?.user_id,
+      });
+
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      navigate("/");
     },
   });
-
+  // const { user } = useQuery({
+  //   queryKey: ["user"],
+  //   queryFn: GetUser,
+  // });
   const onSubmit = (values: LoginFormValues) => {
     const { email, password } = values;
     alert("login successfully");
@@ -41,6 +56,8 @@ const LoginForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-6">
       {/* მეილი */}
+
+      {/* <h1>{user?.first_name}</h1> */}
       <div className="flex flex-col space-y-1.5">
         <Label
           htmlFor="email"
