@@ -7,7 +7,8 @@ import { createAvatar } from "@dicebear/core";
 import { avataaars } from "@dicebear/collection";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { changeAvagar, getUser } from "@/api/profile";
+import { changeAvatar, getUser } from "@/api/profile";
+import { useNavigate } from "react-router-dom";
 
 const Profile: React.FC = () => {
   const userId = Number(localStorage.getItem("userId")); //იუზერის აიდი
@@ -19,6 +20,16 @@ const Profile: React.FC = () => {
       },
     },
   });
+const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("userId");
+    navigate("/login");
+    window.location.reload();
+    console.log("logOut");
+  };
 
   const { t } = useTranslation();
   const { data, refetch } = useQuery({
@@ -28,7 +39,7 @@ const Profile: React.FC = () => {
 
   const { mutate: setAvatar } = useMutation({
     mutationKey: ["avatar"],
-    mutationFn: changeAvagar,
+    mutationFn: changeAvatar,
     onSuccess: () => refetch(),
   });
 
@@ -142,7 +153,7 @@ const Profile: React.FC = () => {
 
       {/* Logout Button */}
       <div className="flex justify-center">
-        <Button className="bg-sky-500 w-full md:w-auto text-white hover:bg-sky-600 rounded-md px-6 py-3 text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+        <Button onClick={handleLogout} className="bg-sky-500 w-full md:w-auto text-white hover:bg-sky-600 rounded-md px-6 py-3 text-lg font-semibold transition-all duration-300 transform hover:scale-105">
           {t("logout")}
         </Button>
       </div>

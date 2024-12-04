@@ -1,6 +1,6 @@
 import { httpClient } from "..";
 
-export const changeAvagar = async ({
+export const changeAvatar = async ({
   id,
   avatar,
 }: {
@@ -18,7 +18,7 @@ export const changeAvagar = async ({
   }
 };
 
-// };
+
 
 export enum AUTH_ENDPOINTS {
   SIGN_IN = "user/login/",

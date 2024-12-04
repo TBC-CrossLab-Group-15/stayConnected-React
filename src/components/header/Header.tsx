@@ -82,23 +82,29 @@ const Header = () => {
                 </Button>
               </NavLink>
 
-              <DropdownMenu >
-                <DropdownMenuTrigger >
+              <DropdownMenu>
+                <DropdownMenuTrigger>
                   <Avatar className="p-5">
-                    <AvatarImage src={user?.user?.avatar ?? undefined} />
+                    <AvatarImage src={user?.user?.avatar ?? undefined}/>
                     <AvatarFallback>{user?.user?.first_name}</AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="shadow-md rounded-md p-2 gap-2 flex justify-center items-center flex-col ">
-                
-                    <DropdownMenuItem className="p-0">
+                  <DropdownMenuItem className="p-0">
                     <NavLink to="/profile">
-                      <Button variant="ghost" className="w-full  px-6">Profile</Button>
-                      </NavLink> 
-                    </DropdownMenuItem>
-       
-                  <DropdownMenuItem className="p-0"  onClick={() => handleLogout()}>
-                    <Button variant="ghost" className="w-full  ">Sign Out</Button>
+                      <Button variant="ghost" className="w-full  px-6">
+                        Profile
+                      </Button>
+                    </NavLink>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem
+                    className="p-0"
+                    onClick={() => handleLogout()}
+                  >
+                    <Button variant="ghost" className="w-full  ">
+                      Sign Out
+                    </Button>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -143,9 +149,9 @@ const Header = () => {
                 </svg>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuSeparator  />
-                <NavLink  to="login">
-                  <DropdownMenuItem >{t("sign-in")}</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <NavLink to="login">
+                  <DropdownMenuItem>{t("sign-in")}</DropdownMenuItem>
                 </NavLink>
                 {/* <DropdownMenuItem>Add Question</DropdownMenuItem> only appears if user is logged in */}
               </DropdownMenuContent>
