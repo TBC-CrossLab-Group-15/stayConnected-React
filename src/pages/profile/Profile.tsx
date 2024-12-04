@@ -6,6 +6,11 @@ import Select from "react-select";
 import { createAvatar } from "@dicebear/core";
 import { avataaars } from "@dicebear/collection";
 import { useTranslation } from "react-i18next";
+// import { useMutation } from "@tanstack/react-query";
+// import { changeAvagar } from "@/api/profile";
+// import { use } from "i18next";
+// import { useQuery } from "@tanstack/react-query";
+// import { getUser } from "@/api/profile";
 
 const Profile: React.FC = () => {
   const [userAvatar, setUserAvatar] = React.useState<string>("Oliver");
@@ -19,6 +24,27 @@ const Profile: React.FC = () => {
   });
 
   const { t } = useTranslation();
+  // const userId = 1;
+
+  // const {data} = useQuery({
+  //   queryKey: ["profile"],
+  //   queryFn: () => getUser(),
+  // })
+
+  // const {mutate:setAvatar} = useMutation({
+  //   mutationKey:["avatar"],
+  //   mutationFn:changeAvagar
+  // })
+
+const data= {
+  avatar: null,
+  first_name: "giorgi",
+  last_name: "zautashvili",
+  email: "gio@gmail.com",
+  rating: 2,
+  my_answers: 1
+}
+
 
   const avatar = createAvatar(avataaars, {
     seed: userAvatar, // in here i whant to put avatarIcon : {value}
@@ -31,6 +57,8 @@ const Profile: React.FC = () => {
     if (data.avatarIcon.value) {
       setUserAvatar(data.avatarIcon.value); // Update seed dynamically
     }
+
+    // setAvatar({id,payload})
   };
 
   return (
@@ -49,16 +77,16 @@ const Profile: React.FC = () => {
               src={dataUrl}
               alt="Avatar"
             />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback>{data?.first_name}</AvatarFallback>
           </Avatar>
         </div>
 
         <div className="flex flex-col w-[60%]   items-center md:items-start text-center md:text-left space-y-2">
           <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-            Giorgi
+            {data?data?.first_name + " "+ data?.last_name:"User Name"}
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            example@gmail.com
+            {data?.email ?? "example@gmail.com"}
           </p>
 
           <form
@@ -116,13 +144,13 @@ const Profile: React.FC = () => {
         <div className="flex justify-between text-gray-600 dark:text-gray-400">
           <p className="text-lg">{t("score")}</p>
           <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-            25
+            {data?.rating??"0"}
           </p>
         </div>
         <div className="flex justify-between text-gray-600 dark:text-gray-400">
           <p className="text-lg">{t("answeredQuestions")}</p>
           <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-            10
+            {data?.my_answers??"0"}
           </p>
         </div>
       </div>

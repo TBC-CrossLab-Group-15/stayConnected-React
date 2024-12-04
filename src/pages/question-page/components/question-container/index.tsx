@@ -11,9 +11,11 @@ const QuestionContainer: React.FC = () => {
   //როცა გადავალთ კონკრეტულ კითხვაზე აიდი იქნება დასაჭერი რომ კითხვის რექუესთს გადავცეთ
 
   const { data } = useQuery({
-    queryKey: ["question", 1],
-    queryFn: () => getQuestion(1),
+    queryKey: ["question", 8],
+    queryFn: () => getQuestion(8),
   });
+
+  console.log(data)
 
   const { mutate: approve } = useMutation({
     mutationKey: ["answer"],
@@ -68,14 +70,14 @@ const QuestionContainer: React.FC = () => {
         <div className="max-h-[400px] sm:max-h-[300px]  overflow-y-auto flex flex-col gap-4 pr-10 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent dark:scrollbar-thumb-blue-700 dark:scrollbar-track-transparent">
           {data.answers.map((person: Answer) => (
             <Person
-              text={person.text}
-              userName={person.user.first_name + " " + person.user.last_name}
-              userAvatar={person.user.avatar.name}
-              key={person.id}
-              id={person.id}
+              text={person?.text}
+              userName={person?.user?.first_name + " " + person?.user?.last_name}
+              userAvatar={person.user.avatar?.name}
+              key={person?.id}
+              id={person?.id}
               onApprove={onApprove}
               questionAuthorIsSignedIn={questionAuthorIsSignedIn}
-              isApproved={person.isCorrect}
+              isApproved={person?.isCorrect}
             />
           ))}
         </div>
