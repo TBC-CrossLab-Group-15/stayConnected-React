@@ -12,7 +12,8 @@ const QuestionContainer: React.FC = () => {
   const { control, handleSubmit } = useForm({ defaultValues: { answer: "" } });
   //
   const userId = localStorage.getItem("userId"); // მომავალში ლოკალსთორეჯიდან წამოვიღებ
-  const questionId = 1; // როცა რომელიმე კითხვაზე დაკლიკებით გადმოვა კონკრეტულ შეკითხვაზე
+  const questionId = 37; // როცა რომელიმე კითხვაზე დაკლიკებით გადმოვა კონკრეტულ შეკითხვაზე
+
   //
   const { data, refetch } = useQuery({
     queryKey: ["question", questionId],
@@ -27,22 +28,32 @@ const QuestionContainer: React.FC = () => {
     },
   });
 
+
+
   const { mutate: approve } = useMutation({
     mutationKey: ["answer"],
     mutationFn: getCorrectAnswer,
+    onSuccess: () => {
+      refetch();
+    },
     onError: (error) => {
       console.error("Failed to approve the answer:", error);
     },
   });
   //
   const ifUserIsAuth = () => {
-    return userId === data?.user.id || false;
+    return userId == data?.user.id;
   };
   const questionAuthorIsSignedIn = ifUserIsAuth(); // როცა ავტორიზირებულია კითხვის ავტორი / ამით გამოჩნდება aprove ღილაკი
   const userIsSignedIn = localStorage.getItem("accessToken"); // როცა ავტორიზირებულია მომხმარებელი შეუძლია პასუხის გაცემა და ამით გამოჩნდება სენდის ღილაკი
   //
+
+
+
   const onApprove = (id: number, isCorrect: boolean) => {
-    approve({ id, payload: isCorrect });
+
+
+    approve({ id: id, payload: isCorrect });
   };
 
   const onSendAnswer = ({ answer }: { answer: string }) => {
@@ -51,6 +62,7 @@ const QuestionContainer: React.FC = () => {
   //
   if (!data) return <p>Loading...</p>;
   //
+  
   return (
     <div className="bg-gray-50 w-[1400px] h-[750px] sm:h-auto   mx-auto overflow-hidden dark:bg-black p-3 sm:p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-3 sm:gap-14">
       {/* Question Header */}
@@ -78,20 +90,19 @@ const QuestionContainer: React.FC = () => {
           {data?.text || "კითხვის აღწერა"}
         </p>
       </div>
-
       {/* Question Body */}
       <div className="flex flex-col gap-6 ">
         <h3 className="text-base font-medium text-gray-800 dark:text-gray-200">
           {t("answers")}
         </h3>
         <div className="max-h-[400px] sm:max-h-[300px]  overflow-y-auto flex flex-col gap-4 pr-10 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent dark:scrollbar-thumb-blue-700 dark:scrollbar-track-transparent">
-          {data.answers.map((person: Answer) => (
+          {data?.answers.map((person: Answer) => (
             <Person
               text={person?.text}
               userName={
                 person?.user?.first_name + " " + person?.user?.last_name
               }
-              userAvatar={person.user.avatar?.name}
+              userAvatar={person?.user?.avatar}
               key={person?.id}
               id={person?.id}
               onApprove={onApprove}

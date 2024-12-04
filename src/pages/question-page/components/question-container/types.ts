@@ -4,10 +4,7 @@ export type Answer = {
   isCorrect: boolean;
   user: {
     id: number;
-    avatar: {
-      id: number;
-      name: string;
-    };
+    avatar:string;
     first_name: string;
     last_name: string;
   };
