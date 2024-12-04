@@ -19,6 +19,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { format } from "date-fns";
+import { QuestionType } from "@/api/question/index.types";
 
 interface myCardProps {
   width: string;
@@ -42,42 +43,42 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const pageSize = 10;
-  // useEffect(() => {
-  //   const fetchQuestions = async () => {
-  //     try {
-  //       const data: QuestionType[] = await getQuestions({
-  //         page: currentPage,
-  //         page_size: pageSize,
-  //       });
-  //       console.log(data);
-  //       if (data) {
-  //         const transformedData: Questions[] = data.map((questions) => {
-  //           return {
-  //             id: questions.id,
-  //             title: questions.title,
-  //             description: questions.text,
-  //             is_answered: questions.answers[0]?.isCorrect ?? false, // Safe access
-  //             date: questions.create_date,
-  //             user: {
-  //               user_name: questions.user.first_name,
-  //               user_surname: questions.user.last_name,
-  //             },
-  //             tags:
-  //               questions.tags?.map((tag) => ({
-  //                 id: tag.id,
-  //                 name: tag.name,
-  //               })) || [], // Ensure tags are an array
-  //           };
-  //         });
-  //         setQuestionsData(transformedData);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching questions:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const data: QuestionType[] = await getQuestions({
+          page: currentPage,
+          page_size: pageSize,
+        });
 
-  //   fetchQuestions();
-  // }, []);
+        if (data) {
+          const transformedData: Questions[] = data.map((questions) => {
+            return {
+              id: questions.id,
+              title: questions.title,
+              description: questions.text,
+              is_answered: questions.answers[0]?.isCorrect ?? false, // Safe access
+              date: questions.create_date,
+              user: {
+                user_name: questions.user.first_name,
+                user_surname: questions.user.last_name,
+              },
+              tags:
+                questions.tags?.map((tag) => ({
+                  id: tag.id,
+                  name: tag.name,
+                })) || [], // Ensure tags are an array
+            };
+          });
+          setQuestionsData(transformedData);
+        }
+      } catch (error) {
+        console.error("Error fetching questions:", error);
+      }
+    };
+
+    fetchQuestions();
+  }, []);
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
@@ -98,7 +99,7 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
               user_surname: question.user.last_name,
             },
             tags: question.tags || [],
-          }))
+          })),
         );
 
         // Calculate total pages

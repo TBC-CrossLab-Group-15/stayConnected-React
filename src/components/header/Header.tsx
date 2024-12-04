@@ -37,7 +37,7 @@ const Header = () => {
     console.log("logOut");
   };
   return (
-    <div className=" shadow-[0px_-2px_4px_rgba(0,0,0,0.1)] border-solid border-b border-b-gray-300 dark:border-b-solid dark:border-b-neutral-800">
+    <div className="z-50 dark:bg-black sticky top-0 left-0 w-full bg-white shadow-[0px_-2px_4px_rgba(0,0,0,0.1)] border-solid border-b border-b-gray-300 dark:border-b-solid dark:border-b-neutral-800">
       <div className="max-w-[1400px]  mx-auto  px-5 h-20 flex items-center justify-between gap-4">
         <div className="text-2xl font-bold">
           <NavLink to="/">
@@ -82,21 +82,23 @@ const Header = () => {
                 </Button>
               </NavLink>
 
-              <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <Avatar>
+              <DropdownMenu >
+                <DropdownMenuTrigger >
+                  <Avatar className="p-5">
                     <AvatarImage src={user?.user?.avatar ?? undefined} />
                     <AvatarFallback>{user?.user?.first_name}</AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="shadow-md rounded-md p-2 flex justify-center items-center flex-col">
-                  <NavLink to="/profile">
-                    <DropdownMenuItem>
-                      <Button variant={"outline"}>Profile</Button>
+                <DropdownMenuContent className="shadow-md rounded-md p-2 gap-2 flex justify-center items-center flex-col ">
+                
+                    <DropdownMenuItem className="p-0">
+                    <NavLink to="/profile">
+                      <Button variant="ghost" className="w-full  px-6">Profile</Button>
+                      </NavLink> 
                     </DropdownMenuItem>
-                  </NavLink>
-                  <DropdownMenuItem onClick={() => handleLogout()}>
-                    <Button variant={"outline"}>Sign Out</Button>
+       
+                  <DropdownMenuItem className="p-0"  onClick={() => handleLogout()}>
+                    <Button variant="ghost" className="w-full  ">Sign Out</Button>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -141,9 +143,9 @@ const Header = () => {
                 </svg>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuSeparator />
-                <NavLink to="login">
-                  <DropdownMenuItem>{t("sign-in")}</DropdownMenuItem>
+                <DropdownMenuSeparator  />
+                <NavLink  to="login">
+                  <DropdownMenuItem >{t("sign-in")}</DropdownMenuItem>
                 </NavLink>
                 {/* <DropdownMenuItem>Add Question</DropdownMenuItem> only appears if user is logged in */}
               </DropdownMenuContent>
