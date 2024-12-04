@@ -6,13 +6,12 @@ import { getCorrectAnswer, getQuestion, sendAnswer } from "@/api/question";
 import { useTranslation } from "react-i18next";
 import { Answer } from "./types";
 import { Controller, useForm } from "react-hook-form";
-
 const QuestionContainer: React.FC = () => {
   const { t } = useTranslation();
   //
   const { control, handleSubmit } = useForm({ defaultValues: { answer: "" } });
   //
-  const userId = 1; // მომავალში ლოკალსთორეჯიდან წამოვიღებ
+  const userId =localStorage.getItem("userId"); // მომავალში ლოკალსთორეჯიდან წამოვიღებ
   const questionId = 1; // როცა რომელიმე კითხვაზე დაკლიკებით გადმოვა კონკრეტულ შეკითხვაზე
   //
   const { data, refetch } = useQuery({

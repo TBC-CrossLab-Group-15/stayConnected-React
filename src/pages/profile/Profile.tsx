@@ -6,14 +6,11 @@ import Select from "react-select";
 import { createAvatar } from "@dicebear/core";
 import { avataaars } from "@dicebear/collection";
 import { useTranslation } from "react-i18next";
-// import { useMutation } from "@tanstack/react-query";
-// import { changeAvagar } from "@/api/profile";
-// import { use } from "i18next";
-// import { useQuery } from "@tanstack/react-query";
-// import { getUser } from "@/api/profile";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { changeAvagar, getUser } from "@/api/profile";
 
 const Profile: React.FC = () => {
-  const [userAvatar, setUserAvatar] = React.useState<string>("Oliver");
+  const userId = Number(localStorage.getItem("userId"));//იუზერის აიდი 
   const { control, handleSubmit } = useForm({
     defaultValues: {
       avatarIcon: {
@@ -23,42 +20,34 @@ const Profile: React.FC = () => {
     },
   });
 
-  const { t } = useTranslation();
-  // const userId = 1;
+const { t } = useTranslation();
+const {data,refetch} = useQuery({
+  queryKey:["userInfo"],
+  queryFn:getUser
+})
 
-  // const {data} = useQuery({
-  //   queryKey: ["profile"],
-  //   queryFn: () => getUser(),
-  // })
 
-  // const {mutate:setAvatar} = useMutation({
-  //   mutationKey:["avatar"],
-  //   mutationFn:changeAvagar
-  // })
 
-  const data = {
-    avatar: null,
-    first_name: "giorgi",
-    last_name: "zautashvili",
-    email: "gio@gmail.com",
-    rating: 2,
-    my_answers: 1,
-  };
+const {mutate:setAvatar} = useMutation({
+    mutationKey:["avatar"],
+    mutationFn:changeAvagar,
+    onSuccess:()=>refetch()
+})
+
 
   const avatar = createAvatar(avataaars, {
-    seed: userAvatar, // in here i whant to put avatarIcon : {value}
+    seed:data?.avatar?? "" // in here i whant to put avatarIcon : {value}
   });
   const svg = avatar.toString();
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
   const dataUrl = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
 
   const onSubmit = (data: { avatarIcon: { value: string; label: string } }) => {
-    if (data.avatarIcon.value) {
-      setUserAvatar(data.avatarIcon.value); // Update seed dynamically
-    }
-
-    // setAvatar({id,payload})
+    const avatarValue = data.avatarIcon.value;
+    setAvatar({id:userId,avatar:avatarValue})
   };
+
+  if (!data) return <div>Loading...</div>;
 
   return (
     <div className="w-full border m-auto max-w-3xl bg-white dark:bg-gray-900 rounded-xl shadow-2xl p-10 space-y-8">

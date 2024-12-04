@@ -4,7 +4,7 @@ import { createContext, PropsWithChildren } from "react";
 import Loader from "@/components/loader/loader";
 
 type UserType = {
-  avatar_url: null;
+  avatar: null;
   email: string;
   first_name: string;
   last_name: string;
