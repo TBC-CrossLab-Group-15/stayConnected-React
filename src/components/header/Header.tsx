@@ -14,7 +14,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  // DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -28,12 +27,13 @@ const Header = () => {
   const { t } = useTranslation();
   const user = useAuthContext();
   console.log(user);
+  // იუზერის დალოგაუთება
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
+    localStorage.removeItem("userId");
     navigate("/login");
     window.location.reload();
-
     console.log("logOut");
   };
   return (

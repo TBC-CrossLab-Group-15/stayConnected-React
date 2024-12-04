@@ -31,21 +31,18 @@ const LoginForm: React.FC = () => {
     mutationFn: Login,
     onSuccess: (res) => {
       console.log("User signed in:", res);
-      // if (res?.access && res?.refresh) {
+
       AfterLoginSuccessn({
         accessToken: res?.access,
         refreshToken: res?.refresh,
-        // userId: res?.user_id,
+        userId: res?.user_id, // Explicitly convert to number or null
       });
-
+      console.log("useris aidi", res?.user_id);
       queryClient.invalidateQueries({ queryKey: ["user"] });
-      navigate("/");
+      setTimeout(() => navigate("/"), 0);
     },
   });
-  // const { user } = useQuery({
-  //   queryKey: ["user"],
-  //   queryFn: GetUser,
-  // });
+
   const onSubmit = (values: LoginFormValues) => {
     const { email, password } = values;
     alert("login successfully");
