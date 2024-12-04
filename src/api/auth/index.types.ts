@@ -5,10 +5,13 @@ export type RegisterResponseType = {
   email: string;
 };
 export type LoginResponseType = {
-  access: string;
-  refresh: string;
+  access: string | undefined;
+  refresh: string | undefined;
+  user_id: number | null;
 };
 
-export type RefreshResponseType = {
-  refresh: string;
+export type RefreshPayload = {
+  payload: {
+    refresh: string;
+  };
 };

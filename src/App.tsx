@@ -10,6 +10,7 @@ import Profile from "./pages/profile"; //keep Profile import
 import { ThemeProvider } from "@/components/theme-provider";
 import QuestionPage from "./pages/question-page";
 import CreateQuestion from "@/pages/create-question-page/create-question-view/CreateQuestionView";
+import Loader from "./components/loader/loader";
 
 // lazy components can be added later
 
@@ -25,6 +26,7 @@ function App() {
             <Route path="profile" element={<Profile />} />
             <Route path="questionPage" element={<QuestionPage />} />
             <Route path="createQuestion" element={<CreateQuestion />} />
+            <Route path="loader" element={<Loader />} />
             {/* Route for profile */}
           </Route>
           <Route path="*" element={<NotFoundPage />} />

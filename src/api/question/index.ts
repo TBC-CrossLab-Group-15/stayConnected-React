@@ -15,13 +15,13 @@ export const getQuestion = async (id: number) => {
     throw new Error("Failed");
   }
 };
+
 export type QuestionsListResponseType = {
   count: number;
   next: string | null;
   previous: string | null;
   results: QuestionType[];
 };
-
 export const getQuestions = async (
   params: QuestionsListDataType
 ): Promise<QuestionsListResponseType> => {
@@ -29,6 +29,44 @@ export const getQuestions = async (
     const result = await httpClient.get("posts/questions/", {
       params,
     });
+    return result.data;
+  } catch (error) {
+    console.log("Error:", error);
+    throw new Error("Failed");
+  }
+};
+
+
+export const sendAnswer = async ({
+  questionId,
+  answerText,
+}: {
+  questionId: number;
+  answerText: string;
+}) => {
+  try {
+    const result = await httpClient.post(`posts/answers/`, {
+      text: answerText,
+      question: questionId,
+
+    });
+    return result.data;
+  } catch (error) {
+    console.log("Error:", error);
+    throw new Error("Failed");
+  }
+};
+
+
+export const getCorrectAnswer = async ({
+  id,
+  payload,
+}: {
+  id: number;
+  payload: boolean;
+}) => {
+  try {
+    const result = await httpClient.put(`posts/answers/${id}/`, payload);
     return result.data;
   } catch (error) {
     console.log("Error:", error);

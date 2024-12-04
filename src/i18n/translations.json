@@ -42,7 +42,7 @@
       "edit-profile-info": "Edit Profile Info",
 
       "send": "Send",
-      "cancel": "Cancel",
+      "reject": "Reject",
       "approve": "Approve",
       "answers": "Answers",
       "date": "Date",
@@ -106,7 +106,7 @@
       "edit-profile-info": "პროფილის ინფორმაციის რედაქტირება",
 
       "send": "გაგზავნა",
-      "cancel": "გაუქმება",
+      "reject": "უარყოფა",
       "approve": "დადასტურება",
       "answers": "პასუხები",
       "date": "თარიღი",
