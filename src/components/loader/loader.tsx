@@ -13,10 +13,12 @@ const Loader = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-md flex flex-col justify-center items-center h-screen">
-      <h2 className="text-xl font-bold mb-4 text-center">Loading...</h2>
-      <Progress value={progress} className="mb-4" />
-      {progress === 100 && <p className="text-green-500">Complete!</p>}
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="w-full max-w-md flex flex-col justify-center items-center">
+        <h2 className="text-xl font-bold mb-4 text-center">Loading...</h2>
+        <Progress value={progress} className="mb-4" />
+        {progress === 100 && <p className="text-green-500">Complete!</p>}
+      </div>
     </div>
   );
 };
