@@ -6,13 +6,14 @@ import { Button } from "@/components/ui/button";
 import { RegisterDataType } from "../../types";
 import { registerFormSchema } from "./shema.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useMutation } from "@tanstack/react-query";
 import { Register } from "@/api/auth/index.ts";
 import { RegistrationDefaultValues } from "../registration-default-values/index.tsx";
 
 const RegistrationForm: React.FC = () => {
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
@@ -28,6 +29,7 @@ const RegistrationForm: React.FC = () => {
     mutationFn: Register,
     onSuccess: (data) => {
       console.log("User signed in:", data);
+      navigate("login");
     },
   });
   const onSubmit = (values: RegisterDataType) => {
@@ -55,7 +57,6 @@ const RegistrationForm: React.FC = () => {
 
           {errors.first_name && (
             <p className="text-red-500">{errors.first_name.message}</p>
-
           )}
         </div>
 
@@ -76,7 +77,6 @@ const RegistrationForm: React.FC = () => {
 
           {errors.last_name && (
             <p className="text-red-500">{errors.last_name.message}</p>
-
           )}
         </div>
 
@@ -137,7 +137,6 @@ const RegistrationForm: React.FC = () => {
 
           {errors.confirm_password && (
             <p className="text-red-500">{errors.confirm_password.message}</p>
-
           )}
         </div>
         <div className="flex justify-between">

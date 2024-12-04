@@ -13,15 +13,23 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   // DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import LanguageSwitcher from "./components/language";
 import { useTranslation } from "react-i18next";
+import { useAuthContext } from "@/context/auth/hooks";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 
 const Header = () => {
   const { t } = useTranslation();
+  const user = useAuthContext();
+  console.log(user);
+  const handleLogout = () => {
+    console.log("logOut");
+  };
   return (
     <div className=" shadow-[0px_-2px_4px_rgba(0,0,0,0.1)] border-solid border-b border-b-gray-300 dark:border-b-solid dark:border-b-neutral-800">
       <div className="max-w-[1400px]  mx-auto  px-5 h-20 flex items-center justify-between gap-4">
@@ -60,12 +68,12 @@ const Header = () => {
           </Select> */}
         </div>
         <div className="flex justify-between gap-3">
-          {/* {user ? (
+          {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Avatar>
-                  <AvatarImage src={profileData?.avatar_url ?? undefined} />
-                  <AvatarFallback>CN</AvatarFallback>
+                  <AvatarImage src={user?.user?.avatar_url ?? undefined} />
+                  <AvatarFallback>{user?.user?.first_name}</AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="font-sans">
@@ -79,7 +87,10 @@ const Header = () => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          ) : ( */}
+          ) : (
+            <div></div>
+          )}
+
           <NavLink to="login" className="hidden md:block">
             <Button className="bg-blue-500 hover:bg-blue-400 text-base font-sans">
               {t("sign-in")}
