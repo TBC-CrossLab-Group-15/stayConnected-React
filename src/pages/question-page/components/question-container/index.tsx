@@ -6,14 +6,16 @@ import { getCorrectAnswer, getQuestion, sendAnswer } from "@/api/question";
 import { useTranslation } from "react-i18next";
 import { Answer } from "./types";
 import { Controller, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 const QuestionContainer: React.FC = () => {
+  const {id} = useParams();
+  //
   const { t } = useTranslation();
   //
   const { control, handleSubmit } = useForm({ defaultValues: { answer: "" } });
   //
   const userId = localStorage.getItem("userId"); // მომავალში ლოკალსთორეჯიდან წამოვიღებ
-  const questionId = 37; // როცა რომელიმე კითხვაზე დაკლიკებით გადმოვა კონკრეტულ შეკითხვაზე
+  const questionId = Number(id); // როცა რომელიმე კითხვაზე დაკლიკებით გადმოვა კონკრეტულ შეკითხვაზე
 
   //
   const { data, refetch } = useQuery({
@@ -141,16 +143,16 @@ const QuestionContainer: React.FC = () => {
       {!userIsSignedIn && (
         <div className="flex w-full sm:w-[80%] mx-auto justify-center items-center space-x-2 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg shadow-md">
           <p className="text-gray-700 dark:text-gray-200 text-lg">
-            {t("singMessage")}
-          </p>
           <Button
             variant="link"
-            className="text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300"
+            className="text-blue-500 text-lg dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300"
           >
             <Link to="/login" className="font-semibold">
-              {t("sign-in")}
+              {t("sign-in-question-page")}
             </Link>
-          </Button>
+          </Button>{t("singMessage")}
+          </p>
+
         </div>
       )}
     </div>
