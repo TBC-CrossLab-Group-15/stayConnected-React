@@ -18,7 +18,7 @@ const LanguageSwitcher = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex  items-center gap-2 px-4 py-2 bg-white dark:bg-black   rounded-md cursor-pointer z-10 ">
+<DropdownMenuTrigger className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 dark:focus-visible:ring-neutral-300 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 h-9 w-9">
         <Languages className="w-5 h-5 text-gray-700" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="shadow-md rounded-md p-2 bg-white dark:bg-black">

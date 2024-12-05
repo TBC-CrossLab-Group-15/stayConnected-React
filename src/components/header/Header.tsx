@@ -70,11 +70,11 @@ const Header = () => {
             </SelectContent>
           </Select> */}
         </div>
-        <div className="flex justify-between items-center gap-3 p-4 rounded-lg">
+        <div className="flex justify-between items-center gap-3 p-4   rounded-lg">
           {userId ? (
             <>
               <NavLink to="createQuestion ">
-                <Button className="rounded-full  text-base font-sans h-9 w-9  bg-slate-50 text-black hover:bg-slate-100 dark:bg-black dark:text-white border dark:hover:bg-zinc-900">
+                <Button className="text-black dark:text-white inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 dark:focus-visible:ring-neutral-300 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 h-9 w-9">
                   +
                 </Button>
               </NavLink>
@@ -99,7 +99,7 @@ const Header = () => {
                     className="p-0"
                     onClick={() => handleLogout()}
                   >
-                    <Button variant="ghost" className="w-full  ">
+                    <Button variant="ghost" className="w-full ">
                       Sign Out
                     </Button>
                   </DropdownMenuItem>
