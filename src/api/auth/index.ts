@@ -10,7 +10,7 @@ import axios from "axios";
 import { AUTH_ENDPOINTS } from "./index.enum";
 
 export const Login = async (
-  data: LoginFormValues
+  data: LoginFormValues,
 ): Promise<LoginResponseType | undefined> => {
   try {
     console.log(data);
@@ -29,7 +29,7 @@ export const Login = async (
 };
 
 export const Register = async (
-  data: RegisterDataType
+  data: RegisterDataType,
 ): Promise<RegisterResponseType | undefined> => {
   try {
     const result = await httpClient.post(AUTH_ENDPOINTS.SIGN_UP, data);

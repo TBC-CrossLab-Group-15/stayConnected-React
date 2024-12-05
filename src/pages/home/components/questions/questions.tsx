@@ -56,7 +56,7 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
       }),
   });
 
-  const totalPages = Math.ceil(questionsData.count / pageSize);
+  const totalPages = Math.ceil(questionsData?.count / pageSize);
 
   console.log("questions:", questionsData);
 
@@ -86,7 +86,7 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
   };
   return (
     <div className="max-w-[1400px] w-full mx-auto px-5 h-full mt-8 mb-8 font-sans">
-      {questionsData.results.map((question) => (
+      {questionsData?.results?.map((question) => (
         <Card
           key={question.id}
           className={`rounded-xl flex flex-col justify-center p-0 border-solid border-b border-zinc-200 bg-card text-card-foreground shadow sm:min-h-[200px] md:min-h-[200px] lg:min-h-[200px] xl:min-h-[150px] 2xl:min-h-[150px] ${width} mb-5`}

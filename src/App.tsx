@@ -53,7 +53,7 @@ function App() {
                 </UnauthorizedGuard>
               }
             />
-            <Route path="questionPage" element={<LazyQuestionPage />} />
+            <Route path="questionPage/:id" element={<LazyQuestionPage />} />
             <Route
               path="createQuestion"
               element={

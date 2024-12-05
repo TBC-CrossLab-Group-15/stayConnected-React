@@ -6,6 +6,7 @@ import { getCorrectAnswer, getQuestion, sendAnswer } from "@/api/question";
 import { useTranslation } from "react-i18next";
 import { Answer } from "./types";
 import { Controller, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 const QuestionContainer: React.FC = () => {
   const { t } = useTranslation();
   //
@@ -58,81 +59,98 @@ const QuestionContainer: React.FC = () => {
   //
 
   return (
-    <div className="bg-gray-50 w-[1400px] h-[750px] sm:h-auto   mx-auto overflow-hidden dark:bg-black p-3 sm:p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-3 sm:gap-14">
-      {/* Question Header */}
-      <div className="flex flex-col gap-4 ">
-        <div className="flex justify-between items-start flex-col sm:flex-row  ">
-          <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 ">
-            {data?.title || "DataTitle"}
-          </h2>
-          <div className="flex gap-4">
-            <Button
-              className="text-gray-600 dark:text-gray-300  p-0 sm:p-4"
-              variant="link"
-            >
-              {data?.user.first_name + " " + data?.user.last_name || "Author"}
-            </Button>
-            <Button
-              className="text-gray-600 dark:text-gray-300 p-0 sm:p-4"
-              variant="link"
-            >
-              {data?.create_date.slice(0, 10) || "date / time"}
-            </Button>
+    <div className="  flex flex-col gap-10 w-full ">
+      <div className="bg-gray-50  h-[750px] sm:h-auto w-full sm:w-[80%] mx-auto overflow-hidden dark:bg-black p-3 sm:p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-3 sm:gap-14">
+        {/* Question Header */}
+        <div className="flex flex-col gap-4 ">
+          <div className="flex justify-between items-start flex-col sm:flex-row  ">
+            <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 ">
+              {data?.title || "DataTitle"}
+            </h2>
+            <div className="flex gap-4">
+              <Button
+                className="text-gray-600 dark:text-gray-300  p-0 sm:p-4"
+                variant="link"
+              >
+                {data?.user.first_name + " " + data?.user.last_name || "Author"}
+              </Button>
+              <Button
+                className="text-gray-600 dark:text-gray-300 p-0 sm:p-4"
+                variant="link"
+              >
+                {data?.create_date.slice(0, 10) || "date / time"}
+              </Button>
+            </div>
+          </div>
+          <p className="text-gray-700 dark:text-gray-300  text-sm leading-relaxed ">
+            {data?.text || "კითხვის აღწერა"}
+          </p>
+        </div>
+        {/* Question Body */}
+        <div className="flex flex-col gap-6 ">
+          <h3 className="text-base font-medium text-gray-800 dark:text-gray-200">
+            {t("answers")}
+          </h3>
+          <div className="max-h-[400px] sm:max-h-[300px]  overflow-y-auto flex flex-col gap-4 pr-10 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent dark:scrollbar-thumb-blue-700 dark:scrollbar-track-transparent">
+            {data?.answers.map((person: Answer) => (
+              <Person
+                text={person?.text}
+                userName={
+                  person?.user?.first_name + " " + person?.user?.last_name
+                }
+                userAvatar={person?.user?.avatar}
+                key={person?.id}
+                id={person?.id}
+                onApprove={onApprove}
+                questionAuthorIsSignedIn={questionAuthorIsSignedIn}
+                isApproved={person?.isCorrect}
+              />
+            ))}
           </div>
         </div>
-        <p className="text-gray-700 dark:text-gray-300  text-sm leading-relaxed ">
-          {data?.text || "კითხვის აღწერა"}
-        </p>
-      </div>
-      {/* Question Body */}
-      <div className="flex flex-col gap-6 ">
-        <h3 className="text-base font-medium text-gray-800 dark:text-gray-200">
-          {t("answers")}
-        </h3>
-        <div className="max-h-[400px] sm:max-h-[300px]  overflow-y-auto flex flex-col gap-4 pr-10 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent dark:scrollbar-thumb-blue-700 dark:scrollbar-track-transparent">
-          {data?.answers.map((person: Answer) => (
-            <Person
-              text={person?.text}
-              userName={
-                person?.user?.first_name + " " + person?.user?.last_name
-              }
-              userAvatar={person?.user?.avatar}
-              key={person?.id}
-              id={person?.id}
-              onApprove={onApprove}
-              questionAuthorIsSignedIn={questionAuthorIsSignedIn}
-              isApproved={person?.isCorrect}
+        {/* Question Footer */}
+        {userIsSignedIn && (
+          <form
+            onSubmit={handleSubmit(onSendAnswer)}
+            className="flex items-center gap-4  flex-col sm:flex-row"
+          >
+            <Controller
+              name="answer" // The name of the field in the form data
+              control={control} // Pass in the control object from useForm
+              defaultValue="" // Default value for the textarea
+              render={({ field }) => (
+                <Textarea
+                  {...field} // Spread the field props (onChange, value, etc.)
+                  className="flex-1"
+                  placeholder="Type your answer here."
+                />
+              )}
             />
-          ))}
-        </div>
+            <Button
+              type="submit"
+              className="w-full sm:w-20 p-0 sm:p-7 bg-blue-700 text-white dark:bg-black dark:text-white"
+              variant="outline"
+            >
+              {t("send")}
+            </Button>
+          </form>
+        )}
       </div>
 
-      {/* Question Footer */}
-      {userIsSignedIn && (
-        <form
-          onSubmit={handleSubmit(onSendAnswer)}
-          className="flex items-center gap-4  flex-col sm:flex-row"
-        >
-          <Controller
-            name="answer" // The name of the field in the form data
-            control={control} // Pass in the control object from useForm
-            defaultValue="" // Default value for the textarea
-            render={({ field }) => (
-              <Textarea
-                {...field} // Spread the field props (onChange, value, etc.)
-                className="flex-1"
-                placeholder="Type your answer here."
-              />
-            )}
-          />
+      {!userIsSignedIn && (
+        <div className="flex w-full sm:w-[80%] mx-auto justify-center items-center space-x-2 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg shadow-md">
+          <p className="text-gray-700 dark:text-gray-200 text-lg">
+            Sign in to answer the question
+          </p>
           <Button
-            type="submit"
-            className="w-full sm:w-20 p-0 sm:p-7 bg-blue-700 text-white dark:bg-black dark:text-white"
-            variant="outline"
+            variant="link"
+            className="text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300"
           >
-            {t("send")}
+            <Link to="/login" className="font-semibold">
+              Sign in
+            </Link>
           </Button>
-        </form>
+        </div>
       )}
     </div>
   );
