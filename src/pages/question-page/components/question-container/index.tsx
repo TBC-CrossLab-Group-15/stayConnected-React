@@ -8,14 +8,14 @@ import { Answer } from "./types";
 import { Controller, useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 const QuestionContainer: React.FC = () => {
-  // const { id } = useParams();
+  const { id } = useParams();
   //
   const { t } = useTranslation();
   //
   const { control, handleSubmit } = useForm({ defaultValues: { answer: "" } });
   //
   const userId = localStorage.getItem("userId"); // მომავალში ლოკალსთორეჯიდან წამოვიღებ
-  const questionId = 72; // როცა რომელიმე კითხვაზე დაკლიკებით გადმოვა კონკრეტულ შეკითხვაზე
+  const questionId = Number(id); // როცა რომელიმე კითხვაზე დაკლიკებით გადმოვა კონკრეტულ შეკითხვაზე
 
   //
   const { data, refetch } = useQuery({

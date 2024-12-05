@@ -26,7 +26,7 @@ const Person: React.FC<{
 }) => {
   const { t } = useTranslation();
   const avatar = createAvatar(avataaars, {
-    seed: userAvatar??"",
+    seed: userAvatar ?? "",
   });
   const svg = avatar.toString();
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
