@@ -23,7 +23,7 @@ export type QuestionsListResponseType = {
   results: QuestionType[];
 };
 export const getQuestions = async (
-  params: QuestionsListDataType
+  params: QuestionsListDataType,
 ): Promise<QuestionsListResponseType> => {
   try {
     const result = await httpClient.get("posts/questions", {
