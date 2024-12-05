@@ -107,7 +107,7 @@ const Header = () => {
               </DropdownMenu>
             </>
           ) : (
-            <div>
+            <div className="bg-black">
               <NavLink to="login" className="hidden md:block">
                 <Button className="bg-blue-500 hover:bg-blue-400 text-base font-sans">
                   {t("sign-in")}
