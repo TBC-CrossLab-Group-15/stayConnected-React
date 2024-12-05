@@ -8,7 +8,7 @@ import { Answer } from "./types";
 import { Controller, useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 const QuestionContainer: React.FC = () => {
-  const {id} = useParams();
+  const { id } = useParams();
   //
   const { t } = useTranslation();
   //
@@ -144,15 +144,15 @@ const QuestionContainer: React.FC = () => {
         <div className="flex w-full sm:w-[80%] mx-auto justify-center items-center space-x-2 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg shadow-md">
           <p className="text-gray-700 dark:text-gray-200 text-lg">
           <Button
-            variant="link"
-            className="text-blue-500 text-lg dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300"
-          >
-            <Link to="/login" className="font-semibold">
-              {t("sign-in-question-page")}
-            </Link>
-          </Button>{t("singMessage")}
+              variant="link"
+              className="text-blue-500  p-2 text-lg dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300"
+            >
+              <Link to="/login" className="font-semibold">
+                {t("sign-in-question-page")}
+              </Link>
+            </Button>
+            {t("singMessage") }
           </p>
-
         </div>
       )}
     </div>

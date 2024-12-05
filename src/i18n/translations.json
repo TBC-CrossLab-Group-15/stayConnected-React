@@ -49,7 +49,7 @@
       "date": "Date",
       "time": "Time",
       "answerPlaceHolder": "Sign in to answer the question",
-      "sign-in-question-page":"Sign in",
+      "sign-in-question-page": "Sign in",
       "singMessage": "to answer the question",
 
       "profile": "Profile",
@@ -117,7 +117,7 @@
       "date": "თარიღი",
       "time": "დრო",
       "answerPlaceHolder": "აქ შეგიძლია უპასუხო",
-      "sign-in-question-page":"გაიარე ავტორიზაცია",
+      "sign-in-question-page": "გაიარე ავტორიზაცია",
       "singMessage": "რომ უპასუხო კითხვას",
 
       "profile": "პროფილი",
