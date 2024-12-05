@@ -86,9 +86,7 @@ const Person: React.FC<{
           </Button>
         )}
       </div>
-   
     </div>
-  
   );
 };
 
