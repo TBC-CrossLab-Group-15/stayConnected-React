@@ -13,6 +13,7 @@ const Person: React.FC<{
   userAvatar: string;
   userName: string;
   text: string;
+  date: string;
 }> = ({
   questionAuthorIsSignedIn,
   onApprove,
@@ -21,6 +22,7 @@ const Person: React.FC<{
   userAvatar,
   userName,
   text,
+  date,
 }) => {
   const { t } = useTranslation();
   const avatar = createAvatar(avataaars, {
@@ -30,6 +32,7 @@ const Person: React.FC<{
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
   const dataUrl = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
 
+  console.log(date);
   return (
     <div className="dark:bg-gray-800 h-full  persons flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between  shadow-inner bg-gray-200 border rounded-lg p-5 ">
       {/* Left Section */}
@@ -60,10 +63,6 @@ const Person: React.FC<{
 
       {/* Right Section */}
       <div className="flex justify-around sm:justify-start  sm:h-64  items-start gap-2 flex-row  sm:flex-col sm:items-center sm:gap-5 ">
-        <Button className="p-0" variant="link">
-          {t("date")} {t("time")}
-        </Button>
-
         {questionAuthorIsSignedIn && (
           <Button
             onClick={() => onApprove(id, !isApproved)}
@@ -77,6 +76,10 @@ const Person: React.FC<{
             {isApproved ? t("reject") : t("approve")}
           </Button>
         )}
+        <Button className="p-0  flex flex-col" variant="link">
+          <p> {date.slice(0, 10)}</p>
+          <p> {date.slice(11, 19)}</p>
+        </Button>
         {isApproved && (
           <Button
             className="h-full flex justify-center items-end text-green-500"

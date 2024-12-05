@@ -12,6 +12,6 @@ export const LoginFormSchema = z.object({
     .max(50, { message: "validation.password-max" })
     .regex(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      { message: "validation.password-strength" }
+      { message: "validation.password-strength" },
     ),
 });

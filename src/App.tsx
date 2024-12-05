@@ -19,7 +19,7 @@ const LazyCreateQuestionPage = lazy(
   () =>
     import(
       "@/pages/create-question-page/create-question-view/CreateQuestionView"
-    )
+    ),
 );
 
 function App() {

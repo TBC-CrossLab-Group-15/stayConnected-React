@@ -20,27 +20,19 @@ import LanguageSwitcher from "./components/language";
 import { useTranslation } from "react-i18next";
 import { useAuthContext } from "@/context/auth/hooks";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import { Logout } from "@/api/auth";
+
+import UseLogoutClick from "../../hooks/onLogoutClick";
 
 const Header = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const user = useAuthContext();
   const userId = localStorage.getItem("userId");
-  const refreshToken = localStorage.getItem("refreshToken");
-
-  // იუზერის დალოგაუთება
-
   const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("userId");
-    Logout({ payload: { refresh: refreshToken } }).then((res) => {
-      return res.data;
-    });
+    UseLogoutClick();
     navigate("/login");
-    // window.location.reload();
   };
+
   return (
     <div className="z-50 dark:bg-black sticky top-0 left-0 w-full  bg-white shadow-[0px_-2px_4px_rgba(0,0,0,0.1)] border-solid border-b border-b-gray-300 dark:border-b-solid dark:border-b-neutral-800">
       <div className="max-w-[1400px]  mx-auto  px-5 h-20 flex items-center justify-between gap-4">
@@ -63,7 +55,7 @@ const Header = () => {
             </svg>
           </NavLink>
         </div>
-        <div className="flex justify-between gap-5 md:min-w-[550px] font-sans">
+        <div className="flex justify-between gap-5 md:min-w-[550px] font-sans ">
           {/* <Command className="rounded-lg border shadow-md md:min-w-[300px] ">
             <CommandInput placeholder="Type a command or choose a tag..." />
           </Command>
@@ -78,11 +70,11 @@ const Header = () => {
             </SelectContent>
           </Select> */}
         </div>
-        <div className="flex justify-between gap-3">
+        <div className="flex justify-between items-center gap-3 p-4   rounded-lg">
           {userId ? (
             <>
-              <NavLink to="createQuestion">
-                <Button className="rounded-full text-base font-sans h-9 w-9 bg-slate-50 text-black hover:bg-slate-100 dark:bg-black dark:text-white border dark:hover:bg-zinc-900">
+              <NavLink to="createQuestion ">
+                <Button className="text-black dark:text-white inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 dark:focus-visible:ring-neutral-300 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 h-9 w-9">
                   +
                 </Button>
               </NavLink>
@@ -107,7 +99,7 @@ const Header = () => {
                     className="p-0"
                     onClick={() => handleLogout()}
                   >
-                    <Button variant="ghost" className="w-full  ">
+                    <Button variant="ghost" className="w-full ">
                       Sign Out
                     </Button>
                   </DropdownMenuItem>

@@ -48,6 +48,9 @@
       "answers": "Answers",
       "date": "Date",
       "time": "Time",
+      "answerPlaceHolder": "Sign in to answer the question",
+      "sign-in-question-page": "Sign in",
+      "singMessage": "to answer the question",
 
       "profile": "Profile",
       "information": "Information",
@@ -109,10 +112,13 @@
 
       "send": "გაგზავნა",
       "reject": "უარყოფა",
-      "approve": "დადასტურება",
+      "approve": "დასტური",
       "answers": "პასუხები",
       "date": "თარიღი",
       "time": "დრო",
+      "answerPlaceHolder": "აქ შეგიძლია უპასუხო",
+      "sign-in-question-page": "გაიარე ავტორიზაცია",
+      "singMessage": "რომ უპასუხო კითხვას",
 
       "profile": "პროფილი",
       "information": "ინფორმაცია",
