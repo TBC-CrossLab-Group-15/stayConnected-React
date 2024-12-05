@@ -143,7 +143,7 @@ const QuestionContainer: React.FC = () => {
       {!userIsSignedIn && (
         <div className="flex w-full sm:w-[80%] mx-auto justify-center items-center space-x-2 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg shadow-md">
           <p className="text-gray-700 dark:text-gray-200 text-lg">
-          <Button
+            <Button
               variant="link"
               className="text-blue-500  p-2 text-lg dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300"
             >
@@ -151,7 +151,7 @@ const QuestionContainer: React.FC = () => {
                 {t("sign-in-question-page")}
               </Link>
             </Button>
-            {t("singMessage") }
+            {t("singMessage")}
           </p>
         </div>
       )}
