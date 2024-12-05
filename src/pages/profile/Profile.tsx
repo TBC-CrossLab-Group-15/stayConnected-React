@@ -11,7 +11,6 @@ import { changeAvatar } from "@/api/profile";
 import { useNavigate } from "react-router-dom";
 import { GetUser } from "@/api/auth";
 
-
 const Profile: React.FC = () => {
   const userId = Number(localStorage.getItem("userId"));
   const { control, handleSubmit } = useForm({
@@ -39,7 +38,7 @@ const Profile: React.FC = () => {
     queryFn: GetUser,
   });
 
-  const { mutate: setAvatar,  } = useMutation({
+  const { mutate: setAvatar } = useMutation({
     mutationKey: ["avatar"],
     mutationFn: changeAvatar,
     onSuccess: () => refetch(),
