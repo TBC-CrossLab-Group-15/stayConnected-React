@@ -1,4 +1,5 @@
 import { getTags } from "@/api/tags";
+import { Button } from "@/components/ui/button";
 import { Command, CommandInput } from "@/components/ui/command";
 import {
   Select,
@@ -40,6 +41,7 @@ const Search = () => {
           ))}
         </SelectContent>
       </Select>
+      <Button className="bg-blue-500">Search</Button>
     </div>
   );
 };
