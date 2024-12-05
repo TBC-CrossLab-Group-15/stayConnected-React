@@ -19,7 +19,7 @@ const LazyCreateQuestionPage = lazy(
   () =>
     import(
       "@/pages/create-question-page/create-question-view/CreateQuestionView"
-    )
+    ),
 );
 
 function App() {
@@ -53,7 +53,7 @@ function App() {
                 </ProfileGuard>
               }
             />
-            <Route path="questionPage" element={<LazyQuestionPage />} />
+            <Route path="questionPage/:id" element={<LazyQuestionPage />} />
             <Route path="createQuestion" element={<LazyCreateQuestionPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
