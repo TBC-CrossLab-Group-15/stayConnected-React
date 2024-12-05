@@ -34,10 +34,10 @@ const Person: React.FC<{
     <div className="dark:bg-gray-800 h-full  persons flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between  shadow-inner bg-gray-200 border rounded-lg p-5 ">
       {/* Left Section */}
 
-      <div className="flex w-full h-full  sm:h-64  flex-col sm:flex-row gap-5 bg-white  overflow-hidden p-4">
+      <div className="flex w-full h-full dark:bg-gray-500 sm:h-64  flex-col sm:flex-row gap-5 bg-white  overflow-hidden p-4">
         {/* Icon Box */}
-        <div className="flex flex-col justify-center  items-center w-full sm:w-1/4 p-4 bg-gray-100 rounded-lg">
-          <Avatar className="w-16 h-16 sm:h-28 sm:w-28">
+        <div className="flex flex-col dark:bg-black  justify-center  items-center w-full sm:w-1/4 p-4 bg-gray-100 rounded-lg">
+          <Avatar className="w-16  h-16 sm:h-28 sm:w-28">
             <AvatarImage
               src={dataUrl}
               className="w-full h-full "
@@ -45,14 +45,14 @@ const Person: React.FC<{
             />
             <AvatarFallback className="text-lg">{userName}</AvatarFallback>
           </Avatar>
-          <div className="mt-2 text-sm text-gray-600  rounded-lg p-2 font-bold">
+          <div className="mt-2  text-sm text-gray-600 dark:text-white  rounded-lg p-2 font-bold">
             {userName}
           </div>
         </div>
 
         {/* Text Box */}
-        <div className="flex-1  overflow-y-auto bg-gray-50 p-4 rounded-lg h-48 sm:h-auto">
-          <p className="text-sm h-48  sm:text-base overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent dark:scrollbar-thumb-blue-700 dark:scrollbar-track-transparent pr-1">
+        <div className="flex-1 dark:bg-black dark:text-white overflow-y-auto bg-gray-50 p-4 rounded-lg h-48 sm:h-auto">
+          <p className="text-sm h-48   sm:text-base overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent dark:scrollbar-thumb-blue-700 dark:scrollbar-track-transparent pr-1">
             {text}
           </p>
         </div>
@@ -70,7 +70,7 @@ const Person: React.FC<{
             variant="outline"
             className={`w-50  ${
               isApproved
-                ? "bg-red-500 text-white hover:bg-red-600 border-red-500"
+                ? "bg-red-500 text-white hover:bg-red-600 border-red-500 dark:bg-red-500 dark:text-white"
                 : "bg-blue-500 text-white hover:bg-blue-600 border-blue-500"
             }`}
           >

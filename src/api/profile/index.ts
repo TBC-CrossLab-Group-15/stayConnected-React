@@ -17,4 +17,3 @@ export const changeAvatar = async ({
     throw new Error("Failed");
   }
 };
-

@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { GetUser } from "@/api/auth";
 
 const Profile: React.FC = () => {
-  const userId = Number(localStorage.getItem("userId")); //იუზერის აიდი
+  const userId = Number(localStorage.getItem("userId"));
   const { control, handleSubmit } = useForm({
     defaultValues: {
       avatarIcon: {
@@ -38,6 +38,8 @@ const Profile: React.FC = () => {
     queryFn: GetUser,
   });
 
+
+
   const { mutate: setAvatar } = useMutation({
     mutationKey: ["avatar"],
     mutationFn: changeAvatar,
@@ -45,7 +47,7 @@ const Profile: React.FC = () => {
   });
 
   const avatar = createAvatar(avataaars, {
-    seed: data?.avatar ?? "", // in here i whant to put avatarIcon : {value}
+    seed: data?.avatar ?? "", // in here i want to put avatarIcon : {value}
   });
   const svg = avatar.toString();
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
@@ -59,43 +61,37 @@ const Profile: React.FC = () => {
   if (!data) return <div>Loading...</div>;
 
   return (
-    <div className="w-full border m-auto max-w-3xl bg-white dark:bg-gray-900 rounded-xl shadow-2xl p-10 space-y-8">
+    <div className="w-full border m-auto max-w-3xl bg-white dark:bg-gray-900 rounded-xl shadow-xl p-8 space-y-8">
       {/* Profile Header */}
       <h2 className="text-4xl font-extrabold text-center text-gray-800 dark:text-gray-200 tracking-tight">
         {t("profile")}
       </h2>
 
       {/* Avatar and User Info */}
-      <div className="flex  flex-col  md:flex-row items-center md:items-start bg-gray-100 dark:bg-gray-800 p-8 rounded-xl shadow-lg gap-6 hover:shadow-2xl transition-shadow duration-300">
-        <div className="flex items-center w-[30%]  justify-center  md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-blue-500 hover:scale-105 transform transition-all duration-300">
+      <div className="flex flex-col md:flex-row items-center md:items-start bg-gray-100 dark:bg-gray-800 p-8 rounded-xl shadow-lg gap-6 hover:shadow-2xl transition-shadow duration-300">
+        <div className="flex items-center justify-center w-[30%] md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-blue-500 dark:border-blue-400 hover:scale-105 transform transition-all duration-300">
           <Avatar className="rounded-full w-full h-full">
-            <AvatarImage
-              className=" object-cover rounded-full w-full h-full "
-              src={dataUrl}
-              alt="Avatar"
-            />
+            <AvatarImage className="object-cover w-full h-full" src={dataUrl} alt="Avatar" />
             <AvatarFallback>{data?.first_name}</AvatarFallback>
           </Avatar>
         </div>
 
-        <div className="flex flex-col w-[60%]   items-center md:items-start text-center md:text-left space-y-2">
+        <div className="flex flex-col w-[60%] items-center md:items-start text-center md:text-left space-y-2">
           <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-            {data ? data?.first_name + " " + data?.last_name : "User Name"}
+            {data ? `${data?.first_name} ${data?.last_name}` : "User Name"}
           </p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            {data?.email ?? "example@gmail.com"}
-          </p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{data?.email ?? "example@gmail.com"}</p>
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex  flex-col pt-10 md:flex-row lg:flex-row items-center  gap-2 w-full "
+            className="flex flex-col pt-6 md:flex-row items-center gap-4 w-full"
           >
             <Controller
               name="avatarIcon"
               control={control}
               render={({ field }) => (
                 <Select
-                  className="w-3/4 sm:w-1/3 md:w-1/3 lg:w-1/3 "
+                  className="w-full dark:text-black sm:w-2/3 md:w-2/3 lg:w-2/3 xl:w-2/3 "
                   {...field}
                   options={[
                     { value: "Eden", label: "Eden" },
@@ -123,8 +119,8 @@ const Profile: React.FC = () => {
               )}
             />
             <Button
-              variant={"outline"}
-              className="w-3/4 sm:w-1/3 md:w-20 lg:w-20 "
+              variant="outline"
+              className="w-full sm:w-1/3 md:w-20 lg:w-20 text-lg font-semibold text-gray-800 hover:bg-blue-500 dark:text-white hover:text-white transition-all duration-300"
               type="submit"
             >
               {t("change")}
@@ -135,20 +131,14 @@ const Profile: React.FC = () => {
 
       {/* Information Section */}
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 space-y-6 hover:shadow-xl transition-shadow duration-300">
-        <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-          {t("information")}
-        </p>
+        <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200">{t("information")}</p>
         <div className="flex justify-between text-gray-600 dark:text-gray-400">
           <p className="text-lg">{t("score")}</p>
-          <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-            {data?.rating ?? "0"}
-          </p>
+          <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">{data?.rating ?? "0"}</p>
         </div>
         <div className="flex justify-between text-gray-600 dark:text-gray-400">
           <p className="text-lg">{t("answeredQuestions")}</p>
-          <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-            {data?.my_answers ?? "0"}
-          </p>
+          <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">{data?.my_answers ?? "0"}</p>
         </div>
       </div>
 
