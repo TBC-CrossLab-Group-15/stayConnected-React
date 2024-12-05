@@ -1,80 +1,62 @@
+import React, { useRef, useState, useCallback } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Badge } from "../../../components/ui/badge";
-import React, { useState, useRef, useCallback } from "react";
 import { X } from "lucide-react";
-import {
-  Command,
-  CommandGroup,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import { Command as CommandPrimitive } from "cmdk";
+import { Command, CommandGroup, CommandItem } from "@/components/ui/command";
+import { CommandList, Command as CommandPrimitive } from "cmdk";
+import { fetchTags } from "../../../api/createQuestion/index";
 
-type Framework = Record<"value" | "label", string>;
+type Framework = { id: number; name: string };
 
-const FRAMEWORKS = [
-  { value: "next.js", label: "Next.js" },
-  { value: "sveltekit", label: "SvelteKit" },
-  { value: "nuxt.js", label: "Nuxt.js" },
-  { value: "remix", label: "Remix" },
-  { value: "astro", label: "Astro" },
-  { value: "wordpress", label: "WordPress" },
-  { value: "express.js", label: "Express.js" },
-  { value: "nest.js", label: "Nest.js" },
-] satisfies Framework[];
+type FancyMultiSelectProps = {
+  selected: Framework[];
+  onChange: React.Dispatch<React.SetStateAction<Framework[]>>;
+};
 
-const CreateQuestion: React.FC = () => {
+const CreateQuestion: React.FC<FancyMultiSelectProps> = ({
+  selected,
+  onChange,
+}) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState<Framework[]>([]);
   const [inputValue, setInputValue] = useState("");
 
-  const handleUnselect = useCallback((framework: Framework) => {
-    setSelected((prev) => prev.filter((s) => s.value !== framework.value));
-  }, []);
+  const {
+    data: tags = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["tags"],
+    queryFn: fetchTags,
+    staleTime: 300000,
+    select: (data) => (Array.isArray(data) ? data : []),
+  });
+  console.log(tags);
 
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLDivElement>) => {
-      const input = inputRef.current;
-      if (input) {
-        if (e.key === "Delete" || e.key === "Backspace") {
-          if (input.value === "") {
-            setSelected((prev) => {
-              const newSelected = [...prev];
-              newSelected.pop();
-              return newSelected;
-            });
-          }
-        }
-        if (e.key === "Escape") {
-          input.blur();
-        }
-      }
+  const handleUnselect = useCallback(
+    (tag: Framework) => {
+      onChange((prev) => prev.filter((s) => s.id !== tag.id));
     },
-    [],
+    [onChange]
   );
 
-  const selectables = FRAMEWORKS.filter(
-    (framework) => !selected.some((s) => s.value === framework.value),
-  );
-  console.log("selected values:", selected);
+  const selectables = Array.isArray(tags)
+    ? tags.filter((tag) => !selected.some((s) => s.id === tag.id))
+    : [];
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Failed to load tags.</p>;
 
   return (
-    <Command
-      onKeyDown={handleKeyDown}
-      className="overflow-visible bg-transparent"
-    >
-      <div className="group rounded-md  border-input px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 dark:border-y-white dark:border-[4px] ">
+    <Command onKeyDown={() => {}} className="overflow-visible bg-transparent">
+      <div className="group rounded-md border-input px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
         <div className="flex flex-wrap gap-1">
-          {selected.map((framework) => (
-            <Badge key={framework.value} variant="secondary">
-              {framework.label}
+          {selected.map((tag) => (
+            <Badge key={tag.id} variant="secondary">
+              {tag.name}
               <button
-                className="ml-1 dark:border-y-white dark:border-[4px] rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                onClick={() => handleUnselect(framework)}
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                }}
+                className="ml-1 rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                onClick={() => handleUnselect(tag)}
               >
                 <X className="h-3 w-3 text-muted-foreground hover:text-foreground" />
               </button>
@@ -86,7 +68,7 @@ const CreateQuestion: React.FC = () => {
             onValueChange={setInputValue}
             onBlur={() => setOpen(false)}
             onFocus={() => setOpen(true)}
-            placeholder="Select frameworks..."
+            placeholder="Select tags..."
             className="ml-2 flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
           />
         </div>
@@ -94,22 +76,19 @@ const CreateQuestion: React.FC = () => {
       <div className="relative mt-2">
         <CommandList>
           {open && selectables.length > 0 && (
-            <div className="dark:border-y-white dark:border-[4px] absolute top-0 z-10 w-full rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in">
+            <div className="absolute top-0 z-10 w-full rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in">
               <CommandGroup className="h-full overflow-auto">
-                {selectables.map((framework) => (
+                {selectables.map((tag: { id: number; name: string }) => (
                   <CommandItem
-                    key={framework.value}
-                    onMouseDown={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                    }}
+                    key={tag.id}
+                    onMouseDown={(e) => e.preventDefault()}
                     onSelect={() => {
                       setInputValue("");
-                      setSelected((prev) => [...prev, framework]);
+                      onChange((prev) => [...prev, tag]);
                     }}
                     className="cursor-pointer"
                   >
-                    {framework.label}
+                    {tag.name}
                   </CommandItem>
                 ))}
               </CommandGroup>
@@ -120,4 +99,5 @@ const CreateQuestion: React.FC = () => {
     </Command>
   );
 };
+
 export default CreateQuestion;
