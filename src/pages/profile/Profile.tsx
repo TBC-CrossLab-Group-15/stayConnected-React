@@ -8,8 +8,10 @@ import { avataaars } from "@dicebear/collection";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { changeAvatar } from "@/api/profile";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { GetUser } from "@/api/auth";
+import UseLogoutClick from "@/hooks/onLogoutClick";
+import { useNavigate } from "react-router-dom";
 
 const Profile: React.FC = () => {
   const userId = Number(localStorage.getItem("userId"));
@@ -21,23 +23,17 @@ const Profile: React.FC = () => {
       },
     },
   });
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("userId");
-    navigate("/login");
-    window.location.reload();
-    console.log("logOut");
-  };
 
   const { t } = useTranslation();
   const { data, refetch } = useQuery({
     queryKey: ["userInfo"],
     queryFn: GetUser,
   });
-
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    UseLogoutClick();
+    navigate("/login");
+  };
   const { mutate: setAvatar } = useMutation({
     mutationKey: ["avatar"],
     mutationFn: changeAvatar,
@@ -155,7 +151,7 @@ const Profile: React.FC = () => {
       {/* Logout Button */}
       <div className="flex justify-center">
         <Button
-          onClick={handleLogout}
+          onClick={() => handleLogout()}
           className="bg-sky-500 w-full md:w-auto text-white hover:bg-sky-600 rounded-md px-6 py-3 text-lg font-semibold transition-all duration-300 transform hover:scale-105"
         >
           {t("logout")}
