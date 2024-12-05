@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { avataaars } from "@dicebear/collection";
 import { createAvatar } from "@dicebear/core";
 import { useQuery } from "@tanstack/react-query";
+import LeaderboardPlaceholder from "./components/leaderboard_placeholder";
 
 const Leaderboard: React.FC = () => {
   const {
@@ -16,7 +17,7 @@ const Leaderboard: React.FC = () => {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LeaderboardPlaceholder />;
   }
   if (isError) {
     return (
@@ -30,11 +31,9 @@ const Leaderboard: React.FC = () => {
   return (
     <div className="w-full p-5 flex-col sticky top-[90px] bg-gray-100 rounded-lg border shadow-lg dark:bg-black dark:border-solid dark:border-neutral-800">
       {/* Top 3 Users */}
-
       <h1 className="mb-3 text-xl font-sans font-bold text-center">
         Leaderboard
       </h1>
-
       <div className="flex justify-between mb-6 gap-4">
         {topThree.map((user, index) => {
           const colors = ["bg-yellow-300", "bg-gray-300", "bg-orange-400"];

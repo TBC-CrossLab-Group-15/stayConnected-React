@@ -19,8 +19,8 @@ import {
 } from "@/components/ui/pagination";
 import { format } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
-import { Skeleton } from "@/components/ui/skeleton";
 import { NavLink } from "react-router-dom";
+import QuestionsPlaceholder from "./components/questions_placeholder";
 
 interface myCardProps {
   width: string;
@@ -62,21 +62,16 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
   console.log("questions:", questionsData);
 
   if (isLoading) {
-    return (
-      <div className="flex flex-col space-y-3">
-        <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-        <div className="space-y-2">
-          <Skeleton className="h-4 w-[250px]" />
-          <Skeleton className="h-4 w-[200px]" />
-        </div>
-      </div>
-    );
+    return <QuestionsPlaceholder />;
   }
+
   if (isError) {
     return (
       <div>Error loading Questions: {error?.message || "Unknown error"}</div>
     );
   }
+
+  console.log(questionsData.results);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -88,11 +83,11 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
   return (
     <div className="max-w-[1400px] w-full mx-auto px-5 h-full mt-8 mb-8 font-sans">
       {questionsData?.results?.map((question) => (
-        <NavLink to={`questionPage/${question.id}`}>
-          <Card
-            key={question.id}
-            className={`rounded-xl flex flex-col justify-center p-0 border-solid border-b border-zinc-200 bg-card text-card-foreground shadow sm:min-h-[200px] md:min-h-[200px] lg:min-h-[200px] xl:min-h-[150px] 2xl:min-h-[150px] ${width} mb-5`}
-          >
+        <Card
+          key={question.id}
+          className={`rounded-xl flex flex-col justify-center p-0 border-solid border-b border-zinc-200 bg-card text-card-foreground shadow sm:min-h-[200px] md:min-h-[200px] lg:min-h-[200px] xl:min-h-[150px] 2xl:min-h-[150px] ${width} mb-5`}
+        >
+          <NavLink to={`questionPage/${question.id}`}>
             <CardHeader>
               <div className="flex justify-between">
                 <CardTitle>{question.title}</CardTitle>
@@ -122,8 +117,8 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
                 <span>No tags available</span>
               )}
             </CardFooter>
-          </Card>
-        </NavLink>
+          </NavLink>
+        </Card>
       ))}
 
       <Pagination>
