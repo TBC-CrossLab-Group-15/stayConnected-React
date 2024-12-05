@@ -20,27 +20,19 @@ import LanguageSwitcher from "./components/language";
 import { useTranslation } from "react-i18next";
 import { useAuthContext } from "@/context/auth/hooks";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import { Logout } from "@/api/auth";
+
+import UseLogoutClick from "../../hooks/onLogoutClick";
 
 const Header = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const user = useAuthContext();
   const userId = localStorage.getItem("userId");
-  const refreshToken = localStorage.getItem("refreshToken");
-
-  // იუზერის დალოგაუთება
-
   const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("userId");
-    Logout({ payload: { refresh: refreshToken } }).then((res) => {
-      return res.data;
-    });
+    UseLogoutClick();
     navigate("/login");
-    // window.location.reload();
   };
+
   return (
     <div className="z-50 dark:bg-black sticky top-0 left-0 w-full  bg-white shadow-[0px_-2px_4px_rgba(0,0,0,0.1)] border-solid border-b border-b-gray-300 dark:border-b-solid dark:border-b-neutral-800">
       <div className="max-w-[1400px]  mx-auto  px-5 h-20 flex items-center justify-between gap-4">
