@@ -1,3 +1,6 @@
-export enum ADDQUESTION_ENDPOINTS {
-  ADD_QUESTION = "posts/questions/",
+export enum CreateQuestion_ENDPOINTS {
+  CreateQuestion = "posts/questions/",
+  GetTag = "posts/tags/",
 }
+
+// index.enum.ts Create Question
