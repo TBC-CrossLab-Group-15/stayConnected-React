@@ -55,7 +55,7 @@ const Header = () => {
             </svg>
           </NavLink>
         </div>
-        <div className="flex justify-between gap-5 md:min-w-[550px] font-sans">
+        <div className="flex justify-between gap-5 md:min-w-[550px] font-sans ">
           {/* <Command className="rounded-lg border shadow-md md:min-w-[300px] ">
             <CommandInput placeholder="Type a command or choose a tag..." />
           </Command>
@@ -70,11 +70,11 @@ const Header = () => {
             </SelectContent>
           </Select> */}
         </div>
-        <div className="flex justify-between gap-3">
+        <div className="flex justify-between items-center gap-3 p-4 rounded-lg">
           {userId ? (
             <>
-              <NavLink to="createQuestion">
-                <Button className="rounded-full text-base font-sans h-9 w-9 bg-slate-50 text-black hover:bg-slate-100 dark:bg-black dark:text-white border dark:hover:bg-zinc-900">
+              <NavLink to="createQuestion ">
+                <Button className="rounded-full  text-base font-sans h-9 w-9  bg-slate-50 text-black hover:bg-slate-100 dark:bg-black dark:text-white border dark:hover:bg-zinc-900">
                   +
                 </Button>
               </NavLink>

@@ -48,9 +48,8 @@
       "answers": "Answers",
       "date": "Date",
       "time": "Time",
-      "answerPlaceHolder":"Sign in to answer the question",
-      "singMessage":"Sign in to answer the question",
-
+      "answerPlaceHolder": "Sign in to answer the question",
+      "singMessage": "Sign in to answer the question",
 
       "profile": "Profile",
       "information": "Information",
@@ -116,9 +115,8 @@
       "answers": "პასუხები",
       "date": "თარიღი",
       "time": "დრო",
-      "answerPlaceHolder":"აქ შეგიძლია უპასუხო",
-      "singMessage":"გაიარე ავტორიზაცია რომ უპასუხო",
-
+      "answerPlaceHolder": "აქ შეგიძლია უპასუხო",
+      "singMessage": "გაიარე ავტორიზაცია რომ უპასუხო",
 
       "profile": "პროფილი",
       "information": "ინფორმაცია",
