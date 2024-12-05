@@ -28,8 +28,6 @@ const QuestionContainer: React.FC = () => {
     },
   });
 
-
-
   const { mutate: approve } = useMutation({
     mutationKey: ["answer"],
     mutationFn: getCorrectAnswer,
@@ -48,11 +46,7 @@ const QuestionContainer: React.FC = () => {
   const userIsSignedIn = localStorage.getItem("accessToken"); // როცა ავტორიზირებულია მომხმარებელი შეუძლია პასუხის გაცემა და ამით გამოჩნდება სენდის ღილაკი
   //
 
-
-
   const onApprove = (id: number, isCorrect: boolean) => {
-
-
     approve({ id: id, payload: isCorrect });
   };
 
@@ -62,7 +56,7 @@ const QuestionContainer: React.FC = () => {
   //
   if (!data) return <p>Loading...</p>;
   //
-  
+
   return (
     <div className="bg-gray-50 w-[1400px] h-[750px] sm:h-auto   mx-auto overflow-hidden dark:bg-black p-3 sm:p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-3 sm:gap-14">
       {/* Question Header */}

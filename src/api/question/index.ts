@@ -63,8 +63,9 @@ export const getCorrectAnswer = async ({
   payload: boolean;
 }) => {
   try {
-    const result = await httpClient.patch(`posts/answers/${id}/`,{
-      isCorrect: payload,});
+    const result = await httpClient.patch(`posts/answers/${id}/`, {
+      isCorrect: payload,
+    });
     return result.data;
   } catch (error) {
     console.log("Error:", error);

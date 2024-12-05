@@ -5,13 +5,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-
 const Person: React.FC<{
   questionAuthorIsSignedIn: boolean;
   onApprove: (id: number, isCorrect: boolean) => void;
   id: number;
   isApproved: boolean;
-  userAvatar:string;
+  userAvatar: string;
   userName: string;
   text: string;
 }> = ({
@@ -31,7 +30,6 @@ const Person: React.FC<{
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
   const dataUrl = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
 
-  
   return (
     <div className="dark:bg-gray-800 h-full  persons flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between  shadow-inner bg-gray-200 border rounded-lg p-5 ">
       {/* Left Section */}
