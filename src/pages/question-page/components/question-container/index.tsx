@@ -6,6 +6,7 @@ import { getCorrectAnswer, getQuestion, sendAnswer } from "@/api/question";
 import { useTranslation } from "react-i18next";
 import { Answer } from "./types";
 import { Controller, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 const QuestionContainer: React.FC = () => {
   const { t } = useTranslation();
   //
@@ -58,7 +59,8 @@ const QuestionContainer: React.FC = () => {
   //
 
   return (
-    <div className="bg-gray-50 w-[1400px] h-[750px] sm:h-auto   mx-auto overflow-hidden dark:bg-black p-3 sm:p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-3 sm:gap-14">
+    <div className="  flex flex-col gap-10 w-full ">
+    <div className="bg-gray-50  h-[750px] sm:h-auto w-full sm:w-[80%] mx-auto overflow-hidden dark:bg-black p-3 sm:p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-3 sm:gap-14">
       {/* Question Header */}
       <div className="flex flex-col gap-4 ">
         <div className="flex justify-between items-start flex-col sm:flex-row  ">
@@ -105,8 +107,8 @@ const QuestionContainer: React.FC = () => {
             />
           ))}
         </div>
+       
       </div>
-
       {/* Question Footer */}
       {userIsSignedIn && (
         <form
@@ -134,7 +136,23 @@ const QuestionContainer: React.FC = () => {
           </Button>
         </form>
       )}
+
     </div>
+
+    {!userIsSignedIn && (
+      <div className="flex w-full sm:w-[80%] mx-auto justify-center items-center space-x-2 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg shadow-md">
+      <p className="text-gray-700 dark:text-gray-200 text-lg">
+        Sign in to answer the question
+      </p>
+      <Button variant="link" className="text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300">
+        <Link to="/login" className="font-semibold">
+          Sign in
+        </Link>
+      </Button>
+    </div>
+    )}
+
+</div>
   );
 };
 
