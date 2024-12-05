@@ -30,23 +30,17 @@ const LoginForm: React.FC = () => {
     mutationKey: ["login"],
     mutationFn: Login,
     onSuccess: (res) => {
-      console.log("User signed in:", res);
-
       AfterLoginSuccessn({
         accessToken: res?.access,
         refreshToken: res?.refresh,
-        userId: res?.user_id, // Explicitly convert to number or null
+        userId: res?.user_id,
       });
-      console.log("useris aidi", res?.user_id);
       queryClient.invalidateQueries({ queryKey: ["user"] });
       setTimeout(() => navigate("/"), 0);
     },
   });
 
   const onSubmit = (values: LoginFormValues) => {
-    const { email, password } = values;
-    alert("login successfully");
-    console.log(email, password);
     handleLogin(values);
   };
 
