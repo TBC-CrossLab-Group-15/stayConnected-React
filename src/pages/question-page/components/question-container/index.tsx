@@ -58,6 +58,7 @@ const QuestionContainer: React.FC = () => {
   if (!data) return <p>Loading...</p>;
   //
 
+
   return (
     <div className="  flex flex-col gap-10 w-full ">
       <div className="bg-gray-50  h-[750px] sm:h-auto w-full sm:w-[80%] mx-auto overflow-hidden dark:bg-black p-3 sm:p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-3 sm:gap-14">
@@ -104,6 +105,7 @@ const QuestionContainer: React.FC = () => {
                 onApprove={onApprove}
                 questionAuthorIsSignedIn={questionAuthorIsSignedIn}
                 isApproved={person?.isCorrect}
+                date={person?.create_date}
               />
             ))}
           </div>
@@ -122,7 +124,7 @@ const QuestionContainer: React.FC = () => {
                 <Textarea
                   {...field} // Spread the field props (onChange, value, etc.)
                   className="flex-1"
-                  placeholder="Type your answer here."
+                  placeholder={t("answerPlaceHolder")}
                 />
               )}
             />
@@ -140,14 +142,14 @@ const QuestionContainer: React.FC = () => {
       {!userIsSignedIn && (
         <div className="flex w-full sm:w-[80%] mx-auto justify-center items-center space-x-2 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg shadow-md">
           <p className="text-gray-700 dark:text-gray-200 text-lg">
-            Sign in to answer the question
+            {t("singMessage")}
           </p>
           <Button
             variant="link"
             className="text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300"
           >
             <Link to="/login" className="font-semibold">
-              Sign in
+              {t("sign-in")}
             </Link>
           </Button>
         </div>
