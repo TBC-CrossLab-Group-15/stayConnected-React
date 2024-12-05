@@ -8,14 +8,14 @@ import { Answer } from "./types";
 import { Controller, useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 const QuestionContainer: React.FC = () => {
-  const { id } = useParams();
+  // const { id } = useParams();
   //
   const { t } = useTranslation();
   //
   const { control, handleSubmit } = useForm({ defaultValues: { answer: "" } });
   //
   const userId = localStorage.getItem("userId"); // მომავალში ლოკალსთორეჯიდან წამოვიღებ
-  const questionId = Number(id); // როცა რომელიმე კითხვაზე დაკლიკებით გადმოვა კონკრეტულ შეკითხვაზე
+  const questionId = 72; // როცა რომელიმე კითხვაზე დაკლიკებით გადმოვა კონკრეტულ შეკითხვაზე
 
   //
   const { data, refetch } = useQuery({
@@ -94,7 +94,7 @@ const QuestionContainer: React.FC = () => {
             {t("answers")}
           </h3>
           <div className="max-h-[400px] sm:max-h-[300px]  overflow-y-auto flex flex-col gap-4 pr-10 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent dark:scrollbar-thumb-blue-700 dark:scrollbar-track-transparent">
-            {data?.answers.map((person: Answer) => (
+            {data?.answers?.map((person: Answer) => (
               <Person
                 text={person?.text}
                 userName={

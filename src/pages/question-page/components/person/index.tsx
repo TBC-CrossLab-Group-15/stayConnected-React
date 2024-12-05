@@ -26,7 +26,7 @@ const Person: React.FC<{
 }) => {
   const { t } = useTranslation();
   const avatar = createAvatar(avataaars, {
-    seed: userAvatar,
+    seed: userAvatar??"",
   });
   const svg = avatar.toString();
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
@@ -39,7 +39,7 @@ const Person: React.FC<{
 
       <div className="flex w-full h-full dark:bg-gray-500 sm:h-64  flex-col sm:flex-row gap-5 bg-white  overflow-hidden p-4">
         {/* Icon Box */}
-        <div className="flex flex-col dark:bg-black  justify-center  items-center w-full sm:w-1/4 p-4 bg-gray-100 rounded-lg">
+        <div className="flex flex-col dark:bg-black overflow-hidden justify-center  items-center w-full sm:w-1/4 p-4 bg-gray-100 rounded-lg">
           <Avatar className="w-16  h-16 sm:h-28 sm:w-28">
             <AvatarImage
               src={dataUrl}
