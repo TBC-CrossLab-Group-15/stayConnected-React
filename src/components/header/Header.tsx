@@ -1,14 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
-// import { Command, CommandInput } from "@/components/ui/command";
-// import {
-//   Select,
-//   SelectContent,
-//   SelectItem,
-//   SelectTrigger,
-//   SelectValue,
-// } from "@/components/ui/select";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,8 +12,9 @@ import LanguageSwitcher from "./components/language";
 import { useTranslation } from "react-i18next";
 import { useAuthContext } from "@/context/auth/hooks";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-
 import UseLogoutClick from "../../hooks/onLogoutClick";
+import { createAvatar } from "@dicebear/core";
+import { avataaars } from "@dicebear/collection";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -32,6 +25,13 @@ const Header = () => {
     UseLogoutClick();
     navigate("/login");
   };
+
+  const avatar = createAvatar(avataaars, {
+    seed: `${user?.avatar || user.first_name}`,
+  });
+  const svg = avatar.toString();
+  const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
+  const dataUrl = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
 
   return (
     <div className="z-50 dark:bg-black sticky top-0 left-0 w-full  bg-white shadow-[0px_-2px_4px_rgba(0,0,0,0.1)] border-solid border-b border-b-gray-300 dark:border-b-solid dark:border-b-neutral-800">
@@ -55,34 +55,19 @@ const Header = () => {
             </svg>
           </NavLink>
         </div>
-        <div className="flex justify-between gap-5 md:min-w-[550px] font-sans ">
-          {/* <Command className="rounded-lg border shadow-md md:min-w-[300px] ">
-            <CommandInput placeholder="Type a command or choose a tag..." />
-          </Command>
-          <Select>
-            <SelectTrigger className=" md:min-w-[150px] h-10 rounded-lg border shadow-md ">
-              <SelectValue placeholder="Choose a tag" />
-            </SelectTrigger>
-            <SelectContent className="text-sans">
-              <SelectItem value="light">C#</SelectItem>
-              <SelectItem value="dark">React</SelectItem>
-              <SelectItem value="system">C++</SelectItem>
-            </SelectContent>
-          </Select> */}
-        </div>
+        <div className="flex justify-between gap-5 md:min-w-[550px] font-sans "></div>
         <div className="flex justify-between items-center gap-3 p-4   rounded-lg">
           {userId ? (
             <>
-              <NavLink to="createQuestion ">
-                <Button className="text-black dark:text-white inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 dark:focus-visible:ring-neutral-300 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 h-9 w-9">
-                  +
+              <NavLink to="createQuestion">
+                <Button className="bg-neutral-50 text-black hover:bg-neutral-100">
+                  Add Question
                 </Button>
               </NavLink>
-
               <DropdownMenu>
                 <DropdownMenuTrigger>
-                  <Avatar className="p-5">
-                    <AvatarImage src={user?.user?.avatar ?? undefined} />
+                  <Avatar className="p-10">
+                    <AvatarImage src={dataUrl} />
                     <AvatarFallback>{user?.user?.first_name}</AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
@@ -107,7 +92,7 @@ const Header = () => {
               </DropdownMenu>
             </>
           ) : (
-            <div className="bg-black">
+            <div>
               <NavLink to="login" className="hidden md:block">
                 <Button className="bg-blue-500 hover:bg-blue-400 text-base font-sans">
                   {t("sign-in")}
