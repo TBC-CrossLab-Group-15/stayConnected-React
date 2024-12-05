@@ -46,7 +46,7 @@ const RegistrationForm: React.FC = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="grid w-full items-center gap-4">
         <div className="flex flex-col space-y-1.5">
-          <Label htmlFor="name">{t("name")}</Label>
+          <Label htmlFor="first_name">{t("name")}</Label>
           <Controller
             name="first_name"
             control={control}
@@ -56,7 +56,7 @@ const RegistrationForm: React.FC = () => {
           />
 
           {errors.first_name && (
-            <p className="text-red-500">{errors.first_name.message}</p>
+            <p className="text-red-500">{t(`${errors.first_name.message}`)}</p>
           )}
         </div>
 

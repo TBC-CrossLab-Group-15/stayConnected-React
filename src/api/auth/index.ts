@@ -10,7 +10,7 @@ import axios from "axios";
 import { AUTH_ENDPOINTS } from "./index.enum";
 
 export const Login = async (
-  data: LoginFormValues,
+  data: LoginFormValues
 ): Promise<LoginResponseType | undefined> => {
   try {
     console.log(data);
@@ -25,10 +25,8 @@ export const Login = async (
   }
 };
 
-// Adjust the import path as needed
-
 export const Register = async (
-  data: RegisterDataType,
+  data: RegisterDataType
 ): Promise<RegisterResponseType | undefined> => {
   try {
     const result = await httpClient.post(AUTH_ENDPOINTS.SIGN_UP, data);
@@ -50,14 +48,12 @@ export const GetUser = async () => {
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       console.log("Error:", error.response?.data || error.message);
-      throw new Error(error.response?.data?.message || "Failed to register");
+      throw new Error(error.response?.data?.message || "Failed to Get User");
     }
   }
 };
 
 export const refresh = ({ payload }: RefreshPayload) => {
-  console.log("This is Payload: ", payload);
-
   return httpClient
     .post(AUTH_ENDPOINTS.REFRESH, payload)
     .then((res) => res.data);

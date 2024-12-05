@@ -7,6 +7,7 @@ import Heading from "@/components/ui/heading";
 import { Textarea } from "@/components/ui/textarea";
 import FancyMultiSelect from "../Components/CreateQuestion";
 import { useTranslation } from "react-i18next";
+
 const CreateQuestion: React.FC = () => {
   const { t } = useTranslation();
 

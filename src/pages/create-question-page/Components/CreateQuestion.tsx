@@ -50,12 +50,13 @@ const CreateQuestion: React.FC = () => {
         }
       }
     },
-    [],
+    []
   );
 
   const selectables = FRAMEWORKS.filter(
-    (framework) => !selected.some((s) => s.value === framework.value),
+    (framework) => !selected.some((s) => s.value === framework.value)
   );
+  console.log("selected values:", selected);
 
   return (
     <Command
