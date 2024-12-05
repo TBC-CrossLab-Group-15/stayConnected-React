@@ -8,13 +8,12 @@ export interface CreateQuestionType {
 }
 
 export const CreateQuestionAPI = async (
-  data: CreateQuestionType
+  data: CreateQuestionType,
 ): Promise<CreateQuestionType> => {
-
   try {
     const response = await httpClient.post(
       CreateQuestion_ENDPOINTS.CreateQuestion,
-      data
+      data,
     );
     return response.data;
   } catch (error) {
@@ -34,12 +33,9 @@ export const fetchTags = async (): Promise<{ id: number; name: string }[]> => {
   }
 };
 
-
-
 export const getTags = async () => {
   try {
     const result = await httpClient.get("posts/tags/");
-
 
     return result;
   } catch (error) {
@@ -47,8 +43,6 @@ export const getTags = async () => {
     throw new Error("Failed");
   }
 };
-
-
 
 // const response = await fetch("/your-api-endpoint");
 // const data = await response.json(); // ან response.text() თუ მონაცემები არ არის JSON
