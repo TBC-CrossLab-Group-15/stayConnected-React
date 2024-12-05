@@ -7,8 +7,9 @@ import { createAvatar } from "@dicebear/core";
 import { avataaars } from "@dicebear/collection";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { changeAvatar, getUser } from "@/api/profile";
+import { changeAvatar } from "@/api/profile";
 import { useNavigate } from "react-router-dom";
+import { GetUser } from "@/api/auth";
 
 const Profile: React.FC = () => {
   const userId = Number(localStorage.getItem("userId")); //იუზერის აიდი
@@ -34,7 +35,7 @@ const Profile: React.FC = () => {
   const { t } = useTranslation();
   const { data, refetch } = useQuery({
     queryKey: ["userInfo"],
-    queryFn: getUser,
+    queryFn: GetUser,
   });
 
   const { mutate: setAvatar } = useMutation({

@@ -18,18 +18,3 @@ export const changeAvatar = async ({
   }
 };
 
-export enum AUTH_ENDPOINTS {
-  SIGN_IN = "user/login/",
-  SIGN_UP = "user/register/",
-}
-
-export const getUser = async () => {
-  try {
-    const result = await httpClient.get("/user/currentuser");
-
-    return result.data;
-  } catch (error) {
-    console.log("Error:", error);
-    throw new Error("Failed");
-  }
-};
