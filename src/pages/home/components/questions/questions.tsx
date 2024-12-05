@@ -56,7 +56,7 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
       }),
   });
 
-  const totalPages = Math.ceil(questionsData.count / pageSize);
+  const totalPages = Math.ceil(questionsData?.count / pageSize);
 
   console.log("questions:", questionsData);
 
