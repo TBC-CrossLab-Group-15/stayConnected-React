@@ -76,7 +76,7 @@ const RegistrationForm: React.FC = () => {
           />
 
           {errors.last_name && (
-            <p className="text-red-500">{errors.last_name.message}</p>
+            <p className="text-red-500">{t(`${errors.last_name.message}`)}</p>
           )}
         </div>
 
@@ -136,7 +136,9 @@ const RegistrationForm: React.FC = () => {
           />
 
           {errors.confirm_password && (
-            <p className="text-red-500">{errors.confirm_password.message}</p>
+            <p className="text-red-500">
+              {t(`${errors.confirm_password.message}`)}
+            </p>
           )}
         </div>
         <div className="flex justify-between">

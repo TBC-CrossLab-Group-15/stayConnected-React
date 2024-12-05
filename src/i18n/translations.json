@@ -28,7 +28,8 @@
         "email-invalid": "Please enter a valid email address.",
         "password-min": "Password must be at least 8 characters.",
         "password-max": "Password cannot exceed 50 characters.",
-        "passwords-mismatch": "Passwords do not match."
+        "passwords-mismatch": "Passwords do not match.",
+        "password-strength": "The password must contain at least one uppercase letter, a number, and a symbol."
       },
       "profile-info-title": "Your Profile Info",
       "username": "Username",
@@ -92,7 +93,8 @@
         "email-invalid": "გთხოვთ შეიყვანოთ სწორი ელფოსტა.",
         "password-min": "პაროლი უნდა იყოს მინიმუმ 8 სიმბოლო.",
         "password-max": "პაროლი არ უნდა აღემატებოდეს 50 სიმბოლოს.",
-        "passwords-mismatch": "პაროლები არ ემთხვევა."
+        "passwords-mismatch": "პაროლები არ ემთხვევა.",
+        "password-strength": "პაროლი  უნდა შეიცავდეს ერთ დიდ ასოს, რიცხვს და სიმბოლოს."
       },
       "profile-info-title": "თქვენი პროფილის ინფორმაცია",
       "username": "მომხმარებლის სახელი",

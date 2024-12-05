@@ -12,6 +12,11 @@ export type LoginResponseType = {
 
 export type RefreshPayload = {
   payload: {
-    refresh: string;
+    refresh: string | null;
   };
 };
+// export type LogoutPayload = {
+//   payload: {
+//     logout: string;
+//   };
+// };

@@ -6,7 +6,7 @@ import NotFoundPage from "./pages/404";
 import { ThemeProvider } from "@/components/theme-provider";
 import Loader from "./components/loader/loader";
 import AuthGuard from "./components/route-guards/auth";
-import ProfileGuard from "./components/route-guards/profile";
+import UnauthorizedGuard from "./components/route-guards/unauthorized";
 
 // lazy components
 
@@ -19,7 +19,7 @@ const LazyCreateQuestionPage = lazy(
   () =>
     import(
       "@/pages/create-question-page/create-question-view/CreateQuestionView"
-    ),
+    )
 );
 
 function App() {
@@ -48,13 +48,20 @@ function App() {
             <Route
               path="profile"
               element={
-                <ProfileGuard>
+                <UnauthorizedGuard>
                   <LazyProfilePage />
-                </ProfileGuard>
+                </UnauthorizedGuard>
               }
             />
             <Route path="questionPage/:id" element={<LazyQuestionPage />} />
-            <Route path="createQuestion" element={<LazyCreateQuestionPage />} />
+            <Route
+              path="createQuestion"
+              element={
+                <UnauthorizedGuard>
+                  <LazyCreateQuestionPage />
+                </UnauthorizedGuard>
+              }
+            />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

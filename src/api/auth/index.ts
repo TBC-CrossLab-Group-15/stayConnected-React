@@ -19,6 +19,9 @@ export const Login = async (
     return result.data;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
+      if (error.response?.status === 401) {
+        alert("Your Email or password is incorrect");
+      }
       console.log("Error:", error.response?.data || error.message);
       throw new Error(error.response?.data?.message || "Failed to login");
     }
@@ -56,5 +59,10 @@ export const GetUser = async () => {
 export const refresh = ({ payload }: RefreshPayload) => {
   return httpClient
     .post(AUTH_ENDPOINTS.REFRESH, payload)
+    .then((res) => res.data);
+};
+export const Logout = ({ payload }: RefreshPayload) => {
+  return httpClient
+    .post(AUTH_ENDPOINTS.LOGOUT, payload)
     .then((res) => res.data);
 };

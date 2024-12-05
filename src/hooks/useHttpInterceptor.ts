@@ -43,11 +43,11 @@ export const useHttpInterceptor = () => {
         }
 
         if (resErr.status === 401 && !refreshToken) {
-          navigate("login");
+          return Promise.reject(resErr);
         }
 
         return resErr;
-      },
+      }
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
