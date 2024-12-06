@@ -10,34 +10,29 @@ import axios from "axios";
 import { AUTH_ENDPOINTS } from "./index.enum";
 
 export const Login = async (
-  data: LoginFormValues,
+  data: LoginFormValues
 ): Promise<LoginResponseType | undefined> => {
   try {
-    console.log(data);
     const result = await httpClient.post(AUTH_ENDPOINTS.SIGN_IN, data);
-    console.log("Response data:", result.data);
     return result.data;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       if (error.response?.status === 401) {
         alert("Your Email or password is incorrect");
       }
-      console.log("Error:", error.response?.data || error.message);
       throw new Error(error.response?.data?.message || "Failed to login");
     }
   }
 };
 
 export const Register = async (
-  data: RegisterDataType,
+  data: RegisterDataType
 ): Promise<RegisterResponseType | undefined> => {
   try {
     const result = await httpClient.post(AUTH_ENDPOINTS.SIGN_UP, data);
-    console.log("Response data:", result.data);
     return result.data;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
-      console.log("Error:", error.response?.data || error.message);
       throw new Error(error.response?.data?.message || "Failed to register");
     }
   }
@@ -46,11 +41,9 @@ export const Register = async (
 export const GetUser = async () => {
   try {
     const result = await httpClient.get(AUTH_ENDPOINTS.USER);
-    console.log("Response data:", result);
     return result.data;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
-      console.log("Error:", error.response?.data || error.message);
       throw new Error(error.response?.data?.message || "Failed to Get User");
     }
   }

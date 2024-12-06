@@ -7,7 +7,7 @@ export const registerFormSchema = z.object({
     .max(50, { message: "validation.name-max" }),
   last_name: z
     .string()
-    .min(2, { message: "validation.last-name-min" })
+    .min(2, { message: "validation.lastname-min" })
     .max(50, { message: "validation.lastName-max" }),
   email: z
     .string()
@@ -20,7 +20,7 @@ export const registerFormSchema = z.object({
     .max(50, { message: "validation.password-max" })
     .regex(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      { message: "validation.password-strength" }, // Custom message for password strength
+      { message: "validation.password-strength" } // Custom message for password strength
     ),
   confirm_password: z
     .string()

@@ -27,7 +27,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     isEnabled: !!accessToken,
     accessToken,
   });
-  console.log(user);
+
   return (
     <AuthContext.Provider value={{ user }}>
       {isUserLoading ? <Loader /> : children}
