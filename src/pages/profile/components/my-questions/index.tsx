@@ -8,6 +8,7 @@ import { deleteAnswer, deleteQuestion, getCorrectAnswer } from "@/api/question";
 import { FiTrash2 } from "react-icons/fi";
 import { Question } from "./types";
 
+
 const MyQuestions: React.FC = () => {
   const { t } = useTranslation();
   const userId = Number(localStorage.getItem("userId"));
@@ -64,6 +65,13 @@ const MyQuestions: React.FC = () => {
     return <div>Loading...</div>;
   }
 
+  if (!data || data.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[450px]">
+        <img src="/public/images/svg123.jpg" className="w-50 h-50" alt="" />
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col gap-5 h-[450px] w-full pr-1 ">
       {data?.map((question: Question) => (
@@ -71,6 +79,7 @@ const MyQuestions: React.FC = () => {
           key={question.id}
           className="bg-gray-50  w-full  dark:bg-black p-3 sm:p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-3 sm:gap-14"
         >
+
           <div className="flex flex-col gap-4 ">
             <div className="flex justify-between  items-start flex-col sm:flex-row  ">
               <h2 className="text-lg underline font-semibold text-gray-800 dark:text-gray-100 ">

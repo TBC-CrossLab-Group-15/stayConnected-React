@@ -58,7 +58,6 @@ const Profile: React.FC = () => {
   if (!data) return <div>Loading...</div>;
 
   return (
-
     <div className="w-full  border m-auto max-w-3xl bg-white  dark:bg-gray-900 rounded-xl shadow-xl p-8 space-y-8">
       {/* Profile Header */}
       <h2 className="text-4xl font-extrabold text-center text-gray-800 dark:text-gray-200 tracking-tight">
@@ -160,6 +159,8 @@ const Profile: React.FC = () => {
         <TabsContent className="flex  flex-col gap-5 " value="myPosts">
           <ScrollArea className=" rounded-md  ">
             <MyQuestions />
+
+
           </ScrollArea>
         </TabsContent>
       </Tabs>
@@ -173,7 +174,6 @@ const Profile: React.FC = () => {
         </Button>
       </div>
     </div>
-
   );
 };
 
