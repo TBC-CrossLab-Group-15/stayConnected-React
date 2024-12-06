@@ -8,5 +8,3 @@ export type TagProp = {
   title: string;
   id: number[];
 };
-
-

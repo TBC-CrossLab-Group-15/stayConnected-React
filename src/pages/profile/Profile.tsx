@@ -91,7 +91,7 @@ const Profile: React.FC = () => {
               control={control}
               render={({ field }) => (
                 <Select
-                  className="w-full dark:text-black sm:w-2/3 md:w-2/3 lg:w-2/3 xl:w-2/3 "
+                  className="w-full  dark:text-black  sm:w-2/3 md:w-2/3 lg:w-2/3 xl:w-2/3 "
                   {...field}
                   options={[
                     { value: "Eden", label: "Eden" },
@@ -120,7 +120,7 @@ const Profile: React.FC = () => {
             />
             <Button
               variant="outline"
-              className="w-full sm:w-1/3 md:w-20 lg:w-20 text-lg font-semibold text-gray-800 hover:bg-blue-500 dark:text-white hover:text-white transition-all duration-300"
+              className="w-full  sm:w-1/3 md:w-20 lg:w-20 text-lg font-semibold text-gray-800 hover:bg-blue-500 dark:text-white hover:text-white transition-all duration-300"
               type="submit"
             >
               {t("change")}
