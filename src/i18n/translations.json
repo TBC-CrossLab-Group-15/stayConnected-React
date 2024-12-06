@@ -66,7 +66,8 @@
       "askQuestion": "Ask Your Question!",
       "questionTitle": "Question Title",
       "questionDescription": "Question Description",
-      "addTag": "Add Tag"
+      "addTag": "Add Tag",
+      "selectTags":"selectTags..."
     }
   },
   "ka": {
@@ -137,7 +138,8 @@
       "askQuestion": "დასვი შენი კითხვა!",
       "questionTitle": "კითხვის სათაური",
       "questionDescription": "კითხვის დახასიათბა",
-      "addTag": "დაამატე თაგი"
+      "addTag": "დაამატე თაგი",
+      "selectTags":"აირჩიე თეგი..."
     }
   }
 }

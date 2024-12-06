@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 import { Command, CommandGroup, CommandItem } from "@/components/ui/command";
 import { CommandList, Command as CommandPrimitive } from "cmdk";
 import { fetchTags } from "../../../api/createQuestion/index";
+import { useTranslation } from "react-i18next";
 
 type Framework = { id: number; name: string };
 
@@ -17,6 +18,7 @@ const CreateQuestion: React.FC<FancyMultiSelectProps> = ({
   selected,
   onChange,
 }) => {
+   const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -68,7 +70,7 @@ const CreateQuestion: React.FC<FancyMultiSelectProps> = ({
             onValueChange={setInputValue}
             onBlur={() => setOpen(false)}
             onFocus={() => setOpen(true)}
-            placeholder="Select tags..."
+            placeholder={t("selectTags")}
             className="ml-2 flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
           />
         </div>
