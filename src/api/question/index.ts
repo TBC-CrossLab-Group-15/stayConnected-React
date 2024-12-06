@@ -74,9 +74,8 @@ export const getCorrectAnswer = async ({
   }
 };
 
-
 export const deleteAnswer = async (id: number) => {
-  console.log(id)
+  console.log(id);
   try {
     const result = await httpClient.delete(`posts/answers/${id}/`);
     return result.data;
@@ -85,7 +84,6 @@ export const deleteAnswer = async (id: number) => {
     throw new Error("Failed");
   }
 };
-
 
 export const deleteQuestion = async (id: number) => {
   try {

@@ -48,7 +48,7 @@
       "answers": "Answers",
       "date": "Date",
       "time": "Time",
-      "answerPlaceHolder": "Sign in to answer the question",
+      "answerPlaceHolder": "answer the question",
       "sign-in-question-page": "Sign in",
       "singMessage": "to answer the question",
 
@@ -58,6 +58,13 @@
       "answeredQuestions": "Answers",
       "logout": "Logout",
       "change": "Change",
+
+      "account": "Account",
+      "posts": "My Posts",
+      "deleteQuestion": "Delete Question",
+
+
+
 
       "askQuestion": "Ask Your Question!",
       "questionTitle": "Question Title",
@@ -126,6 +133,9 @@
       "answeredQuestions": "გაცემული პასუხები",
       "logout": "გასვლა",
       "change": "შეცვლა",
+      "account": "იუზერი",
+      "posts": "ჩემი კითხვები",
+      "deleteQuestion": "წაშალე კითხვა",
 
       "askQuestion": "დასვი შენი კითხვა!",
       "questionTitle": "კითხვის სათაური",

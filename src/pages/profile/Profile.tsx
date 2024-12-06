@@ -58,15 +58,16 @@ const Profile: React.FC = () => {
   if (!data) return <div>Loading...</div>;
 
   return (
-    <div className="w-full border m-auto max-w-3xl bg-white dark:bg-gray-900 rounded-xl shadow-xl p-8 space-y-8">
+
+    <div className="w-full  border m-auto max-w-3xl bg-white  dark:bg-gray-900 rounded-xl shadow-xl p-8 space-y-8">
       {/* Profile Header */}
       <h2 className="text-4xl font-extrabold text-center text-gray-800 dark:text-gray-200 tracking-tight">
         {t("profile")}
       </h2>
       <Tabs defaultValue="account" className=" flex flex-col ">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="account">Account</TabsTrigger>
-          <TabsTrigger value="myPosts">My Posts</TabsTrigger>
+          <TabsTrigger value="account">{t("account")}</TabsTrigger>
+          <TabsTrigger value="myPosts">{t("posts")}</TabsTrigger>
         </TabsList>
         {/* Avatar and User Info */}
         <TabsContent className="flex flex-col gap-5" value="account">
@@ -172,6 +173,7 @@ const Profile: React.FC = () => {
         </Button>
       </div>
     </div>
+
   );
 };
 

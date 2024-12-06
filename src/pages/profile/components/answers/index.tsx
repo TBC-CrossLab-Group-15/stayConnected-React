@@ -1,47 +1,52 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  MdDelete
-} from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 type AnswerType = {
   id: number;
   text: string;
   isCorrect: boolean;
-  create_date: string|undefined;
+  create_date: string | undefined;
   question: number;
   user: {
     avatar: string | null;
     first_name: string;
     id: number;
     last_name: string;
-  }
+  };
 };
 
 type AnswerPropsTypes = {
-  answerData:{
-    create_date: string|undefined;
-    id: number;
-    isCorrect: boolean;
-    question: number;
-    text: string;
-    user: {
-      avatar: string | null;
-      first_name: string;
-      id: number;
-      last_name: string;
-    }
-  }[]|[];
+  answerData:
+    | {
+        create_date: string | undefined;
+        id: number;
+        isCorrect: boolean;
+        question: number;
+        text: string;
+        user: {
+          avatar: string | null;
+          first_name: string;
+          id: number;
+          last_name: string;
+        };
+      }[]
+    | [];
   onApprove: (id: number, isCorrect: boolean) => void;
   onRemove: (id: number) => void;
   userId: number | null;
 };
 
-const Answers: React.FC<AnswerPropsTypes> = ({ answerData, onApprove ,onRemove,userId}) => {
+const Answers: React.FC<AnswerPropsTypes> = ({
+  answerData,
+  onApprove,
+  onRemove,
+  userId,
+}) => {
   const { t } = useTranslation();
 
-console.log(answerData)
+  console.log(answerData);
 
   if (!answerData || answerData.length === 0) {
     return <p>No answers yet</p>;
@@ -95,16 +100,16 @@ console.log(answerData)
                 className="h-full flex justify-center items-end  w-20"
                 variant="link"
               ></Button>
-            )} 
-          {userId == answer.user.id &&
-                  <Button onClick={() => onRemove(answer.id)} className="bg-gray-400 text-white rounded-full w-8 h-8 flex justify-center items-center hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 active:bg-red-700">
-                  <MdDelete size={20} />
-                </Button>
-          }         
-
+            )}
+            {userId == answer.user.id && (
+              <Button
+                onClick={() => onRemove(answer.id)}
+                className="bg-gray-400 text-white rounded-full w-8 h-8 flex justify-center items-center hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 active:bg-red-700"
+              >
+                <MdDelete size={20} />
+              </Button>
+            )}
           </div>
-
-
         </div>
       ))}
     </>
