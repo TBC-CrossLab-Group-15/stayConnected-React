@@ -35,8 +35,6 @@ export const fetchTags = async (): Promise<{ id: number; name: string }[]> => {
   }
 };
 
-
-
 // const response = await fetch("/your-api-endpoint");
 // const data = await response.json(); // ან response.text() თუ მონაცემები არ არის JSON
 // console.log(data); // ნახეთ, როგორ ჩანს მონაცემები
