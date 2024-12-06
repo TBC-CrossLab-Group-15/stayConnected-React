@@ -17,8 +17,12 @@ const Registration: React.FC = () => {
       <Card className="w-[370px]">
         <CardHeader>
           <CardTitle>
-            <div className="w-full flex justify-center ">
-              <img src="/images/pc.jpg" alt="stayConnected" />
+            <div className="w-full flex justify-center mb-2 rounded-sm ">
+              <img
+                className="rounded-sm"
+                src="/images/pc.jpg"
+                alt="stayConnected"
+              />
             </div>
           </CardTitle>
           <CardDescription>{t("enter-details")} </CardDescription>

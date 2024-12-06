@@ -1,7 +1,7 @@
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LoginDefaultValues } from "./login-default-values";
 import { LoginFormValues } from "./types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,6 +24,10 @@ const LoginForm: React.FC = () => {
   });
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const location = useLocation();
+  const toNavigate =
+    location?.state?.from?.pathname + location?.state?.from?.search || "/";
+
   const { mutate: handleLogin } = useMutation({
     mutationKey: ["login"],
     mutationFn: Login,
@@ -34,7 +38,7 @@ const LoginForm: React.FC = () => {
         userId: res?.user_id,
       });
       queryClient.invalidateQueries({ queryKey: ["user"] });
-      setTimeout(() => navigate("/"), 0);
+      setTimeout(() => navigate(toNavigate), 0);
     },
   });
 
@@ -66,7 +70,9 @@ const LoginForm: React.FC = () => {
           )}
         />
         {errors.email && (
-          <p className="text-sm text-red-500">{t(`${errors.email.message}`)}</p>
+          <p className="text-sm text-destructive">
+            {t(`${errors.email.message}`)}
+          </p>
         )}
       </div>
       {/* პაროლი */}
@@ -90,21 +96,21 @@ const LoginForm: React.FC = () => {
           )}
         />
         {errors.password && (
-          <p className="text-sm text-red-500">
+          <p className="text-sm text-destructive">
             {t(`${errors.password.message}`)}
           </p>
         )}
       </div>
       {/*დალოგინება/რეგისტრაციაზე გადასვლა */}
       <div className="flex justify-between">
-        <Button className="w-full" variant="outline" type="submit">
+        <Button className="w-full " variant="primary" type="submit">
           {t("sign-in")}
         </Button>
       </div>
       <div className="flex justify-center items-center">
         <p className="text-muted-foreground text-xs">{t("no-account")} </p>
         <Button variant="link">
-          <Link className="text-bold " to="/signup">
+          <Link className="text-bold text-accent text-lg" to="/signup">
             {t("sign-up")}
           </Link>
         </Button>

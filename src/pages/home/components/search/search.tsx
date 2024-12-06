@@ -35,11 +35,7 @@ const Search = () => {
         </SelectTrigger>
         <SelectContent className="text-sans">
           {tagsData.map((tag) => (
-            <SelectItem
-              className="hover:bg-red-900"
-              key={tag.id}
-              value={tag.name}
-            >
+            <SelectItem key={tag.id} value={tag.name}>
               {tag.name}
             </SelectItem>
           ))}
