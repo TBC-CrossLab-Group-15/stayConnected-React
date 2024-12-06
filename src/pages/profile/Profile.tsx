@@ -12,6 +12,7 @@ import { changeAvatar } from "@/api/profile";
 import { GetUser } from "@/api/auth";
 import UseLogoutClick from "@/hooks/onLogoutClick";
 import { useNavigate } from "react-router-dom";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 
 const Profile: React.FC = () => {
   const userId = Number(localStorage.getItem("userId"));
@@ -55,15 +56,19 @@ const Profile: React.FC = () => {
   if (!data) return <div>Loading...</div>;
 
   return (
-    <div className="w-full border m-auto max-w-3xl bg-white dark:bg-gray-900 rounded-xl shadow-xl p-8 space-y-8">
+    <Tabs defaultValue="account" className="w-full   border m-auto max-w-3xl dark:bg-gray-900 rounded-xl shadow-xl p-8 space-y-8">
       {/* Profile Header */}
-      <h2 className="text-4xl font-extrabold text-center text-gray-800 dark:text-gray-200 tracking-tight">
+      <h2 className="text-4xl  font-extrabold text-center text-gray-800 dark:text-gray-200 tracking-tight">
         {t("profile")}
       </h2>
-
+      <TabsList className="grid bg-slate-100 rounded-lg  w-full grid-cols-2 p-5 ">
+    <TabsTrigger     value="account">Account</TabsTrigger>
+    <TabsTrigger   value="myPosts">My Posts</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account" className=" flex flex-col gap-5">
       {/* Avatar and User Info */}
       <div className="flex flex-col md:flex-row items-center md:items-start bg-gray-100 dark:bg-gray-800 p-8 rounded-xl shadow-lg gap-6 hover:shadow-2xl transition-shadow duration-300">
-        <div className="flex items-center justify-center w-[30%] md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-blue-500 dark:border-blue-400 hover:scale-105 transform transition-all duration-300">
+        <div className="flex items-center justify-center w-[30%] md:w-48 md:h-48 rounded-full overflow-hidden   hover:scale-105 transform transition-all duration-300">
           <Avatar className="rounded-full w-full h-full">
             <AvatarImage
               className="object-cover w-full h-full"
@@ -147,7 +152,8 @@ const Profile: React.FC = () => {
           </p>
         </div>
       </div>
-
+      </TabsContent>
+      <TabsContent value="myPosts">Change your password here.</TabsContent>
       {/* Logout Button */}
       <div className="flex justify-center">
         <Button
@@ -157,7 +163,8 @@ const Profile: React.FC = () => {
           {t("logout")}
         </Button>
       </div>
-    </div>
+
+    </Tabs>
   );
 };
 
