@@ -30,7 +30,7 @@ const Search = () => {
         <CommandInput placeholder="Type a command or choose a tag..." />
       </Command>
       <Select>
-        <SelectTrigger className=" md:min-w-[150px] w-1/4 h-10 rounded-lg border shadow-md ">
+        <SelectTrigger className=" md:min-w-[150px] w-1/4 h-10 rounded-lg border shadow-md">
           <SelectValue placeholder="Choose a tag" />
         </SelectTrigger>
         <SelectContent className="text-sans">
@@ -41,7 +41,7 @@ const Search = () => {
           ))}
         </SelectContent>
       </Select>
-      <Button className="bg-blue-500">Search</Button>
+      <Button>Search</Button>
     </div>
   );
 };
