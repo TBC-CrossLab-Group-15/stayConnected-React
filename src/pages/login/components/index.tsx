@@ -7,9 +7,7 @@ import { LoginFormValues } from "./types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormSchema } from "./schema";
 import { Label } from "@radix-ui/react-label";
-
 import { useTranslation } from "react-i18next";
-
 import { Login } from "@/api/auth";
 import { useMutation } from "@tanstack/react-query";
 import { AfterLoginSuccessn } from "./utils";
@@ -47,8 +45,6 @@ const LoginForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-6">
       {/* მეილი */}
-
-      {/* <h1>{user?.first_name}</h1> */}
       <div className="flex flex-col space-y-1.5">
         <Label
           htmlFor="email"

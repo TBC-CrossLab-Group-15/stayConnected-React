@@ -19,7 +19,7 @@ import { avataaars } from "@dicebear/collection";
 const Header = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const user = useAuthContext();
+  const { user } = useAuthContext();
   const userId = localStorage.getItem("userId");
   const handleLogout = () => {
     UseLogoutClick();
@@ -27,7 +27,7 @@ const Header = () => {
   };
 
   const avatar = createAvatar(avataaars, {
-    seed: `${user?.avatar || user.first_name}`,
+    seed: user && user.first_name ? `${user.avatar || user.first_name}` : "", // Safely accessing properties
   });
   const svg = avatar.toString();
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
@@ -68,7 +68,7 @@ const Header = () => {
                 <DropdownMenuTrigger>
                   <Avatar className="p-10">
                     <AvatarImage src={dataUrl} />
-                    <AvatarFallback>{user?.user?.first_name}</AvatarFallback>
+                    <AvatarFallback>{user?.first_name}</AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="shadow-md rounded-md p-2 gap-2 flex justify-center items-center flex-col ">
