@@ -62,10 +62,34 @@ export const getCorrectAnswer = async ({
   id: number;
   payload: boolean;
 }) => {
+  console.log(id, payload);
   try {
     const result = await httpClient.patch(`posts/answers/${id}/`, {
       isCorrect: payload,
     });
+    return result.data;
+  } catch (error) {
+    console.log("Error:", error);
+    throw new Error("Failed");
+  }
+};
+
+
+export const deleteAnswer = async (id: number) => {
+  console.log(id)
+  try {
+    const result = await httpClient.delete(`posts/answers/${id}/`);
+    return result.data;
+  } catch (error) {
+    console.log("Error:", error);
+    throw new Error("Failed");
+  }
+};
+
+
+export const deleteQuestion = async (id: number) => {
+  try {
+    const result = await httpClient.delete(`posts/questions/${id}/`);
     return result.data;
   } catch (error) {
     console.log("Error:", error);
