@@ -65,12 +65,10 @@ const Person: React.FC<{
         {questionAuthorIsSignedIn && (
           <Button
             onClick={() => onApprove(id, !isApproved)}
-            variant="outline"
-            className={`w-50  ${
-              isApproved
-                ? "bg-red-500 text-white hover:bg-red-600 border-red-500 dark:bg-red-500 dark:text-white"
-                : "bg-blue-500 text-white hover:bg-blue-600 border-blue-500"
-            }`}
+            variant={
+              isApproved ? "destructive" : "primary"
+            }
+            className="w-24"
           >
             {isApproved ? t("reject") : t("approve")}
           </Button>

@@ -57,7 +57,7 @@ const Answers: React.FC<AnswerPropsTypes> = ({
       {answerData?.map((answer: AnswerType) => (
         <div
           key={answer.id}
-          className="dark:bg-gray-800   p-5 persons flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between shadow-inner  border rounded-lg"
+          className="dark:bg-gray-800   p-5 persons flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between shadow-inner  border rounded-lg "
         >
           {/* Left section */}
           <div className="flex w-full h-full  rounded-lg  dark:bg-gray-500  flex-col sm:flex-row gap-5 overflow-hidden">
@@ -67,16 +67,16 @@ const Answers: React.FC<AnswerPropsTypes> = ({
           </div>
 
           {/* Right section */}
-          <div className="flex  justify-around sm:justify-start  items-start gap-2 flex-row sm:flex-col sm:items-center sm:gap-5">
+          <div className="flex   justify-around sm:justify-start  items-start gap-2 flex-row sm:flex-col sm:items-center sm:gap-5">
             <div className="flex gap-2 ">
               <Button
                 onClick={() => onApprove(answer.id, !answer.isCorrect)}
-                variant="outline"
-                className={` w-20  ${
+                variant={ 
                   answer?.isCorrect
-                    ? "bg-red-500 text-white hover:bg-red-600 border-red-500 dark:bg-red-500 dark:text-white "
-                    : "bg-blue-500 text-white hover:bg-blue-600 border-blue-500 "
-                }`}
+                    ? "destructive"
+                    : "primary"
+                }
+                className="w-24"
               >
                 {answer.isCorrect ? t("reject") : t("approve")}
               </Button>
