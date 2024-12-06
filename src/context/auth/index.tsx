@@ -17,7 +17,7 @@ type AuthContextType = {
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext<AuthContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
