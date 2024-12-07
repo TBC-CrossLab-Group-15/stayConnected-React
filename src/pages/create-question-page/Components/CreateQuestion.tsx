@@ -18,7 +18,7 @@ const CreateQuestion: React.FC<FancyMultiSelectProps> = ({
   selected,
   onChange,
 }) => {
-   const { t } = useTranslation();
+  const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -33,25 +33,24 @@ const CreateQuestion: React.FC<FancyMultiSelectProps> = ({
     staleTime: 300000,
     select: (data) => (Array.isArray(data) ? data : []),
   });
-  console.log(tags);
 
   const handleUnselect = useCallback(
     (tag: Framework) => {
       onChange((prev) => prev.filter((s) => s.id !== tag.id));
     },
-    [onChange],
+    [onChange]
   );
 
   const selectables = Array.isArray(tags)
     ? tags.filter((tag) => !selected.some((s) => s.id === tag.id))
     : [];
 
-  if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p>Failed to load tags.</p>;
+  if (isLoading) return <p>{t("loadingTags", "Loading...")}</p>;
+  if (isError) return <p>{t("failedToLoadTags", "Failed to load tags.")}</p>;
 
   return (
     <Command onKeyDown={() => {}} className="overflow-visible bg-transparent">
-      <div className="group rounded-md border-input px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
+      <div className="group rounded-md  px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 border-primary">
         <div className="flex flex-wrap gap-1">
           {selected.map((tag) => (
             <Badge key={tag.id} variant="secondary">
@@ -70,7 +69,7 @@ const CreateQuestion: React.FC<FancyMultiSelectProps> = ({
             onValueChange={setInputValue}
             onBlur={() => setOpen(false)}
             onFocus={() => setOpen(true)}
-            placeholder={t("selectTags")}
+            placeholder={t("selectTags", "Select tags...")}
             className="ml-2 flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
           />
         </div>
@@ -78,8 +77,8 @@ const CreateQuestion: React.FC<FancyMultiSelectProps> = ({
       <div className="relative mt-2">
         <CommandList>
           {open && selectables.length > 0 && (
-            <div className="absolute top-0 z-10 w-full rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in">
-              <CommandGroup className="h-full overflow-auto">
+            <div className="absolute top-0 z-10 w-full rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in max-h-52 overflow-y-auto">
+              <CommandGroup>
                 {selectables.map((tag: { id: number; name: string }) => (
                   <CommandItem
                     key={tag.id}
