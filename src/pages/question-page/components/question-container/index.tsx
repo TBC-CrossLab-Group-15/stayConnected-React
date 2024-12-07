@@ -12,7 +12,7 @@ const QuestionContainer: React.FC = () => {
   //
   const { t } = useTranslation();
   //
-  const { control, handleSubmit } = useForm({ defaultValues: { answer: "" } });
+  const { control, handleSubmit,reset } = useForm({ defaultValues: { answer: "" } });
   //
   const userId = localStorage.getItem("userId"); // მომავალში ლოკალსთორეჯიდან წამოვიღებ
   const questionId = Number(id); // როცა რომელიმე კითხვაზე დაკლიკებით გადმოვა კონკრეტულ შეკითხვაზე
@@ -55,6 +55,7 @@ const QuestionContainer: React.FC = () => {
 
   const onSendAnswer = ({ answer }: { answer: string }) => {
     Answer({ questionId: questionId, answerText: answer });
+    reset();
   };
   //
   if (!data) return <p>Loading...</p>;
