@@ -38,7 +38,7 @@ const CreateQuestion: React.FC<FancyMultiSelectProps> = ({
     (tag: Framework) => {
       onChange((prev) => prev.filter((s) => s.id !== tag.id));
     },
-    [onChange]
+    [onChange],
   );
 
   const selectables = Array.isArray(tags)
