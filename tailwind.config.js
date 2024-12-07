@@ -11,8 +11,8 @@ export default {
       },
       colors: {
         scrollbar: {
-          DEFAULT: '#3b82f6', // Scrollbar color
-          track: '#e5e7eb',  // Track color
+          DEFAULT: "#3b82f6", // Scrollbar color
+          track: "#e5e7eb", // Track color
         },
         zauta: "#FCFCFC",
         background: "hsl(var(--background))",
@@ -58,7 +58,5 @@ export default {
       },
     },
   },
-  plugins: [
-    require('tailwind-scrollbar'),
-    require("tailwindcss-animate")],
+  plugins: [require("tailwind-scrollbar"), require("tailwindcss-animate")],
 };
