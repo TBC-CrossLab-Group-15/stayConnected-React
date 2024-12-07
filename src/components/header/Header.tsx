@@ -34,9 +34,9 @@ const Header = () => {
   const dataUrl = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
 
   return (
-    <div className="z-50 dark:bg-black  overflow-hidden sticky top-0 left-0 w-full  bg-white shadow-[0px_-2px_4px_rgba(0,0,0,0.1)] border-solid border-b border-b-gray-300 dark:border-b-solid dark:border-b-neutral-800">
-      <div className="max-w-[1400px]  mx-auto  px-5 h-20 flex items-center justify-between gap-4">
-        <div className="text-2xl font-bold">
+    <div className="z-50 dark:bg-black  overflow-hidden  sticky top-0 left-0 w-full   bg-white shadow-[0px_-2px_4px_rgba(0,0,0,0.1)] border-solid border-b border-b-gray-300 dark:border-b-solid dark:border-b-neutral-800">
+      <div className="max-w-[1400px]  mx-auto  px-5  h-20 flex items-center justify-between gap-4 ">
+        <div className="text-2xl font-bold  ">
           <NavLink to="/">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -56,22 +56,29 @@ const Header = () => {
           </NavLink>
         </div>
         <div className="flex justify-between gap-5 md:min-w-[550px] font-sans "></div>
-        <div className="flex justify-between items-center gap-3 p-4   rounded-lg">
+        <div className="flex justify-between items-center gap-3  px-5   rounded-lg ">
           {userId ? (
             <>
-              <NavLink to="createQuestion">
-                <Button className="bg-neutral-50 text-black hover:bg-neutral-100">
+            
+              <NavLink to="createQuestion  ">
+                <Button className="bg-neutral-50 text-black   hover:bg-neutral-100 hover:scale-105 transition-all duration-300 ">
                   {t("add-question")}
                 </Button>
               </NavLink>
               <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <Avatar className="p-10">
-                    <AvatarImage src={dataUrl} />
-                    <AvatarFallback>{user?.first_name}</AvatarFallback>
+                <DropdownMenuTrigger className=" justify-center items-center flex border rounded-full  hover:scale-105 transition-all duration-300 cursor-pointer">
+                  <Avatar className="relative flex justify-center items-center w-12 h-12 rounded-full  overflow-hidden ">
+                    <AvatarImage
+                      className="object-cover w-full h-full"
+                      src={dataUrl}
+                    />
+                    <AvatarFallback className="absolute inset-0 flex items-center justify-center text-gray-500 text-sm">
+                      {user?.first_name}
+                    </AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="shadow-md rounded-md p-2 gap-2 flex justify-center items-center flex-col ">
+
+                <DropdownMenuContent className="shadow-md  rounded-md p-2 gap-2 flex justify-center items-center flex-col ">
                   <DropdownMenuItem className="p-0">
                     <NavLink to="/profile">
                       <Button variant="ghost" className="w-full  px-6">
@@ -92,13 +99,15 @@ const Header = () => {
               </DropdownMenu>
             </>
           ) : (
+            
             <div>
-              <NavLink to="login" className="hidden md:block">
+              <NavLink to="login" className="hidden md:block ">
                 <Button className="bg-blue-500 hover:bg-blue-400 text-base font-sans">
                   {t("sign-in")}
                 </Button>
               </NavLink>
             </div>
+            
           )}
           <LanguageSwitcher />
 
@@ -112,7 +121,7 @@ const Header = () => {
           <ModeToggle />
           {!userId ? (
             <DropdownMenu>
-              <DropdownMenuTrigger className="block md:hidden">
+              <DropdownMenuTrigger className="block md:hidden ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
