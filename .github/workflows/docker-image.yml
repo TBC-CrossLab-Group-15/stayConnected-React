@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build Docker Images
-    runs-on: self-hosted
+    runs-on: runner02
 
     steps:
       - name: Fix Repo Permissions
