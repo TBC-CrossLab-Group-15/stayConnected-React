@@ -44,6 +44,9 @@ const CreateQuestionView: React.FC = () => {
     }
     const tagIds = tags.map((tag) => tag.id);
     mutation.mutate({ title, text, tags: tagIds });
+    setTitle("");
+    setText("");
+    setTags([]);
   };
   console.log("Tags:", tags);
   return (
