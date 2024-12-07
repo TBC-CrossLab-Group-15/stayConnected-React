@@ -25,7 +25,7 @@ const Header = () => {
     UseLogoutClick();
     navigate("/login");
   };
-
+  
   const avatar = createAvatar(avataaars, {
     seed: user && user.first_name ? `${user.avatar || user.first_name}` : "", // Safely accessing properties
   });
@@ -56,7 +56,7 @@ const Header = () => {
           </NavLink>
         </div>
         <div className="flex justify-between gap-5 md:min-w-[550px] font-sans "></div>
-        <div className="flex justify-between items-center gap-3  px-5   rounded-lg ">
+        <div className="flex justify-between items-center gap-3 p-4 rounded-lg">
           {userId ? (
             <>
               <NavLink to="createQuestion  ">
@@ -77,7 +77,7 @@ const Header = () => {
                   </Avatar>
                 </DropdownMenuTrigger>
 
-                <DropdownMenuContent className="shadow-md  rounded-md p-2 gap-2 flex justify-center items-center flex-col ">
+                <DropdownMenuContent className="shadow-md rounded-md p-2 gap-2 flex justify-center items-center flex-col ">
                   <DropdownMenuItem className="p-0">
                     <NavLink to="/profile">
                       <Button variant="ghost" className="w-full  px-6">

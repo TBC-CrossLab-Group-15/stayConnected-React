@@ -23,7 +23,7 @@ export type QuestionsListResponseType = {
   results: QuestionType[];
 };
 export const getQuestions = async (
-  params: QuestionsListDataType,
+  params: QuestionsListDataType
 ): Promise<QuestionsListResponseType> => {
   try {
     const result = await httpClient.get("posts/questions", {
@@ -94,3 +94,36 @@ export const deleteQuestion = async (id: number) => {
     throw new Error("Failed");
   }
 };
+
+
+type FilterDataType = {
+  tag: string;
+};
+
+export const filterByTag = async (params: FilterDataType) => {
+  console.log(params);
+  try {
+    const result = await httpClient.get(`posts/search/?search=${params.tag}`);
+    console.log("filtered data by tag:", result.data);
+    return result.data;
+  } catch (error) {
+    console.log("Error:", error);
+    throw new Error("Failed");
+  }
+};
+
+export const filterByText = async (params: FilterDataType) => {
+  console.log(params);
+  try {
+    const result = await httpClient.get(
+      `posts/search/question/?search=${params.tag}`
+    );
+    console.log("filtered data by text:", result.data);
+    return result.data;
+  } catch (error) {
+    console.log("Error:", error);
+    throw new Error("Failed");
+  }
+};
+
+
