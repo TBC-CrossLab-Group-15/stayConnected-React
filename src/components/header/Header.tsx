@@ -25,7 +25,7 @@ const Header = () => {
     UseLogoutClick();
     navigate("/login");
   };
-  
+
   const avatar = createAvatar(avataaars, {
     seed: user && user.first_name ? `${user.avatar || user.first_name}` : "", // Safely accessing properties
   });

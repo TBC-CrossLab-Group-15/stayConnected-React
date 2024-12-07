@@ -39,7 +39,7 @@ interface Question {
 
 const HomeView = () => {
   const [filteredQuestions, setFilteredQuestions] = useState<Question[] | null>(
-    null
+    null,
   );
   const handleFilteredQuestions = (data: Question[]) => {
     setFilteredQuestions(data);

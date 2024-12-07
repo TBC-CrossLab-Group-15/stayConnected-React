@@ -8,7 +8,6 @@ const MainSection: React.FC<PropsWithChildren> = ({ children }) => {
         sm:p-10
         flex items-center justify-center
         "
-
     >
       {children}
     </div>

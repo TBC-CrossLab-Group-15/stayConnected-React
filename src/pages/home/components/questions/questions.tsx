@@ -43,7 +43,6 @@ export interface Questions {
   answers: { isCorrect: boolean }[];
 }
 
-
 const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
   const { t } = useTranslation();
   console.log(t("next"));
@@ -155,7 +154,7 @@ const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
           </NavLink>
         </Card>
       ))}
- {!filteredQuestions && (
+      {!filteredQuestions && (
         <Pagination>
           <PaginationContent>
             <PaginationItem>
@@ -214,4 +213,3 @@ const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
 };
 
 export default Questions;
-
