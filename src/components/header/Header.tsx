@@ -60,7 +60,10 @@ const Header = () => {
           {userId ? (
             <>
               <NavLink to="createQuestion  ">
-                <Button variant={"outline"}  className="flex hover:scale-105 transition-all duration-300">
+                <Button
+                  variant={"outline"}
+                  className="flex hover:scale-105 transition-all duration-300"
+                >
                   {t("add-question")}
                 </Button>
               </NavLink>
