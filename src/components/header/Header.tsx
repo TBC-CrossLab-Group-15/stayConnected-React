@@ -60,15 +60,15 @@ const Header = () => {
           {userId ? (
             <>
               <NavLink to="createQuestion  ">
-                <Button className="bg-neutral-50 text-black   hover:bg-neutral-100 hover:scale-105 transition-all duration-300 ">
+                <Button variant={"outline"}  className="flex hover:scale-105 transition-all duration-300">
                   {t("add-question")}
                 </Button>
               </NavLink>
               <DropdownMenu>
-                <DropdownMenuTrigger className=" justify-center items-center flex border rounded-full  hover:scale-105 transition-all duration-300 cursor-pointer">
-                  <Avatar className="relative flex justify-center items-center w-12 h-12 rounded-full  overflow-hidden ">
+                <DropdownMenuTrigger className=" justify-center items-center flex border border-neutral-200  rounded-full  hover:scale-105 transition-all duration-300 cursor-pointer">
+                  <Avatar className="relative flex justify-center items-center  w-12 h-12 rounded-full  overflow-hidden ">
                     <AvatarImage
-                      className="object-cover w-full h-full"
+                      className="object-cover w-full h-full "
                       src={dataUrl}
                     />
                     <AvatarFallback className="absolute inset-0 flex items-center justify-center text-gray-500 text-sm">
@@ -77,7 +77,7 @@ const Header = () => {
                   </Avatar>
                 </DropdownMenuTrigger>
 
-                <DropdownMenuContent className="shadow-md rounded-md p-2 gap-2 flex justify-center items-center flex-col ">
+                <DropdownMenuContent className="shadow-md border  border-neutral-200 mt-4 rounded-md  p-2 gap-2 flex justify-center items-center flex-col ">
                   <DropdownMenuItem className="p-0">
                     <NavLink to="/profile">
                       <Button variant="ghost" className="w-full  px-6">
