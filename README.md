@@ -1,50 +1,69 @@
-# React + TypeScript + Vite
+# StayConnected
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+ StayConnected is a platform designed to foster knowledge sharing among developers. It enables developers to ask questions, provide answers, and exchange valuable experiences, creating a collaborative environment for learning and growth.
 
-Currently, two official plugins are available:
+## Features
+- **User Authentication**: Register, log in, and log out securely.
+- **Question Management**: Create questions, specify tags, and search questions by tags or keywords.
+- **Answer Management**: Mark an answer as correct, update the correct answer, and display the correctness status in the question list.
+- **Profile Management**:
+   - View and edit developer information, including avatars.
+   - Track points and answers provided.
+   - View personal questions.
+- **Main Page**:
+   - Display questions with pagination.
+   - Search functionality and a leaderboard.
+- **Access Control**: Only authenticated users can add questions, give answers, or access the profile page. Guests can view questions and answers.
+- **Internationalization**: Support for English and Georgian languages.
+- **Dark Mode**: User-friendly black mode.
+- **Security**: Refresh token functionality for enhanced security.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Technologies Used
+- **Frontend**: React, Vite, TypeScript
+- **State Management**: React Query, Jotai
+- **Form Handling**: React Hook Form, Zod
+- **Routing**: React Router
+- **HTTP Client**: Axios
+- **UI Components**: ShadCN
 
-## Expanding the ESLint configuration
+# HTTP Requests
+ The application uses HTTP requests integrated from the backend developer's project to handle user authentication, data fetching, and other related server interactions.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
+# Installation
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/your-repository/stayconnected.git
+    ```
+2. Navigate to the project directory:
+    ```bash
+   cd stayconnected
+    ```
+3. Install dependencies:
+    ```bash
+    npm install
+    ```
+4. Start the development server:
+    ```bash
+    npm run dev
+    ```
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+# Usage
+ 1. Open the application in your browser (default URL: `http://localhost:5173`).
+ 2. Register or log in to access full functionality.
+ 3. Explore questions, create your own, and engage with the developer community.
+ 4. Switch between English and Georgian languages as needed.
+ 5. Toggle dark mode for a comfortable user experience.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+# Live Site
+ Access the live application at [StayConnected](https://stayconnected.lol/).
 
-```js
-// eslint.config.js
-import react from "eslint-plugin-react";
+# Contributors
+ - **Tatia Daghelashvili**
+ - **Teona Omiadze**
+ - **Giorgi Zautashvili**
+ - **Nikoloz Sulkhanishvili**
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: "18.3" } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs["jsx-runtime"].rules,
-  },
-});
-```
+
+
