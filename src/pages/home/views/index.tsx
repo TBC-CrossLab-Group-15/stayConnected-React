@@ -39,22 +39,25 @@ interface Question {
 
 const HomeView = () => {
   const [filteredQuestions, setFilteredQuestions] = useState<Question[] | null>(
-    null,
+    null
   );
   const handleFilteredQuestions = (data: Question[]) => {
     setFilteredQuestions(data);
-    console.log("viewidan data", data);
   };
   return (
-    <div className="xl:w-[1400px] flex flex-col-reverse lg:flex-row gap-10">
-      <div className="xl:w-3/5 sm:w-full">
-        <Search onFilter={handleFilteredQuestions} />
-        <Questions width={"w-full"} filteredQuestions={filteredQuestions} />
+    <>
+      <div className="p-0 flex justify-center flex-col xsm:w-full lg:flex-row gap-6">
+        <div className=" sm:w-full sm:m-5 xl:w-[90%] flex flex-col-reverse lg:flex-row gap-10">
+          <div className=" sm:w-full  xl:w-3/5  ">
+            <Search onFilter={handleFilteredQuestions} />
+            <Questions width={"w-full"} filteredQuestions={filteredQuestions} />
+          </div>
+          <div className=" w-full xl:w-2/5">
+            <Leaderboard />
+          </div>
+        </div>
       </div>
-      <div className="  sm:w-full xl:w-2/5">
-        <Leaderboard />
-      </div>
-    </div>
+    </>
   );
 };
 

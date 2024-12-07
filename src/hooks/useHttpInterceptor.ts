@@ -24,7 +24,6 @@ export const useHttpInterceptor = () => {
           setIsRefreshLoading(true);
           refresh({ payload: { refresh: refreshToken } })
             .then((res) => {
-              console.log("refreshToken", res);
               AfterLoginSuccessn({
                 accessToken: res?.access,
                 refreshToken: refreshToken,
@@ -47,7 +46,7 @@ export const useHttpInterceptor = () => {
         }
 
         return resErr;
-      },
+      }
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -48,7 +48,6 @@ const CreateQuestionView: React.FC = () => {
     setText("");
     setTags([]);
   };
-  console.log("Tags:", tags);
   return (
     <Container>
       <div className="py-40 flex justify-center">

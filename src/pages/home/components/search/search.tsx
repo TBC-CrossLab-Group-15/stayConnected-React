@@ -13,13 +13,14 @@ import { Controller, useForm } from "react-hook-form";
 import { filterByTag, filterByText } from "@/api/question";
 import { useNavigate } from "react-router-dom";
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 interface SearchProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onFilter: (data: any) => void;
 }
 
 const Search: FC<SearchProps> = ({ onFilter }) => {
+  const { t } = useTranslation();
   const {
     data: tagsData = [],
     isError,
@@ -78,21 +79,25 @@ const Search: FC<SearchProps> = ({ onFilter }) => {
   };
 
   if (isError) {
-    return <div>Error loading tags: {error?.message || "Unknown error"}</div>;
+    return (
+      <div>
+        {t("errorLoadingTags")} {error?.message || "Unknown error"}
+      </div>
+    );
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="max-w-[1200px] mx-auto px-5 mt-8 mb-8 font-sans flex gap-5">
+      <div className="w-full mx-auto px-5 mt-8 mb-8 font-sans flex gap-5">
         {/* Input Field */}
-        <Command className="rounded-lg border shadow-md md:min-w-[300px] w-3/4 dark:border-solid dark:border-neutral-800">
+        <Command className="rounded-lg border shadow-md md:w-full w-3/4 dark:border-solid dark:border-neutral-800">
           <Controller
             name="searchText"
             control={control}
             render={({ field }) => (
               <input
                 {...field}
-                placeholder="Type a command or choose a tag..."
+                placeholder={t("typeCommandOrTag")}
                 disabled={!!selectedTag}
                 className="h-10 p-2 shadow-md dark:bg-inherit "
               />
@@ -112,8 +117,8 @@ const Search: FC<SearchProps> = ({ onFilter }) => {
               }}
               disabled={!!searchText}
             >
-              <SelectTrigger className="md:min-w-[150px] w-1/4 h-10 rounded-lg border shadow-md">
-                <SelectValue placeholder="Choose a tag" />
+              <SelectTrigger className="md:w-1/3 w-1/4 h-10 rounded-lg border shadow-md">
+                <SelectValue placeholder={t("chooseTag")} />
               </SelectTrigger>
               <SelectContent className="text-sans">
                 {tagsData.map((tag) => (
@@ -126,8 +131,8 @@ const Search: FC<SearchProps> = ({ onFilter }) => {
           )}
         />
 
-        <Button type="submit" variant="primary" className="hover:bg-cyan-200">
-          Search
+        <Button type="submit" variant="primary" className=" h-10">
+          {t("search")}
         </Button>
       </div>
     </form>

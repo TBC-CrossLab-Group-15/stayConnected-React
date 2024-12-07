@@ -46,8 +46,6 @@ const Answers: React.FC<AnswerPropsTypes> = ({
 }) => {
   const { t } = useTranslation();
 
-  console.log(answerData);
-
   if (!answerData || answerData.length === 0) {
     return <p>No answers yet</p>;
   }

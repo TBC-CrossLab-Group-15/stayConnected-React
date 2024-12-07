@@ -45,7 +45,6 @@ export interface Questions {
 
 const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
   const { t } = useTranslation();
-  console.log(t("next"));
 
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
@@ -69,8 +68,6 @@ const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
 
   const totalPages = Math.ceil(questionsData?.count / pageSize);
 
-  console.log("questions:", questionsData);
-
   if (isLoading) {
     return <QuestionsPlaceholder />;
   }
@@ -82,8 +79,6 @@ const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
       </div>
     );
   }
-
-  console.log(questionsData.results);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -97,7 +92,7 @@ const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
     return format(new Date(isoDate), "dd/MM/yyyy");
   };
   return (
-    <div className="max-w-[1400px] w-full mx-auto px-5 h-full mt-8 mb-8 font-sans">
+    <div className="w-full mx-auto px-5 h-full mt-8 mb-8 font-sans">
       {displayedQuestions?.map((question) => (
         <Card
           key={question.id}
