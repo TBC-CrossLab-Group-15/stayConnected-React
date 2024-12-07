@@ -35,7 +35,7 @@ const Header = () => {
 
   return (
     <div className="z-50 dark:bg-black  overflow-hidden  sticky top-0 left-0 w-full   bg-white shadow-[0px_-2px_4px_rgba(0,0,0,0.1)] border-solid border-b border-b-gray-300 dark:border-b-solid dark:border-b-neutral-800">
-      <div className="max-w-[1400px]  mx-auto  px-5  h-20 flex items-center justify-between gap-4 ">
+      <div className="w-[90%]  mx-auto  px-5  h-20 flex items-center justify-between gap-4 ">
         <div className="text-2xl font-bold  ">
           <NavLink to="/">
             <svg
@@ -55,7 +55,7 @@ const Header = () => {
             </svg>
           </NavLink>
         </div>
-        <div className="flex justify-between gap-5 md:min-w-[550px] font-sans "></div>
+        <div className="flex justify-between gap-5 md:w-[550px] font-sans "></div>
         <div className="flex justify-between items-center gap-3 p-4 rounded-lg">
           {userId ? (
             <>
@@ -103,21 +103,13 @@ const Header = () => {
           ) : (
             <div>
               <NavLink to="login" className="hidden md:block ">
-                <Button className="bg-blue-500 hover:bg-blue-400 text-base font-sans">
+                <Button variant="primary" className="text-base font-sans">
                   {t("sign-in")}
                 </Button>
               </NavLink>
             </div>
           )}
           <LanguageSwitcher />
-
-          {/* <NavLink to="addcomment">
-            <Button className="rounded-full text-base font-sans h-9 w-9 bg-slate-50 text-black hover:bg-slate-100 dark:bg-black dark:text-white border dark:hover:bg-zinc-900">
-              +
-            </Button>
-          </NavLink> only appears if user is logged in  */}
-          {/* )} */}
-
           <ModeToggle />
           {!userId ? (
             <DropdownMenu>

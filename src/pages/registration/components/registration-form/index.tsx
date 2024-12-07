@@ -37,7 +37,7 @@ const RegistrationForm: React.FC = () => {
       alert("Passwords do not match");
       return;
     }
-    console.log("values:", values);
+
     handleRegister(values);
     alert("register successfully");
   };

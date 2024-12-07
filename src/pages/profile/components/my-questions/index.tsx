@@ -11,7 +11,6 @@ import { Question } from "./types";
 const MyQuestions: React.FC = () => {
   const { t } = useTranslation();
   const userId = Number(localStorage.getItem("userId"));
-  console.log(typeof userId);
 
   const { data, refetch } = useQuery({
     queryKey: ["my-questions"],

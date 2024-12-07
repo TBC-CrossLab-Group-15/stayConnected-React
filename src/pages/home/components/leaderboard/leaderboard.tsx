@@ -35,7 +35,7 @@ const Leaderboard: React.FC = () => {
       <h1 className="mb-3 text-xl font-sans font-bold text-center">
         {t("leaderboard")}
       </h1>
-      <div className="flex justify-between mb-6 gap-4">
+      <div className="flex justify-between mb-6 gap-4 xsm:flex-col sm:flex-row lg:flex-col xl:flex-row">
         {topThree.map((user, index) => {
           const colors = ["bg-yellow-300", "bg-gray-300", "bg-orange-400"];
 
@@ -49,7 +49,7 @@ const Leaderboard: React.FC = () => {
           return (
             <div
               key={index}
-              className={`flex flex-col items-center p-4 rounded-lg shadow ${colors[index]} w-1/3`}
+              className={`flex flex-col items-center p-4 rounded-lg shadow ${colors[index]} xsm:w-full w-1/3 lg:w-full xl:w-1/3`}
             >
               <Avatar className="mb-3">
                 <AvatarImage
