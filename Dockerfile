@@ -22,7 +22,9 @@ FROM nginx:stable-alpine
 # Copy the build files to the Nginx HTML directory
 COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
 
-# Copy a custom Nginx configuration (optional)
+# Copy the custom Nginx configuration
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+
 # COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose the port Nginx will serve on
