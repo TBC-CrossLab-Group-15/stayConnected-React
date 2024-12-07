@@ -59,7 +59,6 @@ const Header = () => {
         <div className="flex justify-between items-center gap-3  px-5   rounded-lg ">
           {userId ? (
             <>
-            
               <NavLink to="createQuestion  ">
                 <Button className="bg-neutral-50 text-black   hover:bg-neutral-100 hover:scale-105 transition-all duration-300 ">
                   {t("add-question")}
@@ -99,7 +98,6 @@ const Header = () => {
               </DropdownMenu>
             </>
           ) : (
-            
             <div>
               <NavLink to="login" className="hidden md:block ">
                 <Button className="bg-blue-500 hover:bg-blue-400 text-base font-sans">
@@ -107,7 +105,6 @@ const Header = () => {
                 </Button>
               </NavLink>
             </div>
-            
           )}
           <LanguageSwitcher />
 
