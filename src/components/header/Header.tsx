@@ -61,7 +61,7 @@ const Header = () => {
             <>
               <NavLink to="createQuestion">
                 <Button className="bg-neutral-50 text-black hover:bg-neutral-100">
-                  Add Question
+                  {t("add-question")}
                 </Button>
               </NavLink>
               <DropdownMenu>
@@ -75,7 +75,7 @@ const Header = () => {
                   <DropdownMenuItem className="p-0">
                     <NavLink to="/profile">
                       <Button variant="ghost" className="w-full  px-6">
-                        Profile
+                        {t("profile")}
                       </Button>
                     </NavLink>
                   </DropdownMenuItem>
@@ -85,7 +85,7 @@ const Header = () => {
                     onClick={() => handleLogout()}
                   >
                     <Button variant="ghost" className="w-full ">
-                      Sign Out
+                      {t("logout")}
                     </Button>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
