@@ -27,6 +27,10 @@
 - **HTTP Client**: Axios
 - **UI Components**: ShadCN
 
+# HTTP Requests
+ The application uses HTTP requests integrated from the backend developer's project to handle user authentication, data fetching, and other related server interactions.
+
+
 # Installation
 1. Clone the repository:
     ```bash
