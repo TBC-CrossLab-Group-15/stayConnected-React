@@ -73,13 +73,16 @@ const CreateQuestionView: React.FC = () => {
                 />
               </div>
               <div>
-                <Label>{t("addTag")}</Label>
+                <div className="mb-2">
+                  <Label>{t("addTag")}</Label>
+                </div>
                 <FancyMultiSelect selected={tags} onChange={setTags} />
               </div>
               <Button
+                variant={"secondary"}
                 type="submit"
                 disabled={mutation.status === "pending"}
-                className="w-full h-10 lg:w-100 hover:bg-secondary bg-primary"
+                className="w-full h-10 lg:w-100 "
               >
                 {mutation.status === "pending" ? t("sending") : t("send")}
               </Button>
