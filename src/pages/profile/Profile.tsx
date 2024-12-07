@@ -69,7 +69,7 @@ const Profile: React.FC = () => {
         </TabsList>
 
         {/* Avatar and User Info */}
-        <TabsContent  className="flex flex-col gap-5  " value="account">
+        <TabsContent className="flex flex-col gap-5  " value="account">
           <div className="flex flex-col md:flex-row items-center md:items-start bg-gray-100 dark:bg-gray-800 p-8 rounded-xl shadow-lg gap-6 hover:shadow-2xl transition-shadow duration-300">
             <div className="flex items-center justify-center w-48 h-48 rounded-full overflow-hidden hover:scale-105 transform transition-all duration-300">
               <Avatar className="rounded-full w-full h-full">

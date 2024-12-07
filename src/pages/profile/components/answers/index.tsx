@@ -69,18 +69,23 @@ const Answers: React.FC<AnswerPropsTypes> = ({
           {/* Right section */}
           <div className="flex flex-col   w-full sm:w-1/4 mx-auto  sm:flex-col md:flex-col lr:flex-col justify-around sm:justify-start  items-start gap-2 sm:items-center sm:gap-5">
             <div className="flex gap-2 w-full ">
-            <Button
-  onClick={() => onApprove(answer.id, !answer.isCorrect)}
-  variant={answer?.isCorrect ? "destructive" : "primary"}
-  className={`w-full sm:w-24 ${
-    answer.isCorrect ? "bg-red-400 text-white hover:bg-orange-500 focus:ring-orange-400" : "bg-teal-400 text-white hover:bg-teal-500 focus:ring-teal-500"
-  }`}
->
-  {answer.isCorrect ? t("reject") : t("approve")}
-</Button>
+              <Button
+                onClick={() => onApprove(answer.id, !answer.isCorrect)}
+                variant={answer?.isCorrect ? "destructive" : "primary"}
+                className={`w-full sm:w-24 ${
+                  answer.isCorrect
+                    ? "bg-red-400 text-white hover:bg-orange-500 focus:ring-orange-400"
+                    : "bg-teal-400 text-white hover:bg-teal-500 focus:ring-teal-500"
+                }`}
+              >
+                {answer.isCorrect ? t("reject") : t("approve")}
+              </Button>
             </div>
 
-            <Button className="p-0 w-full  flex flex-row sm:flex-col" variant="link">
+            <Button
+              className="p-0 w-full  flex flex-row sm:flex-col"
+              variant="link"
+            >
               <p>{answer?.create_date?.slice(0, 10)}</p>
               <p>{answer?.create_date?.slice(11, 19)}</p>
             </Button>
@@ -101,12 +106,12 @@ const Answers: React.FC<AnswerPropsTypes> = ({
             )}
             {userId == answer.user.id && (
               <div className="flex w-full  justify-end sm:justify-center">
-<Button
-  onClick={() => onRemove(answer.id)}
-  className="bg-teal-200 text-teal-700 rounded-full w-8 h-8 flex justify-center items-center hover:bg-teal-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 active:bg-teal-700"
->
-  <MdDelete size={20} />
-</Button>
+                <Button
+                  onClick={() => onRemove(answer.id)}
+                  className="bg-teal-200 text-teal-700 rounded-full w-8 h-8 flex justify-center items-center hover:bg-teal-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 active:bg-teal-700"
+                >
+                  <MdDelete size={20} />
+                </Button>
               </div>
             )}
           </div>
