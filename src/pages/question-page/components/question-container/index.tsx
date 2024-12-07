@@ -61,10 +61,10 @@ const QuestionContainer: React.FC = () => {
   //
 
   return (
-    <div className="  flex flex-col gap-10 w-full ">
-      <div className="bg-gray-50  h-[750px] sm:h-auto w-full sm:w-[80%] mx-auto overflow-hidden dark:bg-black p-3 sm:p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-3 sm:gap-14">
+    <div className="  flex flex-col  gap-10 w-full  ">
+      <div className="bg-gray-50   h-[750px] sm:h-auto w-full sm:w-[80%] mx-auto overflow-hidden dark:bg-black p-3 sm:p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-3 sm:gap-14">
         {/* Question Header */}
-        <div className="flex flex-col gap-4 ">
+        <div className="flex flex-col gap-4  ">
           <div className="flex justify-between items-start flex-col sm:flex-row  ">
             <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 ">
               {data?.title || "DataTitle"}
@@ -93,7 +93,7 @@ const QuestionContainer: React.FC = () => {
           <h3 className="text-base font-medium text-gray-800 dark:text-gray-200">
             {t("answers")}
           </h3>
-          <div className="max-h-[400px] sm:max-h-[300px]  overflow-y-auto flex flex-col gap-4 pr-10 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent dark:scrollbar-thumb-blue-700 dark:scrollbar-track-transparent">
+          <div className="max-h-[400px] sm:max-h-[300px]  overflow-y-auto flex flex-col gap-4 pr-10 scrollbar-thin scrollbar-thumb-sky-500 scrollbar-track-transparent dark:scrollbar-thumb-sky-700 dark:scrollbar-track-transparent ">
             {data?.answers?.map((person: Answer) => (
               <Person
                 text={person?.text}
@@ -131,8 +131,8 @@ const QuestionContainer: React.FC = () => {
             />
             <Button
               type="submit"
-              className="w-full sm:w-20 p-0 sm:p-7 bg-blue-700 text-white dark:bg-black dark:text-white"
-              variant="outline"
+              className="w-full sm:w-20 p-0 sm:p-7  "
+              variant="secondary"
             >
               {t("send")}
             </Button>

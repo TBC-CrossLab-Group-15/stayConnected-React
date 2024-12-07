@@ -48,7 +48,7 @@
       "answers": "Answers",
       "date": "Date",
       "time": "Time",
-      "answerPlaceHolder": "Sign in to answer the question",
+      "answerPlaceHolder": "answer the question",
       "sign-in-question-page": "Sign in",
       "singMessage": "to answer the question",
 
@@ -59,10 +59,30 @@
       "logout": "Logout",
       "change": "Change",
 
+      "account": "Account",
+      "posts": "My Posts",
+      "deleteQuestion": "Delete Question",
+
       "askQuestion": "Ask Your Question!",
       "questionTitle": "Question Title",
       "questionDescription": "Question Description",
-      "addTag": "Add Tag"
+      "addTag": "Add Tag",
+      "selectTags": "select Tags...",
+
+      "leaderboard": "LeaderBoard",
+      "search": "Search",
+      "chooseTag": "Choose a tag",
+      "typeCommandOrTag": "Type a command or choose a tag...",
+      "datePosted": "Date posted",
+      "previous": "Previous",
+      "next": "Next",
+      "add-question": "Add Question",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System",
+      "errorLoadingTags": "Error loading tags:",
+      "noTagsAvailable": "No tags available",
+      "errorLoadingQuestions": "Error loading Questions:"
     }
   },
   "ka": {
@@ -126,11 +146,30 @@
       "answeredQuestions": "გაცემული პასუხები",
       "logout": "გასვლა",
       "change": "შეცვლა",
+      "account": "იუზერი",
+      "posts": "ჩემი კითხვები",
+      "deleteQuestion": "წაშალეთ კითხვა",
 
       "askQuestion": "დასვი შენი კითხვა!",
       "questionTitle": "კითხვის სათაური",
       "questionDescription": "კითხვის დახასიათბა",
-      "addTag": "დაამატე თაგი"
+      "addTag": "დაამატე თაგი",
+      "selectTags": "აირჩიეთ თეგი...",
+
+      "leaderboard": "ლიდერბორდი",
+      "search": "ძიება",
+      "chooseTag": "აირჩიეთ თეგი",
+      "typeCommandOrTag": "ჩაწერეთ  ან აირჩიეთ თეგი...",
+      "datePosted": "დაპოსტვის თარიღი",
+      "previous": "წინა",
+      "next": "შემდეგი",
+      "add-question": "დამატეთ კითხვა",
+      "light": "ღია",
+      "dark": "ბნელი",
+      "system": "სისტემა",
+      "errorLoadingTags": "ტეგების ჩატვირთვის შეცდომა:",
+      "noTagsAvailable": "ტეგები არ არის ხელმისაწვდომი",
+      "errorLoadingQuestions": "შეკითხვების ჩატვირთვის შეცდომა:"
     }
   }
 }

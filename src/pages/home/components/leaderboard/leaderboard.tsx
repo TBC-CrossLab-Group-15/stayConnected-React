@@ -4,6 +4,7 @@ import { avataaars } from "@dicebear/collection";
 import { createAvatar } from "@dicebear/core";
 import { useQuery } from "@tanstack/react-query";
 import LeaderboardPlaceholder from "./components/leaderboard_placeholder";
+import { useTranslation } from "react-i18next";
 
 const Leaderboard: React.FC = () => {
   const {
@@ -15,7 +16,7 @@ const Leaderboard: React.FC = () => {
     queryKey: ["leaderboard"],
     queryFn: () => getLeaderBoard({ order: "desc" }),
   });
-
+  const { t } = useTranslation();
   if (isLoading) {
     return <LeaderboardPlaceholder />;
   }
@@ -32,7 +33,7 @@ const Leaderboard: React.FC = () => {
     <div className="w-full p-5 flex-col sticky top-[90px] bg-gray-100 rounded-lg border shadow-lg dark:bg-black dark:border-solid dark:border-neutral-800">
       {/* Top 3 Users */}
       <h1 className="mb-3 text-xl font-sans font-bold text-center">
-        Leaderboard
+        {t("leaderboard")}
       </h1>
       <div className="flex justify-between mb-6 gap-4">
         {topThree.map((user, index) => {
@@ -62,7 +63,9 @@ const Leaderboard: React.FC = () => {
                 <h2 className="text-md font-semibold dark:text-black">
                   {user.first_name} {user.last_name}
                 </h2>
-                <p className="text-sm dark:text-black">Score: {user.rating}</p>
+                <p className="text-sm dark:text-black">
+                  {t("score")}: {user.rating}
+                </p>
               </div>
             </div>
           );
@@ -81,7 +84,7 @@ const Leaderboard: React.FC = () => {
           return (
             <div
               key={index}
-              className="flex items-center p-2 border-b last:border-none hover:bg-gray-50"
+              className="flex items-center p-2 border-b last:border-none hover:bg-gray-50 dark:hover:bg-neutral-900 rounded-md"
             >
               <span className="w-6 font-bold text-gray-600 mr-3">
                 {index + 4}.
@@ -98,7 +101,9 @@ const Leaderboard: React.FC = () => {
                 <h3 className="text-sm font-medium">
                   {user.first_name} {user.last_name}
                 </h3>
-                <p className="text-xs text-gray-500">Score: {user.rating}</p>
+                <p className="text-xs text-gray-500">
+                  {t("score")}: {user.rating}
+                </p>
               </div>
             </div>
           );

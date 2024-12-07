@@ -21,6 +21,7 @@ import { format } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
 import { NavLink } from "react-router-dom";
 import QuestionsPlaceholder from "./components/questions_placeholder";
+import { useTranslation } from "react-i18next";
 
 interface MyCardProps {
   width: string;
@@ -42,7 +43,11 @@ export interface Questions {
   answers: { isCorrect: boolean }[];
 }
 
+
 const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
+  const { t } = useTranslation();
+  console.log(t("next"));
+
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
@@ -73,7 +78,9 @@ const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
 
   if (isError) {
     return (
-      <div>Error loading Questions: {error?.message || "Unknown error"}</div>
+      <div>
+        {t("errorLoadingQuestions")} {error?.message || "Unknown error"}
+      </div>
     );
   }
 
@@ -122,7 +129,9 @@ const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
                 <p>
                   {`${question.user.first_name} ${question.user.last_name}`}
                 </p>
-                <p>Date Posted: {formatDate(question.create_date)}</p>
+                <p>
+                  {t("datePosted")}: {formatDate(question.create_date)}
+                </p>
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -140,13 +149,13 @@ const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
                   </Badge>
                 ))
               ) : (
-                <span className="text-neutral-500">No tags available</span>
+                <span className="text-neutral-500">{t("noTagsAvailable")}</span>
               )}
             </CardFooter>
           </NavLink>
         </Card>
       ))}
-      {!filteredQuestions && (
+ {!filteredQuestions && (
         <Pagination>
           <PaginationContent>
             <PaginationItem>
@@ -205,3 +214,4 @@ const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
 };
 
 export default Questions;
+

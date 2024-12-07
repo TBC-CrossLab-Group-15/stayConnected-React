@@ -95,6 +95,7 @@ export const deleteQuestion = async (id: number) => {
   }
 };
 
+
 type FilterDataType = {
   tag: string;
 };
@@ -124,3 +125,5 @@ export const filterByText = async (params: FilterDataType) => {
     throw new Error("Failed");
   }
 };
+
+

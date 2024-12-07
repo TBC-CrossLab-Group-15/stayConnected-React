@@ -9,7 +9,6 @@ import { avataaars } from "@dicebear/collection";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { changeAvatar } from "@/api/profile";
-// import { useNavigate } from "react-router-dom";
 import { GetUser } from "@/api/auth";
 import UseLogoutClick from "@/hooks/onLogoutClick";
 import { useNavigate } from "react-router-dom";
@@ -58,20 +57,21 @@ const Profile: React.FC = () => {
   if (!data) return <div>Loading...</div>;
 
   return (
-    <div className="w-full border m-auto max-w-3xl bg-white dark:bg-gray-900 rounded-xl shadow-xl p-8 space-y-8">
+    <div className="w-full  border m-auto max-w-3xl  bg-white  dark:bg-gray-900 rounded-xl shadow-xl p-1 sm:p-8 space-y-8">
       {/* Profile Header */}
       <h2 className="text-4xl font-extrabold text-center text-gray-800 dark:text-gray-200 tracking-tight">
         {t("profile")}
       </h2>
-      <Tabs defaultValue="account" className=" flex flex-col ">
+      <Tabs defaultValue="account" className="flex flex-col  gap-5  ">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="account">Account</TabsTrigger>
-          <TabsTrigger value="myPosts">My Posts</TabsTrigger>
+          <TabsTrigger value="account">{t("account")}</TabsTrigger>
+          <TabsTrigger value="myPosts">{t("posts")}</TabsTrigger>
         </TabsList>
+
         {/* Avatar and User Info */}
-        <TabsContent className="flex flex-col gap-5" value="account">
+        <TabsContent className="flex flex-col gap-5  " value="account">
           <div className="flex flex-col md:flex-row items-center md:items-start bg-gray-100 dark:bg-gray-800 p-8 rounded-xl shadow-lg gap-6 hover:shadow-2xl transition-shadow duration-300">
-            <div className="flex items-center justify-center w-[30%] md:w-48 md:h-48 rounded-full overflow-hidden  hover:scale-105 transform transition-all duration-300">
+            <div className="flex items-center justify-center w-48 h-48 rounded-full overflow-hidden hover:scale-105 transform transition-all duration-300">
               <Avatar className="rounded-full w-full h-full">
                 <AvatarImage
                   className="object-cover w-full h-full"
@@ -82,7 +82,7 @@ const Profile: React.FC = () => {
               </Avatar>
             </div>
 
-            <div className="flex flex-col w-[60%] items-center md:items-start text-center md:text-left space-y-2">
+            <div className="flex flex-col w-full md:w-2/3 items-center md:items-start text-center md:text-left space-y-2">
               <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
                 {data ? `${data?.first_name} ${data?.last_name}` : "User Name"}
               </p>
@@ -92,14 +92,14 @@ const Profile: React.FC = () => {
 
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="flex flex-col pt-6 md:flex-row items-center gap-4 w-full"
+                className="flex flex-col md:flex-row items-center gap-4 w-full"
               >
                 <Controller
                   name="avatarIcon"
                   control={control}
                   render={({ field }) => (
                     <Select
-                      className="w-full dark:text-black sm:w-2/3 md:w-2/3 lg:w-2/3 xl:w-2/3 "
+                      className="w-full sm:w-2/3 md:w-2/3 lg:w-2/3 xl:w-2/3"
                       {...field}
                       options={[
                         { value: "Eden", label: "Eden" },
@@ -127,8 +127,8 @@ const Profile: React.FC = () => {
                   )}
                 />
                 <Button
-                  variant="outline"
-                  className="w-full sm:w-1/3 md:w-20 lg:w-20 text-lg font-semibold text-gray-800 hover:bg-blue-500 dark:text-white hover:text-white transition-all duration-300"
+                  variant="secondary"
+                  className="w-full hover:bg-teal-300  sm:w-1/3 md:w-20 lg:w-20 text-lg font-semibold    transition-all duration-300"
                   type="submit"
                 >
                   {t("change")}
@@ -156,17 +156,21 @@ const Profile: React.FC = () => {
             </div>
           </div>
         </TabsContent>
-        <TabsContent className="flex  flex-col gap-5 " value="myPosts">
-          <ScrollArea className=" rounded-md  ">
+
+        {/* My Posts */}
+        <TabsContent className="flex flex-col    gap-5" value="myPosts">
+          <ScrollArea className="rounded-md  ">
             <MyQuestions />
           </ScrollArea>
         </TabsContent>
       </Tabs>
+
       {/* Logout Button */}
       <div className="flex justify-center">
         <Button
-          onClick={() => handleLogout()}
-          className="bg-sky-500 w-full md:w-auto text-white hover:bg-sky-600 rounded-md px-6 py-3 text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+          onClick={handleLogout}
+          className="w-full sm:w-full  hover:bg-teal-300 text-lg  transition-all duration-300 transform hover:scale-105"
+          variant={"secondary"}
         >
           {t("logout")}
         </Button>

@@ -34,7 +34,7 @@ const Header = () => {
   const dataUrl = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
 
   return (
-    <div className="z-50 dark:bg-black sticky top-0 left-0 w-full  bg-white shadow-[0px_-2px_4px_rgba(0,0,0,0.1)] border-solid border-b border-b-gray-300 dark:border-b-solid dark:border-b-neutral-800">
+    <div className="z-50 dark:bg-black  overflow-hidden sticky top-0 left-0 w-full  bg-white shadow-[0px_-2px_4px_rgba(0,0,0,0.1)] border-solid border-b border-b-gray-300 dark:border-b-solid dark:border-b-neutral-800">
       <div className="max-w-[1400px]  mx-auto  px-5 h-20 flex items-center justify-between gap-4">
         <div className="text-2xl font-bold">
           <NavLink to="/">
@@ -61,7 +61,7 @@ const Header = () => {
             <>
               <NavLink to="createQuestion">
                 <Button className="bg-neutral-50 text-black hover:bg-neutral-100">
-                  Add Question
+                  {t("add-question")}
                 </Button>
               </NavLink>
               <DropdownMenu>
@@ -76,7 +76,7 @@ const Header = () => {
                   <DropdownMenuItem className="p-0">
                     <NavLink to="/profile">
                       <Button variant="ghost" className="w-full  px-6">
-                        Profile
+                        {t("profile")}
                       </Button>
                     </NavLink>
                   </DropdownMenuItem>
@@ -86,7 +86,7 @@ const Header = () => {
                     onClick={() => handleLogout()}
                   >
                     <Button variant="ghost" className="w-full ">
-                      Sign Out
+                      {t("logout")}
                     </Button>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
