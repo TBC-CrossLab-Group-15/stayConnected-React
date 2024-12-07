@@ -46,12 +46,12 @@ const HomeView = () => {
     console.log("viewidan data", data);
   };
   return (
-    <div className="xl:w-[1400px] flex flex-col-reverse lg:flex-row gap-10">
-      <div className="xl:w-3/5 sm:w-full">
+    <div className="sm:w-full sm:m-5 xl:w-[1400px] flex flex-col-reverse lg:flex-row gap-10">
+      <div className=" sm:w-full  xl:w-3/5  ">
         <Search onFilter={handleFilteredQuestions} />
         <Questions width={"w-full"} filteredQuestions={filteredQuestions} />
       </div>
-      <div className="  sm:w-full xl:w-2/5">
+      <div className=" w-full xl:w-2/5">
         <Leaderboard />
       </div>
     </div>
