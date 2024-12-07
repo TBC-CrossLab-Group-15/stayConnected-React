@@ -4,7 +4,7 @@ import { createContext, PropsWithChildren } from "react";
 import Loader from "@/components/loader/loader";
 
 type UserType = {
-  avatar: null;
+  avatar: string | null;
   email: string;
   first_name: string;
   last_name: string;
@@ -17,7 +17,7 @@ type AuthContextType = {
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext<AuthContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
@@ -27,7 +27,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     isEnabled: !!accessToken,
     accessToken,
   });
-  console.log(user);
+
   return (
     <AuthContext.Provider value={{ user }}>
       {isUserLoading ? <Loader /> : children}

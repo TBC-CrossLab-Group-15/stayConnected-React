@@ -22,24 +22,27 @@ import { useQuery } from "@tanstack/react-query";
 import { NavLink } from "react-router-dom";
 import QuestionsPlaceholder from "./components/questions_placeholder";
 
-interface myCardProps {
+interface MyCardProps {
   width: string;
+  filteredQuestions: Questions[] | null;
 }
 
-interface Questions {
+export interface Questions {
   id: number;
   title: string;
-  description: string;
-  is_answered: boolean;
-  date: string;
+  text: string;
+  create_date: string;
   user: {
-    user_name: string;
-    user_surname: string;
+    id: number;
+    avatar: string | null;
+    first_name: string;
+    last_name: string;
   };
   tags: { id: number; name: string }[];
+  answers: { isCorrect: boolean }[];
 }
 
-const Questions: React.FC<myCardProps> = ({ width }) => {
+const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
@@ -55,7 +58,10 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
         page: currentPage,
         page_size: pageSize,
       }),
+    enabled: !filteredQuestions,
   });
+
+  const displayedQuestions = filteredQuestions || questionsData.results;
 
   const totalPages = Math.ceil(questionsData?.count / pageSize);
 
@@ -82,7 +88,7 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
   };
   return (
     <div className="max-w-[1400px] w-full mx-auto px-5 h-full mt-8 mb-8 font-sans">
-      {questionsData?.results?.map((question) => (
+      {displayedQuestions?.map((question) => (
         <Card
           key={question.id}
           className={`rounded-xl flex flex-col justify-center p-0 border-solid border-b border-zinc-200 bg-card text-card-foreground shadow sm:min-h-[200px] md:min-h-[200px] lg:min-h-[200px] xl:min-h-[150px] 2xl:min-h-[150px] ${width} mb-5`}
@@ -91,10 +97,30 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
             <CardHeader>
               <div className="flex justify-between">
                 <CardTitle>{question.title}</CardTitle>
+                {question.answers[0]?.isCorrect ? (
+                  <svg
+                    width="26"
+                    height="26"
+                    viewBox="0 0 26 26"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 13C0 5.8203 5.8203 0 13 0C20.1797 0 26 5.8203 26 13C26 20.1797 20.1797 26 13 26C5.8203 26 0 20.1797 0 13Z"
+                      fill="#ECFDF5"
+                    />
+                    <path
+                      d="M7.66663 12.6289L10.4289 15.3912C10.8733 15.8356 11.0956 16.0579 11.3717 16.0579C11.6478 16.0579 11.8701 15.8356 12.3145 15.3912L18.334 9.37173"
+                      stroke="#059669"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                ) : null}
               </div>
               <CardDescription className="flex justify-between">
                 <p>
-                  {question.user.first_name} {question.user.first_name}
+                  {`${question.user.first_name} ${question.user.last_name}`}
                 </p>
                 <p>Date Posted: {formatDate(question.create_date)}</p>
               </CardDescription>
@@ -114,65 +140,66 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
                   </Badge>
                 ))
               ) : (
-                <span>No tags available</span>
+                <span className="text-neutral-500">No tags available</span>
               )}
             </CardFooter>
           </NavLink>
         </Card>
       ))}
-
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                if (currentPage > 1) handlePageChange(currentPage - 1);
-              }}
-              className={`${
-                currentPage === 1 ? "cursor-not-allowed opacity-50" : ""
-              }`}
-              aria-disabled={currentPage === 1}
-            >
-              Previous
-            </PaginationPrevious>
-          </PaginationItem>
-          {[...Array(totalPages).keys()].map((page) => (
-            <PaginationItem key={page}>
-              <PaginationLink
+      {!filteredQuestions && (
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
                 href="#"
-                className={currentPage === page + 1 ? "font-bold" : ""}
                 onClick={(e) => {
                   e.preventDefault();
-                  handlePageChange(page + 1);
+                  if (currentPage > 1) handlePageChange(currentPage - 1);
                 }}
+                className={`${
+                  currentPage === 1 ? "cursor-not-allowed opacity-50" : ""
+                }`}
+                aria-disabled={currentPage === 1}
               >
-                {page + 1}
-              </PaginationLink>
+                Previous
+              </PaginationPrevious>
             </PaginationItem>
-          ))}
-          <PaginationItem>
-            <PaginationNext
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                if (currentPage < totalPages) {
-                  handlePageChange(currentPage + 1);
-                }
-              }}
-              className={`${
-                currentPage === totalPages
-                  ? "cursor-not-allowed opacity-50"
-                  : ""
-              }`}
-              aria-disabled={currentPage === totalPages}
-            >
-              Next
-            </PaginationNext>
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+            {[...Array(totalPages).keys()].map((page) => (
+              <PaginationItem key={page}>
+                <PaginationLink
+                  href="#"
+                  className={currentPage === page + 1 ? "font-bold" : ""}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handlePageChange(page + 1);
+                  }}
+                >
+                  {page + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (currentPage < totalPages) {
+                    handlePageChange(currentPage + 1);
+                  }
+                }}
+                className={`${
+                  currentPage === totalPages
+                    ? "cursor-not-allowed opacity-50"
+                    : ""
+                }`}
+                aria-disabled={currentPage === totalPages}
+              >
+                Next
+              </PaginationNext>
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
     </div>
   );
 };

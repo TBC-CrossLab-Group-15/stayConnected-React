@@ -19,15 +19,15 @@ import { avataaars } from "@dicebear/collection";
 const Header = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const user = useAuthContext();
+  const { user } = useAuthContext();
   const userId = localStorage.getItem("userId");
   const handleLogout = () => {
     UseLogoutClick();
     navigate("/login");
   };
-
+  
   const avatar = createAvatar(avataaars, {
-    seed: `${user?.avatar || user.first_name}`,
+    seed: user && user.first_name ? `${user.avatar || user.first_name}` : "", // Safely accessing properties
   });
   const svg = avatar.toString();
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
@@ -56,7 +56,7 @@ const Header = () => {
           </NavLink>
         </div>
         <div className="flex justify-between gap-5 md:min-w-[550px] font-sans "></div>
-        <div className="flex justify-between items-center gap-3 p-4   rounded-lg">
+        <div className="flex justify-between items-center gap-3 p-4 rounded-lg">
           {userId ? (
             <>
               <NavLink to="createQuestion">
@@ -68,9 +68,10 @@ const Header = () => {
                 <DropdownMenuTrigger>
                   <Avatar className="p-10">
                     <AvatarImage src={dataUrl} />
-                    <AvatarFallback>{user?.user?.first_name}</AvatarFallback>
+                    <AvatarFallback>{user?.first_name}</AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
+
                 <DropdownMenuContent className="shadow-md rounded-md p-2 gap-2 flex justify-center items-center flex-col ">
                   <DropdownMenuItem className="p-0">
                     <NavLink to="/profile">

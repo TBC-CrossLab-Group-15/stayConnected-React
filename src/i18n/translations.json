@@ -21,8 +21,8 @@
       "validation": {
         "name-min": "Name must be at least 2 characters.",
         "name-max": "Name cannot exceed 50 characters.",
-        "lastName-min": "Last name must be at least 2 characters.",
-        "lastName-max": "Last name cannot exceed 50 characters.",
+        "lastname-min": "Last name must be at least 2 characters.",
+        "lastname-max": "Last name cannot exceed 50 characters.",
         "email-min": "Email must be at least 10 characters.",
         "email-max": "Email cannot exceed 50 characters.",
         "email-invalid": "Please enter a valid email address.",
@@ -89,8 +89,8 @@
       "validation": {
         "name-min": "სახელი უნდა იყოს მინიმუმ 2 სიმბოლო.",
         "name-max": "სახელი არ უნდა აღემატებოდეს 50 სიმბოლოს.",
-        "lastName-min": "გვარი უნდა იყოს მინიმუმ 2 სიმბოლო.",
-        "lastName-max": "გვარი არ უნდა აღემატებოდეს 50 სიმბოლოს.",
+        "lastname-min": "გვარი უნდა იყოს მინიმუმ 2 სიმბოლო.",
+        "lastname-max": "გვარი არ უნდა აღემატებოდეს 50 სიმბოლოს.",
         "email-min": "ელფოსტა უნდა იყოს მინიმუმ 10 სიმბოლო.",
         "email-max": "ელფოსტა არ უნდა აღემატებოდეს 50 სიმბოლოს.",
         "email-invalid": "გთხოვთ შეიყვანოთ სწორი ელფოსტა.",

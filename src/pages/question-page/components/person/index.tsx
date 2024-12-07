@@ -32,7 +32,6 @@ const Person: React.FC<{
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
   const dataUrl = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
 
-  console.log(date);
   return (
     <div className="dark:bg-gray-800 h-full  persons flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between  shadow-inner bg-gray-200 border rounded-lg p-5 ">
       {/* Left Section */}

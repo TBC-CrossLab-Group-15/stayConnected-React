@@ -17,3 +17,13 @@ export const changeAvatar = async ({
     throw new Error("Failed");
   }
 };
+
+export const getCurrentUserQuestions = async () => {
+  try {
+    const result = await httpClient.get(`user/currentuserquestions/`);
+    return result.data;
+  } catch (error) {
+    console.log("Error:", error);
+    throw new Error("Failed");
+  }
+};

@@ -56,7 +56,9 @@ const RegistrationForm: React.FC = () => {
           />
 
           {errors.first_name && (
-            <p className="text-red-500">{t(`${errors.first_name.message}`)}</p>
+            <p className="text-sm text-destructive">
+              {t(`${errors.first_name.message}`)}
+            </p>
           )}
         </div>
 
@@ -76,7 +78,9 @@ const RegistrationForm: React.FC = () => {
           />
 
           {errors.last_name && (
-            <p className="text-red-500">{t(`${errors.last_name.message}`)}</p>
+            <p className="text-sm text-destructive">
+              {t(`${errors.last_name.message}`)}
+            </p>
           )}
         </div>
 
@@ -95,7 +99,7 @@ const RegistrationForm: React.FC = () => {
             )}
           />
           {errors.email && (
-            <p className="text-red-500 text-sm">
+            <p className="text-sm text-destructive">
               {t(`${errors.email.message}`)}
             </p>
           )}
@@ -115,7 +119,7 @@ const RegistrationForm: React.FC = () => {
             )}
           />
           {errors.password && (
-            <p className="text-red-500 text-sm">
+            <p className="text-sm text-destructive">
               {t(`${errors.password.message}`)}
             </p>
           )}
@@ -136,22 +140,22 @@ const RegistrationForm: React.FC = () => {
           />
 
           {errors.confirm_password && (
-            <p className="text-red-500">
+            <p className="text-sm text-destructive">
               {t(`${errors.confirm_password.message}`)}
             </p>
           )}
         </div>
         <div className="flex justify-between">
-          <Button className="w-full" variant="outline" type="submit">
+          <Button className="w-full " variant="primary" type="submit">
             {t("sign-up")}
           </Button>
         </div>
         <div className="flex justify-center items-center">
           <p className="text-muted-foreground text-xs">
-            {t("already-have-account")}{" "}
+            {t("already-have-account")}
           </p>
           <Button variant="link">
-            <Link className="text-bold  " to="/login">
+            <Link className="text-bold text-lg text-accent " to="/login">
               {t("sign-in")}
             </Link>
           </Button>

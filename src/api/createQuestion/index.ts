@@ -8,14 +8,14 @@ export interface CreateQuestionType {
 }
 
 export const CreateQuestionAPI = async (
-  data: CreateQuestionType
+  data: CreateQuestionType,
 ): Promise<CreateQuestionType> => {
   console.log("amis dabla");
   console.log(data);
   try {
     const response = await httpClient.post(
       CreateQuestion_ENDPOINTS.CreateQuestion,
-      data
+      data,
     );
     return response.data;
   } catch (error) {
@@ -34,8 +34,6 @@ export const fetchTags = async (): Promise<{ id: number; name: string }[]> => {
     throw new Error("Error fetching tags");
   }
 };
-
-
 
 // const response = await fetch("/your-api-endpoint");
 // const data = await response.json(); // ან response.text() თუ მონაცემები არ არის JSON

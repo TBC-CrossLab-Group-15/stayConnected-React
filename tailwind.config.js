@@ -10,6 +10,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        zauta: "#FCFCFC",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -53,11 +54,5 @@ export default {
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"),
-    require("tailwind-scrollbar"), // Add this line
-  ],
-  variants: {
-    scrollbar: ["rounded"], // Enable rounded scrollbar variant (optional)
-  },
+  plugins: [require("tailwindcss-animate")],
 };
