@@ -84,7 +84,7 @@ const Leaderboard: React.FC = () => {
           return (
             <div
               key={index}
-              className="flex items-center p-2 border-b last:border-none hover:bg-gray-50"
+              className="flex items-center p-2 border-b last:border-none hover:bg-gray-50 dark:hover:bg-neutral-900 rounded-md"
             >
               <span className="w-6 font-bold text-gray-600 mr-3">
                 {index + 4}.
