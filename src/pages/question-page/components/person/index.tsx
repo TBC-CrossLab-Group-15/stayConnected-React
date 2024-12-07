@@ -36,7 +36,7 @@ const Person: React.FC<{
     <div className="dark:bg-gray-800 h-full  persons flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between  shadow-inner bg-gray-200 border rounded-lg p-5 ">
       {/* Left Section */}
 
-      <div className="flex w-full h-full dark:bg-gray-500 sm:h-64  flex-col sm:flex-row gap-5 bg-white  overflow-hidden p-4">
+      <div className="flex w-full h-full dark:bg-gray-500 sm:h-64   flex-col sm:flex-row gap-5 bg-white  overflow-hidden p-4">
         {/* Icon Box */}
         <div className="flex flex-col dark:bg-black overflow-hidden justify-center  items-center w-full sm:w-1/4 p-4 bg-gray-100 rounded-lg">
           <Avatar className="w-16  h-16 sm:h-28 sm:w-28">
@@ -65,9 +65,7 @@ const Person: React.FC<{
         {questionAuthorIsSignedIn && (
           <Button
             onClick={() => onApprove(id, !isApproved)}
-            variant={
-              isApproved ? "destructive" : "primary"
-            }
+            variant={isApproved ? "destructive" : "primary"}
             className="w-24"
           >
             {isApproved ? t("reject") : t("approve")}

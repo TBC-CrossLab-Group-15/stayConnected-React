@@ -4,10 +4,9 @@ const MainSection: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <div
       className="
-        p-4
+        p-1
         sm:p-10
         flex items-center justify-center
-  
         "
     >
       {children}

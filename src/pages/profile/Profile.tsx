@@ -43,7 +43,7 @@ const Profile: React.FC = () => {
   });
 
   const avatar = createAvatar(avataaars, {
-    seed: data?.avatar ??"", // in here i want to put avatarIcon : {value}
+    seed: data?.avatar ?? "", // in here i want to put avatarIcon : {value}
   });
   const svg = avatar.toString();
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
@@ -57,23 +57,27 @@ const Profile: React.FC = () => {
   if (!data) return <div>Loading...</div>;
 
   return (
-    <div className="w-full border m-auto max-w-3xl bg-white dark:bg-gray-900 rounded-xl shadow-xl p-8 space-y-8">
+    <div className="w-full  border m-auto max-w-3xl  bg-white  dark:bg-gray-900 rounded-xl shadow-xl p-1 sm:p-8 space-y-8">
       {/* Profile Header */}
       <h2 className="text-4xl font-extrabold text-center text-gray-800 dark:text-gray-200 tracking-tight">
         {t("profile")}
       </h2>
-      <Tabs defaultValue="account" className="flex flex-col gap-5">
+      <Tabs defaultValue="account" className="flex flex-col  gap-5  ">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="account">{t("account")}</TabsTrigger>
           <TabsTrigger value="myPosts">{t("posts")}</TabsTrigger>
         </TabsList>
 
         {/* Avatar and User Info */}
-        <TabsContent className="flex flex-col gap-5" value="account">
+        <TabsContent  className="flex flex-col gap-5  " value="account">
           <div className="flex flex-col md:flex-row items-center md:items-start bg-gray-100 dark:bg-gray-800 p-8 rounded-xl shadow-lg gap-6 hover:shadow-2xl transition-shadow duration-300">
             <div className="flex items-center justify-center w-48 h-48 rounded-full overflow-hidden hover:scale-105 transform transition-all duration-300">
               <Avatar className="rounded-full w-full h-full">
-                <AvatarImage className="object-cover w-full h-full" src={dataUrl} alt="Avatar" />
+                <AvatarImage
+                  className="object-cover w-full h-full"
+                  src={dataUrl}
+                  alt="Avatar"
+                />
                 <AvatarFallback>{data?.first_name}</AvatarFallback>
               </Avatar>
             </div>
@@ -86,7 +90,10 @@ const Profile: React.FC = () => {
                 {data?.email ?? "example@gmail.com"}
               </p>
 
-              <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col md:flex-row items-center gap-4 w-full">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="flex flex-col md:flex-row items-center gap-4 w-full"
+              >
                 <Controller
                   name="avatarIcon"
                   control={control}
@@ -151,7 +158,7 @@ const Profile: React.FC = () => {
         </TabsContent>
 
         {/* My Posts */}
-        <TabsContent className="flex flex-col  gap-5" value="myPosts">
+        <TabsContent className="flex flex-col    gap-5" value="myPosts">
           <ScrollArea className="rounded-md  ">
             <MyQuestions />
           </ScrollArea>

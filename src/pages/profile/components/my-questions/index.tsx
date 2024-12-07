@@ -72,14 +72,14 @@ const MyQuestions: React.FC = () => {
     );
   }
   return (
-    <div className="flex flex-col  gap-5 h-[450px] w-full pr-1 ">
+    <div className="flex flex-col  gap-5 h-[450px]  pr-1 ">
       {data?.map((question: Question) => (
         <div
           key={question.id}
-          className="bg-gray-50   w-full  dark:bg-black p-3 sm:p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-3 sm:gap-14"
+          className="bg-gray-50     dark:bg-black p-3 sm:p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-3 sm:gap-14"
         >
           <div className="flex flex-col gap-4  ">
-            <div className="flex justify-between  items-start flex-col sm:flex-row  ">
+            <div className="flex justify-between   items-start flex-col sm:flex-row  ">
               <h2 className="text-lg underline font-semibold text-gray-800 dark:text-gray-100 ">
                 {question?.title || "DataTitle"}
               </h2>
