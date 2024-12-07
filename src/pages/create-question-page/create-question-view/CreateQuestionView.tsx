@@ -61,7 +61,7 @@ const CreateQuestionView: React.FC = () => {
                 <Input
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="h-12 mt-2"
+                  className="h-12 mt-2 border-primary"
                 />
               </div>
               <div>
@@ -69,17 +69,20 @@ const CreateQuestionView: React.FC = () => {
                 <Textarea
                   value={text}
                   onChange={(e) => setText(e.target.value)}
-                  className="h-20 mt-2"
+                  className="h-20 mt-2 border-primary resize-none"
                 />
               </div>
               <div>
-                <Label>{t("addTag")}</Label>
+                <div className="mb-2">
+                  <Label>{t("addTag")}</Label>
+                </div>
                 <FancyMultiSelect selected={tags} onChange={setTags} />
               </div>
               <Button
+                variant={"secondary"}
                 type="submit"
                 disabled={mutation.status === "pending"}
-                className="w-full h-10 lg:w-100"
+                className="w-full h-10 lg:w-100 "
               >
                 {mutation.status === "pending" ? t("sending") : t("send")}
               </Button>

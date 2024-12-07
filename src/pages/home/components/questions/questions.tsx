@@ -21,6 +21,7 @@ import { format } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
 import { NavLink } from "react-router-dom";
 import QuestionsPlaceholder from "./components/questions_placeholder";
+import { useTranslation } from "react-i18next";
 
 interface myCardProps {
   width: string;
@@ -40,6 +41,8 @@ interface Questions {
 }
 
 const Questions: React.FC<myCardProps> = ({ width }) => {
+  const { t } = useTranslation();
+  console.log(t("next"));
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
@@ -67,7 +70,9 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
 
   if (isError) {
     return (
-      <div>Error loading Questions: {error?.message || "Unknown error"}</div>
+      <div>
+        {t("errorLoadingQuestions")} {error?.message || "Unknown error"}
+      </div>
     );
   }
 
@@ -96,7 +101,9 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
                 <p>
                   {question.user.first_name} {question.user.first_name}
                 </p>
-                <p>Date Posted: {formatDate(question.create_date)}</p>
+                <p>
+                  {t("datePosted")}: {formatDate(question.create_date)}
+                </p>
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -114,7 +121,7 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
                   </Badge>
                 ))
               ) : (
-                <span>No tags available</span>
+                <span>{t("noTagsAvailable")}</span>
               )}
             </CardFooter>
           </NavLink>
@@ -135,7 +142,7 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
               }`}
               aria-disabled={currentPage === 1}
             >
-              Previous
+              {t("previous")}
             </PaginationPrevious>
           </PaginationItem>
           {[...Array(totalPages).keys()].map((page) => (
@@ -168,7 +175,7 @@ const Questions: React.FC<myCardProps> = ({ width }) => {
               }`}
               aria-disabled={currentPage === totalPages}
             >
-              Next
+              {t("next")}
             </PaginationNext>
           </PaginationItem>
         </PaginationContent>
