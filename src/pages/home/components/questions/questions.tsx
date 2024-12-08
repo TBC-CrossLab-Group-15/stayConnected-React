@@ -170,24 +170,22 @@ const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
               >
                 "Previous"
               </PaginationPrevious>
-            </PaginationItem >
+            </PaginationItem>
             <div className="overflow-x-scroll pb-2 mt-3  flex   justify-center align-middle ">
-            {[...Array(totalPages).keys()].map((page) => (
-             
-              <PaginationItem key={page} >
-                <PaginationLink
-                  href="#"
-                  className={currentPage === page + 1 ? "font-bold  " : ""}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handlePageChange(page + 1);
-                  }}
-                >
-                  {page + 1}
-                </PaginationLink>
-              </PaginationItem>
-
-            ))}
+              {[...Array(totalPages).keys()].map((page) => (
+                <PaginationItem key={page}>
+                  <PaginationLink
+                    href="#"
+                    className={currentPage === page + 1 ? "font-bold  " : ""}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handlePageChange(page + 1);
+                    }}
+                  >
+                    {page + 1}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
             </div>
             <PaginationItem>
               <PaginationNext

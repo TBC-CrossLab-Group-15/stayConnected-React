@@ -11,7 +11,7 @@ export const getTags = async (): Promise<TagsResponseType | undefined> => {
     if (axios.isAxiosError(error)) {
       console.log("Error:", error.response?.data || error.message);
       throw new Error(
-        error.response?.data?.message || "Failed to fetch leaderboard"
+        error.response?.data?.message || "Failed to fetch leaderboard",
       );
     }
   }

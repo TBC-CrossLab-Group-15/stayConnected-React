@@ -8,12 +8,12 @@ export interface CreateQuestionType {
 }
 
 export const CreateQuestionAPI = async (
-  data: CreateQuestionType
+  data: CreateQuestionType,
 ): Promise<CreateQuestionType> => {
   try {
     const response = await httpClient.post(
       CreateQuestion_ENDPOINTS.CreateQuestion,
-      data
+      data,
     );
     return response.data;
   } catch (error) {

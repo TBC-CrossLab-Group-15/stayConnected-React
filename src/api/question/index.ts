@@ -23,7 +23,7 @@ export type QuestionsListResponseType = {
   results: QuestionType[];
 };
 export const getQuestions = async (
-  params: QuestionsListDataType
+  params: QuestionsListDataType,
 ): Promise<QuestionsListResponseType> => {
   try {
     const result = await httpClient.get("posts/questions", {
@@ -110,7 +110,7 @@ export const filterByTag = async (params: FilterDataType) => {
 export const filterByText = async (params: FilterDataType) => {
   try {
     const result = await httpClient.get(
-      `posts/search/question/?search=${params.tag}`
+      `posts/search/question/?search=${params.tag}`,
     );
     return result.data;
   } catch (error) {

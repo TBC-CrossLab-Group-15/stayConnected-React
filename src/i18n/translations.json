@@ -29,7 +29,8 @@
         "password-min": "Password must be at least 8 characters.",
         "password-max": "Password cannot exceed 50 characters.",
         "passwords-mismatch": "Passwords do not match.",
-        "password-strength": "The password must contain at least one uppercase letter, a number, and a symbol."
+        "password-strength": "The password must contain at least one uppercase letter, a number, and a symbol.",
+        "password-required": "Password is required"
       },
       "profile-info-title": "Your Profile Info",
       "username": "Username",
@@ -117,7 +118,8 @@
         "password-min": "პაროლი უნდა იყოს მინიმუმ 8 სიმბოლო.",
         "password-max": "პაროლი არ უნდა აღემატებოდეს 50 სიმბოლოს.",
         "passwords-mismatch": "პაროლები არ ემთხვევა.",
-        "password-strength": "პაროლი  უნდა შეიცავდეს ერთ დიდ ასოს, რიცხვს და სიმბოლოს."
+        "password-strength": "პაროლი  უნდა შეიცავდეს ერთ დიდ ასოს, რიცხვს და სიმბოლოს.",
+        "password-required": "პაროლი სავალდებულოა."
       },
       "profile-info-title": "თქვენი პროფილის ინფორმაცია",
       "username": "მომხმარებლის სახელი",

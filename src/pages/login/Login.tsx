@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import LoginForm from "./components";
+import LoginForm from "./components/login-form";
 import { useTranslation } from "react-i18next";
 
 const Login: React.FC = () => {
