@@ -17,12 +17,7 @@ import { useTranslation } from "react-i18next";
 import { Questions } from "./types";
 
 interface SearchProps {
-<<<<<<< HEAD
   onFilter: (data: Questions) => void;
-=======
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onFilter: (data: any) => void;
->>>>>>> 41938a154e19605ad0cec57cfc5e43ae695ed459
 }
 
 const Search: FC<SearchProps> = ({ onFilter }) => {
