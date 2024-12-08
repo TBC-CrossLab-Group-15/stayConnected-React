@@ -14,9 +14,10 @@ import { filterByTag, filterByText } from "@/api/question";
 import { useNavigate } from "react-router-dom";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
+import { Questions } from "./types";
 
 interface SearchProps {
-  onFilter: (data: any) => void;
+  onFilter: (data: Questions) => void;
 }
 
 const Search: FC<SearchProps> = ({ onFilter }) => {

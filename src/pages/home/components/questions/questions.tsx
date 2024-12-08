@@ -117,13 +117,13 @@ const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
                     <path
                       d="M7.66663 12.6289L10.4289 15.3912C10.8733 15.8356 11.0956 16.0579 11.3717 16.0579C11.6478 16.0579 11.8701 15.8356 12.3145 15.3912L18.334 9.37173"
                       stroke="#059669"
-                      stroke-width="1.6"
-                      stroke-linecap="round"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
                     />
                   </svg>
                 ) : null}
               </div>
-              <CardDescription className="flex justify-between">
+              <CardDescription className="flex  justify-between">
                 <p>
                   {`${question.user.first_name} ${question.user.last_name}`}
                 </p>
@@ -135,13 +135,13 @@ const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
             <CardContent>
               <p className="text-lg"> {question.text}</p>
             </CardContent>
-            <CardFooter className="flex flex-wrap gap-3">
+            <CardFooter className="flex flex-wrap gap-3 ">
               {question.tags.length > 0 ? (
                 question.tags.map((tag) => (
                   <Badge
                     key={tag.id}
                     variant="outline"
-                    className="bg-[#EEF2FF] text-[#4E53A2] dark:bg-[#EEF2FF] dark:text-[#4E53A2] rounded-xl"
+                    className="bg-[#EEF2FF]  text-[#4E53A2] dark:bg-[#EEF2FF] dark:text-[#4E53A2] rounded-xl"
                   >
                     {tag.name}
                   </Badge>
@@ -155,7 +155,7 @@ const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
       ))}
       {!filteredQuestions && (
         <Pagination>
-          <PaginationContent>
+          <PaginationContent className="  h-20 flex justify-center w-full">
             <PaginationItem>
               <PaginationPrevious
                 href="#"
@@ -164,18 +164,20 @@ const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
                   if (currentPage > 1) handlePageChange(currentPage - 1);
                 }}
                 className={`${
-                  currentPage === 1 ? "cursor-not-allowed opacity-50" : ""
+                  currentPage === 1 ? "cursor-not-allowed opacity-50  " : ""
                 }`}
                 aria-disabled={currentPage === 1}
               >
-                Previous
+                "Previous"
               </PaginationPrevious>
-            </PaginationItem>
+            </PaginationItem >
+            <div className="overflow-x-scroll pb-2 mt-3  flex   justify-center align-middle ">
             {[...Array(totalPages).keys()].map((page) => (
-              <PaginationItem key={page}>
+             
+              <PaginationItem key={page} >
                 <PaginationLink
                   href="#"
-                  className={currentPage === page + 1 ? "font-bold" : ""}
+                  className={currentPage === page + 1 ? "font-bold  " : ""}
                   onClick={(e) => {
                     e.preventDefault();
                     handlePageChange(page + 1);
@@ -184,7 +186,9 @@ const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
                   {page + 1}
                 </PaginationLink>
               </PaginationItem>
+
             ))}
+            </div>
             <PaginationItem>
               <PaginationNext
                 href="#"
@@ -196,12 +200,12 @@ const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
                 }}
                 className={`${
                   currentPage === totalPages
-                    ? "cursor-not-allowed opacity-50"
+                    ? "cursor-not-allowed opacity-50 p-0"
                     : ""
-                }`}
+                } `}
                 aria-disabled={currentPage === totalPages}
               >
-                Next
+                "Next"
               </PaginationNext>
             </PaginationItem>
           </PaginationContent>

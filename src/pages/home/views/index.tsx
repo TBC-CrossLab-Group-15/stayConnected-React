@@ -45,8 +45,8 @@ const HomeView = () => {
     setFilteredQuestions(data);
   };
   return (
-    <>
-      <div className="p-0 flex justify-center flex-col xsm:w-full lg:flex-row gap-6">
+  
+      <div className="p-0 flex  justify-center flex-col xsm:w-full lg:flex-row gap-6">
         <div className=" sm:w-full sm:m-5 xl:w-[90%] flex flex-col-reverse lg:flex-row gap-10">
           <div className=" sm:w-full  xl:w-3/5  ">
             <Search onFilter={handleFilteredQuestions} />
@@ -57,7 +57,7 @@ const HomeView = () => {
           </div>
         </div>
       </div>
-    </>
+    
   );
 };
 
