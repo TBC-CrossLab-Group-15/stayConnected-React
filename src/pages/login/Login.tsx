@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 const Login: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <div className=" flex items-center justify-center h-screen ">
+    <div className=" flex items-center justify-center h-full   py-12 sm:p-0   sm:h-full ">
       <Card className="w-[370px] ">
         <CardHeader>
           <CardTitle>

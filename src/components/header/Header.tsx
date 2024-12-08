@@ -27,11 +27,12 @@ const Header = () => {
     UseLogoutClick();
     navigate("/login");
   };
-  const icon = useAtomValue(userIconAtom)
-
+  const icon = useAtomValue(userIconAtom);
 
   const avatar = createAvatar(avataaars, {
-    seed: icon ?? (user && user.first_name ? `${user.avatar ?? user.first_name}` : ""),
+    seed:
+      icon ??
+      (user && user.first_name ? `${user.avatar ?? user.first_name}` : ""),
   });
   const svg = avatar.toString();
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
