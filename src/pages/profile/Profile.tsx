@@ -52,7 +52,6 @@ const Profile: React.FC = () => {
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
   const dataUrl = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
 
-  console.log(data?.avatar);
 
   const onSubmit = (data: { avatarIcon: { value: string; label: string } }) => {
     const avatarValue = data.avatarIcon.value;
