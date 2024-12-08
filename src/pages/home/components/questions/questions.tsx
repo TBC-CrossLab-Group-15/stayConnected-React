@@ -79,12 +79,12 @@ const Questions: React.FC<MyCardProps> = ({ width, filteredQuestions }) => {
       </div>
     );
   }
-
+  const isMobile = window.innerWidth <= 768;
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: isMobile ? "auto" : "smooth",
     });
   };
 
