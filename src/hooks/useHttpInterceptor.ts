@@ -44,9 +44,14 @@ export const useHttpInterceptor = () => {
         if (resErr.status === 401 && !refreshToken) {
           return Promise.reject(resErr);
         }
+        if (!refreshToken) {
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          navigate("login");
+        }
 
         return resErr;
-      },
+      }
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
