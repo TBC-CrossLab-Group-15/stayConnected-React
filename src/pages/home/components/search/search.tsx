@@ -68,16 +68,17 @@ const Search: FC<SearchProps> = ({ onFilter }) => {
   });
   console.log("text filter:", filteredquestionsText);
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (selectedTag) {
       navigate(`?tag=${selectedTag}`);
-      filteredTag();
+      await filteredTag();
     } else {
       navigate(`?text=${searchText}`);
-      filteredText();
+      await filteredText();
     }
+    setValue("searchText", "");
+    setValue("selectedTag", "");
   };
-
   if (isError) {
     return (
       <div>
