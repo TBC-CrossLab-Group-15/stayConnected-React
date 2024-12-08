@@ -14,6 +14,10 @@ import UseLogoutClick from "@/hooks/onLogoutClick";
 import { useNavigate } from "react-router-dom";
 import MyQuestions from "./components/my-questions";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useAtom } from 'jotai';
+import { userIconAtom } from '@/store/authIcon';
+
+
 
 const Profile: React.FC = () => {
   const userId = Number(localStorage.getItem("userId"));
@@ -25,6 +29,8 @@ const Profile: React.FC = () => {
       },
     },
   });
+  const [, setUserIcon] = useAtom(userIconAtom);
+ 
 
   const { t } = useTranslation();
   const { data, refetch } = useQuery({
@@ -49,10 +55,16 @@ const Profile: React.FC = () => {
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
   const dataUrl = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
 
+  console.log(data?.avatar)
+
   const onSubmit = (data: { avatarIcon: { value: string; label: string } }) => {
     const avatarValue = data.avatarIcon.value;
     setAvatar({ id: userId, avatar: avatarValue });
+    setUserIcon(data?.avatarIcon.value);
   };
+
+
+
 
   if (!data) return <div>Loading...</div>;
 

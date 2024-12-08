@@ -15,6 +15,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import UseLogoutClick from "../../hooks/onLogoutClick";
 import { createAvatar } from "@dicebear/core";
 import { avataaars } from "@dicebear/collection";
+import { useAtomValue } from "jotai";
+import { userIconAtom } from "@/store/authIcon";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -25,9 +27,11 @@ const Header = () => {
     UseLogoutClick();
     navigate("/login");
   };
+  const icon = useAtomValue(userIconAtom)
+
 
   const avatar = createAvatar(avataaars, {
-    seed: user && user.first_name ? `${user.avatar || user.first_name}` : "", // Safely accessing properties
+    seed: icon ?? (user && user.first_name ? `${user.avatar ?? user.first_name}` : ""),
   });
   const svg = avatar.toString();
   const encodedSvg = encodeURIComponent(svg).replace(/%20/g, " ");
