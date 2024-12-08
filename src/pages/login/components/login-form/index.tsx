@@ -2,15 +2,15 @@ import { Controller, useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { LoginDefaultValues } from "./login-default-values";
-import { LoginFormValues } from "./types/types";
+import { LoginDefaultValues } from "../login-default-values";
+import { LoginFormValues } from "../types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormSchema } from "./schema";
 import { Label } from "@radix-ui/react-label";
 import { useTranslation } from "react-i18next";
 import { Login } from "@/api/auth";
 import { useMutation } from "@tanstack/react-query";
-import { AfterLoginSuccessn } from "./utils";
+import { AfterLoginSuccessn } from "../utils";
 import { queryClient } from "@/main";
 
 const LoginForm: React.FC = () => {
@@ -43,6 +43,10 @@ const LoginForm: React.FC = () => {
   });
 
   const onSubmit = (values: LoginFormValues) => {
+    if (!values.password) {
+      alert("Please fill in the password field");
+      return;
+    }
     handleLogin(values);
   };
 

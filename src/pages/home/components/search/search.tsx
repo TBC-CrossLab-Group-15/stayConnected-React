@@ -16,6 +16,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
 interface SearchProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onFilter: (data: any) => void;
 }
 
