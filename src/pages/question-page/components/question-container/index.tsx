@@ -64,7 +64,7 @@ const QuestionContainer: React.FC = () => {
   //
 
   return (
-    <div className="  flex flex-col  gap-10 w-full  ">
+    <div className="  flex flex-col justify-center   gap-10 w-full h-screen sm:h-[850px] ">
       <div className="bg-gray-50   h-[750px] sm:h-auto w-full sm:w-[80%] mx-auto overflow-hidden dark:bg-black p-3 sm:p-6 md:p-8 lg:p-10 border  dark:border-gray-700 rounded-lg shadow-md flex flex-col gap-3 sm:gap-14">
         {/* Question Header */}
         <div className="flex flex-col gap-4  ">
